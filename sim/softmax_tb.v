@@ -28,9 +28,9 @@ reg over = 0;
 integer exp_num = 0;
 wire [8:0] data_addr;
 reg [7:0] data;
-wire data_req = 0;
-wire finish = 0;
 integer i;
+integer s;
+integer fid;
 
    STAR u_STAR( .clk(clk), .reset(reset), 
            			.data(data), .data_req(data_req), 
@@ -43,8 +43,14 @@ integer i;
 	initial $sdf_annotate(`SDFFILE, LBP);
 `endif
 
-initial	$readmemh (`Input, input_mem);
-initial	$readmemh (`LUT, lut_mem);
+initial begin                             // read input from input.txt
+   fid = $fopen(`Input,"r");
+   for(i=0; i<=255; i=i+1)begin
+      s=$fscanf(fid, "%d", input_mem[i]);
+   end
+   $fclose(fid);
+end
+// initial	$readmemh (`LUT, lut_mem);
 // initial	$readmemh (`EXP, exp_mem);
 
 always begin #(`CYCLE/2) clk = ~clk; end

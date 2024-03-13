@@ -12,7 +12,7 @@ NC_DIR             =$(ROOT_DIR)/conf
 TB_TOP             =softmax_tb
 TOP                =STAR
 
-SRC=$(filter-out $(SRC_DIR)/$(TOP).v, $(shell ls $(SRC_DIR)/*.v $(SRC_DIR)/*.sv))
+SRC=$(filter-out $(SRC_DIR)/$(TOP).v, $(shell ls $(SRC_DIR)/*.v $(SRC_DIR)/*.v))
 
 TB_SRC=$(SIM_DIR)/*.dat
 

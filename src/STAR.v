@@ -2,10 +2,9 @@ module STAR (
     input clk,
     input reset,
     input [7:0]data,
-    output data_req,
+    output reg data_req,
     output reg [8:0] data_addr,
-    output finish
-
+    output reg finish
 );
 
 parameter   Init    = 3'b000,
@@ -22,8 +21,6 @@ reg [4:0] counter;
 wire Input_done;
 
 assign Input_done = (Cur_state == Init && counter == 4'd15)? 1'b1:1'b0;
-assign data_req = (Cur_state == Init)? 1'b1:1'b0;
-assign finish = (Cur_state == Fin)? 1'b1:1'b0;
 
 always @(posedge clk or posedge reset) begin
     if(reset) Cur_state <= Init;
@@ -48,31 +45,36 @@ always @(*) begin
     endcase
 end
 
-always @(posedge clk or posedge reset) begin
+always @(posedge clk or posedge reset) begin    // counter
     if(reset) counter <= 4'b0;
-    else      counter <= counter + 1'b1;
-end
-
-always @(posedge clk or posedge reset) begin
-    if(reset) begin
-        for(i=0; i<=15; i=i+1) Input_data[i] <= 8'b0;
-    end
     else begin
-        if (Cur_state == Init) begin
-            Input_data[counter] <= data;
-        end
+        if(data_req) counter <= counter + 1'b1;
     end
 end
 
-always @(posedge clk or posedge reset) begin
+always @(posedge clk or posedge reset) begin    //get data row
     if (reset) begin
+        for(i=0; i<=15; i=i+1) Input_data[i] <= 8'b0;
         data_addr <= 9'd0;
+        data_req <= 1'b0;
     end
     else begin
         if (Cur_state == Init) begin
-            data_addr <= data_addr + 1'b1;
+            if(data_req) data_addr <= data_addr + 1'b1;
+            Input_data[counter] <= data;
+            data_req <= 1'b1;
+        end
+        else begin
+            data_req <= 1'b0;
         end
     end
 end
 
+always @(posedge clk or posedge reset) begin    // Finish
+    if(reset) finish <= 1'b0;
+    else begin
+        if(Cur_state == Fin) finish <= 1'b1;
+        else                 finish <= 1'b0;
+    end
+end
 endmodule

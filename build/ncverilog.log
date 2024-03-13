@@ -1,36 +1,37 @@
 ncverilog(64): 15.20-s084: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
-TOOL:	ncverilog	15.20-s084: Started on Mar 13, 2024 at 14:14:42 CST
+TOOL:	ncverilog	15.20-s084: Started on Mar 13, 2024 at 14:59:21 CST
 ncverilog
 	/home/YuChengWang/STAR/sim/softmax_tb.v
 	+incdir+/home/YuChengWang/STAR/src
 	+nc64bit
 	+access+r
 	+define+FSDB_FILE="STAR.fsdb"
-Recompiling... reason: file './sim/softmax_tb.v' is newer than expected.
-	expected: Wed Mar 13 13:42:28 2024
-	actual:   Wed Mar 13 14:14:39 2024
+Recompiling... reason: file '../sim/softmax_tb.v' is newer than expected.
+	expected: Wed Mar 13 14:58:38 2024
+	actual:   Wed Mar 13 14:59:05 2024
 file: /home/YuChengWang/STAR/sim/softmax_tb.v
 	module worklib.softmax_tb:v
 		errors: 0, warnings: 0
+ncvlog: *W,SPDUSD: Include directory /home/YuChengWang/STAR/src given but not used.
+	Total errors/warnings found outside modules and primitives:
+		errors: 0, warnings: 1
 		Caching library 'worklib' ....... Done
 	Elaborating the design hierarchy:
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
-		worklib.STAR:v <0x58d1640b>
-			streams:  11, words:  6384
-		worklib.softmax_tb:v <0x5df2471c>
-			streams:  15, words:  9145
+		worklib.softmax_tb:v <0x0aa96b05>
+			streams:  13, words:  9256
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
 		                  Instances  Unique
 		Modules:                  2       2
-		Registers:               19      19
-		Scalar wires:             9       -
+		Registers:               23      23
+		Scalar wires:             5       -
 		Vectored wires:           3       -
 		Always blocks:            6       6
-		Initial blocks:          12      12
-		Cont. assignments:        3       5
+		Initial blocks:          11      11
+		Cont. assignments:        1       1
 		Pseudo assignments:       1       1
 		Simulation timescale:  10ps
 	Writing initial simulation snapshot: worklib.softmax_tb:v
@@ -38,18 +39,9 @@ Loading snapshot worklib.softmax_tb:v .................... Done
 *Verdi* Loading libsscore_ius152.so
 ncsim> source /usr/cad/cadence/INCISIV/cur/tools/inca/files/ncsimrc
 ncsim> run
-ncsim: *W,RMEMNOF: $readmem error: open failed on file "../sim/input.dat".
-            File: ./sim/softmax_tb.v, line = 46, pos = 35
-           Scope: softmax_tb
-            Time: 0 FS + 0
-
-ncsim: *W,RMEMNOF: $readmem error: open failed on file "../sim/LUT.dat".
-            File: ./sim/softmax_tb.v, line = 47, pos = 31
-           Scope: softmax_tb
-            Time: 0 FS + 0
-
 FSDB Dumper for IUS, Release Verdi_Q-2020.03, Linux x86_64/64bit, 02/09/2020
 (C) 1996 - 2020 by Synopsys, Inc.
+*Verdi* FSDB WARNING: The FSDB file already exists. Overwriting the FSDB file may crash the programs that are using this file.
 *Verdi* : Create FSDB file 'STAR.fsdb'
 *Verdi* : Begin traversing the scopes, layer (0).
 *Verdi* : Enable +all dumping.
@@ -63,6 +55,6 @@ Error!!! Somethings' wrong with your code ...!
 -----------------------------------------------------
 
 Simulation complete via $finish(1) at time 100 MS + 0
-./sim/softmax_tb.v:111  	$finish;
+../sim/softmax_tb.v:118  	$finish;
 ncsim> exit
-TOOL:	ncverilog	15.20-s084: Exiting on Mar 13, 2024 at 14:14:52 CST  (total: 00:00:10)
+TOOL:	ncverilog	15.20-s084: Exiting on Mar 13, 2024 at 14:59:26 CST  (total: 00:00:05)

@@ -1,0 +1,9 @@
+//
+// File created by:  ncverilog
+// Do not modify this file
+//
+/home/YuChengWang/STAR/sim/softmax_tb.v
++incdir+/home/YuChengWang/STAR/src
++nc64bit
++access+r
++define+FSDB_FILE=\"STAR.fsdb\"

@@ -1,0 +1,8 @@
+//
+// File created by:  ncverilog
+// Do not modify this file
+//
+-INCDIR
+/home/YuChengWang/STAR/src
+-DEFINE
+FSDB_FILE=\"STAR.fsdb\"

@@ -26,17 +26,57 @@ integer err = 0;
 integer times = 0;
 reg over = 0;
 integer exp_num = 0;
+wire [7:0] xi;
+wire [7:0] o_xi_sub_xmax;
+wire [7:0] sub_xi;
 wire [8:0] data_addr;
+wire [63:0] i_xi_MV;
+wire [63:0] i_sub_MV;
+wire [63:0] o_xmax_MV;
+wire [63:0] o_xi_MV;
+wire [63:0] o_sub_MV;
+wire [63:0] o_sum_MV;
+
 reg [7:0] data;
+reg [7:0] i_xi_sub_xmax;
+reg [7:0] exp;
+reg [7:0] Sum_exp;
+
 integer i;
 integer s;
 integer fid;
 
-   STAR u_STAR( .clk(clk), .reset(reset), 
-           			.data(data), .data_req(data_req), 
-					   .data_addr(data_addr), .finish(finish));
+   STAR u_STAR(   .clk(clk),
+                  .reset(reset), 
+           			.data(data),
+                  .data_req(data_req), 
+					   .data_addr(data_addr),
+                  .i_xi_MV(i_xi_MV),
+                  .CAMSUB_req(CAMSUB_req),
+                  .xi(xi),
+                  .o_xmax_MV(o_xmax_MV),
+                  .o_xi_MV(o_xi_MV),
+                  .FindSub_req(FindSub_req),
+                  .i_sub_MV(i_sub_MV),
+                  .exp(exp),
+                  .Sum_exp(Sum_exp),
+                  .o_sub_MV(o_sub_MV),
+                  .o_sum_MV(o_sum_MV),
+                  .finish(finish));
 			
-//    lbp_mem u_lbp_mem(.lbp_valid(lbp_valid), .lbp_data(lbp_data), .lbp_addr(lbp_addr), .clk(clk));
+   CAMSUB_mem u_CAMSUB_mem(.clk(clk), 
+                           .rst(reset),
+                           .xi(xi), 
+                           .xi_MV(i_xi_MV), 
+                           .CAMSUB(CAMSUB_req), 
+                           .FindSub(FindSub_req),
+                           .sub_xi(sub_xi)
+                           );
+
+   CAM_mem u_CAM_mem(.clk(clk), 
+                     .rst(reset),
+                     .sub_xi(sub_xi),
+                     .sub_MV(i_sub_MV));
    
 
 `ifdef SDF
@@ -50,6 +90,7 @@ initial begin                             // read input from input.txt
    end
    $fclose(fid);
 end
+
 // initial	$readmemh (`LUT, lut_mem);
 // initial	$readmemh (`EXP, exp_mem);
 
@@ -76,12 +117,12 @@ initial begin  // data input
 	@(posedge clk) result_compare = 1; 
 end
 
-// initial begin // result compare
-// 	$display("-----------------------------------------------------\n");
-//  	$display("START!!! Simulation Start .....\n");
-//  	$display("-----------------------------------------------------\n");
+initial begin // result compare
+	$display("-----------------------------------------------------\n");
+ 	$display("START!!! Simulation Start .....\n");
+ 	$display("-----------------------------------------------------\n");
 // 	#(`CYCLE*3); 
-// 	wait( finish ) ;
+	wait( finish ) ;
 // 	@(posedge clk); @(posedge clk);
 // 	for (i=0; i <N_PAT ; i=i+1) begin
 // 			//@(posedge clk);  // TRY IT ! no comment this line for debugging !!
@@ -104,8 +145,8 @@ end
 //   				end					
 // 				exp_num = exp_num + 1;
 // 	end
-// 	over = 1;
-// end
+	over = 1;
+end
 
 
 initial  begin
@@ -117,25 +158,89 @@ initial  begin
  	$finish;
 end
 
-// initial begin
-//       @(posedge over)      
-//       if((over) && (exp_num!='d0)) begin
-//          $display("-----------------------------------------------------\n");
-//          if (err == 0)  begin
-//             $display("Congratulations! All data have been generated successfully!\n");
-//             $display("-------------------------PASS------------------------\n");
-//          end
-//          else begin
-//             $display("There are %d errors!\n", err);
-//             $display("-----------------------------------------------------\n");
+initial begin
+      @(posedge over)      
+      if((over) && (exp_num!='d0)) begin
+         $display("-----------------------------------------------------\n");
+         if (err == 0)  begin
+            $display("Congratulations! All data have been generated successfully!\n");
+            $display("-------------------------PASS------------------------\n");
+         end
+         else begin
+            $display("There are %d errors!\n", err);
+            $display("-----------------------------------------------------\n");
 	    
-//          end
-//       end
-//       #(`CYCLE/2); $finish;
-// end
+         end
+      end
+      #(`CYCLE/2); $finish;
+end
    
 endmodule
 
+
+module CAMSUB_mem (xi, xi_MV, CAMSUB, FindSub, sub_xi, clk, rst);
+input clk, rst;
+input signed [7:0] xi;
+input CAMSUB,FindSub;
+output reg [63:0] xi_MV;
+output reg signed [7:0] sub_xi;
+
+
+reg [63:0] MV_table [0:63];
+reg [7:0] xi_buffer [0:15];
+reg signed [7:0] max_xi;
+reg [4:0] counter;
+
+wire [7:0] posi;
+integer i;
+
+assign posi = xi + 8'd20;
+
+initial begin     //From -20 ~ 0 ~ 43
+	for (i=0; i<=63; i=i+1) MV_table[i] = 1<<i;
+end
+
+always@(negedge clk) begin
+   if(CAMSUB)   xi_MV <= MV_table[posi];
+   else   xi_MV <= 'hz;
+end
+
+
+always@(posedge clk or posedge rst) begin
+   if(rst)  counter <= 5'b0;
+   else begin
+      if(CAMSUB || FindSub)  counter <= counter + 1'b1;
+      else        counter <= 5'b0;
+   end
+end
+
+always@(posedge clk or posedge rst ) begin
+   if(rst) begin
+      for (i=0; i<=15; i=i+1) xi_buffer[i] = 8'b0;
+      max_xi <= 8'b0;
+   end
+   else begin
+      if(CAMSUB) begin
+         xi_buffer[counter] <= xi;
+         if(xi > max_xi) max_xi <= xi;
+      end
+      else if(FindSub)begin
+         sub_xi <= xi_buffer[counter] - max_xi;
+      end
+      else begin
+         sub_xi <= 'hz;
+      end
+   end
+end
+
+endmodule
+
+module CAM_mem (clk, rst, sub_xi, sub_MV);
+input clk, rst;
+input signed [7:0] sub_xi;
+output [63:0] sub_MV;
+
+endmodule
 
 // module lbp_mem (lbp_valid, lbp_data, lbp_addr, clk);
 // input		lbp_valid;

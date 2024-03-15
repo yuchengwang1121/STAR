@@ -1,16 +1,16 @@
 ncverilog(64): 15.20-s084: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
-TOOL:	ncverilog	15.20-s084: Started on Mar 13, 2024 at 14:59:21 CST
+TOOL:	ncverilog	15.20-s084: Started on Mar 15, 2024 at 20:39:09 CST
 ncverilog
 	/home/YuChengWang/STAR/sim/softmax_tb.v
 	+incdir+/home/YuChengWang/STAR/src
 	+nc64bit
 	+access+r
 	+define+FSDB_FILE="STAR.fsdb"
-Recompiling... reason: file '../sim/softmax_tb.v' is newer than expected.
-	expected: Wed Mar 13 14:58:38 2024
-	actual:   Wed Mar 13 14:59:05 2024
+Recompiling... reason: file '../src/STAR.v' is newer than expected.
+	expected: Fri Mar 15 20:35:09 2024
+	actual:   Fri Mar 15 20:39:05 2024
 file: /home/YuChengWang/STAR/sim/softmax_tb.v
-	module worklib.softmax_tb:v
+	module worklib.STAR:v
 		errors: 0, warnings: 0
 ncvlog: *W,SPDUSD: Include directory /home/YuChengWang/STAR/src given but not used.
 	Total errors/warnings found outside modules and primitives:
@@ -19,19 +19,19 @@ ncvlog: *W,SPDUSD: Include directory /home/YuChengWang/STAR/src given but not us
 	Elaborating the design hierarchy:
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
-		worklib.softmax_tb:v <0x0aa96b05>
-			streams:  13, words:  9256
+		worklib.STAR:v <0x07cacffd>
+			streams:  34, words: 25671
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
 		                  Instances  Unique
-		Modules:                  2       2
-		Registers:               23      23
-		Scalar wires:             5       -
-		Vectored wires:           3       -
-		Always blocks:            6       6
-		Initial blocks:          11      11
-		Cont. assignments:        1       1
+		Modules:                  4       4
+		Registers:               42      42
+		Scalar wires:            17       -
+		Vectored wires:          15       -
+		Always blocks:           13      13
+		Initial blocks:          14      14
+		Cont. assignments:        4      11
 		Pseudo assignments:       1       1
 		Simulation timescale:  10ps
 	Writing initial simulation snapshot: worklib.softmax_tb:v
@@ -48,13 +48,11 @@ FSDB Dumper for IUS, Release Verdi_Q-2020.03, Linux x86_64/64bit, 02/09/2020
 *Verdi* : End of traversing.
 -----------------------------------------------------
 
-Error!!! Somethings' wrong with your code ...!
-
--------------------------FAIL------------------------
+START!!! Simulation Start .....
 
 -----------------------------------------------------
 
-Simulation complete via $finish(1) at time 100 MS + 0
-../sim/softmax_tb.v:118  	$finish;
+Simulation complete via $finish(1) at time 16200 NS + 0
+../sim/softmax_tb.v:175       #(`CYCLE/2); $finish;
 ncsim> exit
-TOOL:	ncverilog	15.20-s084: Exiting on Mar 13, 2024 at 14:59:26 CST  (total: 00:00:05)
+TOOL:	ncverilog	15.20-s084: Exiting on Mar 15, 2024 at 20:39:10 CST  (total: 00:00:01)

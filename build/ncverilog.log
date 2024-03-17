@@ -1,41 +1,45 @@
 ncverilog(64): 15.20-s084: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
-TOOL:	ncverilog	15.20-s084: Started on Mar 15, 2024 at 20:39:09 CST
+TOOL:	ncverilog	15.20-s084: Started on Mar 17, 2024 at 22:39:17 CST
 ncverilog
-	/home/YuChengWang/STAR/sim/softmax_tb.v
+	/home/YuChengWang/STAR/sim/softmax_tb.sv
+	/home/YuChengWang/STAR/src/STAR.sv
 	+incdir+/home/YuChengWang/STAR/src
 	+nc64bit
 	+access+r
 	+define+FSDB_FILE="STAR.fsdb"
-Recompiling... reason: file '../src/STAR.v' is newer than expected.
-	expected: Fri Mar 15 20:35:09 2024
-	actual:   Fri Mar 15 20:39:05 2024
-file: /home/YuChengWang/STAR/sim/softmax_tb.v
-	module worklib.STAR:v
+Recompiling... reason: file '../src/STAR.sv' is newer than expected.
+	expected: Sun Mar 17 22:36:20 2024
+	actual:   Sun Mar 17 22:39:13 2024
+file: /home/YuChengWang/STAR/src/STAR.sv
+	module worklib.STAR:sv
 		errors: 0, warnings: 0
 ncvlog: *W,SPDUSD: Include directory /home/YuChengWang/STAR/src given but not used.
 	Total errors/warnings found outside modules and primitives:
 		errors: 0, warnings: 1
 		Caching library 'worklib' ....... Done
 	Elaborating the design hierarchy:
+ncelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
-		worklib.STAR:v <0x07cacffd>
-			streams:  34, words: 25671
+		worklib.STAR:sv <0x71387db0>
+			streams:  31, words: 103487
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
 		                  Instances  Unique
 		Modules:                  4       4
-		Registers:               42      42
-		Scalar wires:            17       -
+		Registers:               46      46
+		Scalar wires:            18       -
+		Expanded wires:           3       1
 		Vectored wires:          15       -
-		Always blocks:           13      13
-		Initial blocks:          14      14
-		Cont. assignments:        4      11
+		Always blocks:           18      18
+		Initial blocks:          15      15
+		Cont. assignments:        5      13
 		Pseudo assignments:       1       1
 		Simulation timescale:  10ps
-	Writing initial simulation snapshot: worklib.softmax_tb:v
-Loading snapshot worklib.softmax_tb:v .................... Done
+	Writing initial simulation snapshot: worklib.softmax_tb:sv
+Loading snapshot worklib.softmax_tb:sv .................... Done
+ncsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
 *Verdi* Loading libsscore_ius152.so
 ncsim> source /usr/cad/cadence/INCISIV/cur/tools/inca/files/ncsimrc
 ncsim> run
@@ -52,7 +56,7 @@ START!!! Simulation Start .....
 
 -----------------------------------------------------
 
-Simulation complete via $finish(1) at time 16200 NS + 0
-../sim/softmax_tb.v:175       #(`CYCLE/2); $finish;
+Simulation complete via $finish(1) at time 16040 NS + 0
+../sim/softmax_tb.sv:176       #(`CYCLE/2); $finish;
 ncsim> exit
-TOOL:	ncverilog	15.20-s084: Exiting on Mar 15, 2024 at 20:39:10 CST  (total: 00:00:01)
+TOOL:	ncverilog	15.20-s084: Exiting on Mar 17, 2024 at 22:39:18 CST  (total: 00:00:01)

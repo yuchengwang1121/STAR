@@ -2,4 +2,5 @@
 // File created by:  ncverilog
 // Do not modify this file
 //
-/home/YuChengWang/STAR/sim/softmax_tb.v
+/home/YuChengWang/STAR/sim/softmax_tb.sv
+/home/YuChengWang/STAR/src/STAR.sv

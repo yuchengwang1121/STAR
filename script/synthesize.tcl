@@ -1,5 +1,5 @@
 # Edit your top module name here
-set top softmax
+set top STAR
 
 # Don't change anything below this line
 set_host_options -max_cores 16

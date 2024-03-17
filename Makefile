@@ -9,10 +9,10 @@ SCRIPT_DIR         =$(ROOT_DIR)/script
 REPORT_DIR         =$(ROOT_DIR)/report
 NC_DIR             =$(ROOT_DIR)/conf
 
-TB_TOP             =softmax_tb
+TB_TOP             =softmax_tb.sv
 TOP                =STAR
 
-SRC=$(filter-out $(SRC_DIR)/$(TOP).v, $(shell ls $(SRC_DIR)/*.v $(SRC_DIR)/*.v))
+SRC=$(filter-out $(SRC_DIR)/$(TOP), $(shell ls $(SRC_DIR)/*.v $(SRC_DIR)/*.sv))
 
 TB_SRC=$(SIM_DIR)/*.dat
 
@@ -71,7 +71,7 @@ check:
 # Run RTL simulation
 rtl: 
 	cd $(BUILD_DIR); \
-	ncverilog $(SIM_DIR)/$(TB_TOP).v $(SRC) \
+	ncverilog $(SIM_DIR)/$(TB_TOP) $(SRC) \
 	+incdir+$(SRC_DIR) \
 	+nc64bit \
 	+access+r \
@@ -101,7 +101,7 @@ autosyn: $(BUILD) syn_init
 syn: $(BUILD) cp_tb_src syn_init
 	cd $(BUILD_DIR); \
 	cp $(SYN_DIR)/$(TOP)_syn.sdf $(BUILD_DIR); \
-	ncverilog $(SIM_DIR)/$(TB_TOP).v $(SYN_DIR)/$(TOP)_syn.v \
+	ncverilog $(SIM_DIR)/$(TB_TOP) $(SYN_DIR)/$(TOP)_syn.v \
 	-v $(CBDK_DIR)/$(CORE_CELL) \
 	+nc64bit \
 	+access+r \

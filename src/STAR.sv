@@ -1,0 +1,234 @@
+module STAR (
+    input clk,
+    input reset,
+    //Input_Mem
+    input  [7:0]data,
+    output wire data_req,
+    output reg [8:0] data_addr,
+    //CAM/SUB_Mem
+    input  [63:0] i_xi_MV,
+    output wire CAMSUB_req,
+    output reg [7:0] xi,
+    output reg [63:0] o_xmax_MV,
+    output reg [63:0] o_xi_MV,
+    //CAM_Mem
+    output wire FindSub_req,
+    input  [63:0] i_sub_MV,
+    //LUT_Mem
+    output wire EXP_req,
+    input  [7:0] exp,
+    input  [7:0] Sum_exp,
+    output reg [63:0] o_sub_MV,
+    output reg [2:0] o_sum_MV [0:63],
+    output reg finish
+);
+
+parameter   Init    = 3'b000,
+            CAMSUB  = 3'b001,
+            FindMax = 3'b010,
+            FindSub = 3'b011,
+            EXP     = 3'b100,
+            FindSExp= 3'b101,
+            Fin     = 3'b110;
+
+integer i;
+
+reg [63:0] Match_Vector_Array [15:0];
+reg [63:0] Max_Match_Vector;
+reg [2:0] Sum_Match_Vector [0:63];
+reg [7:0] Input_buffer [15:0];
+reg [4:0] counter, row_counter, posi;
+reg [2:0] Cur_state,Next_State;
+
+wire Init_done, CAMSUB_done, FindMax_done, FindSub_done, FindSExp_done;
+
+//for tb
+assign data_req     = (Cur_state == Init)? 1'b1:1'b0;
+assign CAMSUB_req   = (Cur_state == CAMSUB && counter !=0)? 1'b1:1'b0;
+assign FindSub_req  = (Cur_state == FindSub && counter !=0)? 1'b1:1'b0;
+assign EXP_req      = (Cur_state == EXP)? 1'b1:1'b0;
+
+//for FSM
+assign Init_done    = (Cur_state == Init    && counter == 5'd15)? 1'b1:1'b0;
+assign CAMSUB_done  = (Cur_state == CAMSUB  && counter == 5'd16)? 1'b1:1'b0;
+assign FindMax_done = (Cur_state == FindMax && counter == 5'd15)? 1'b1:1'b0;
+assign FindSub_done = (Cur_state == FindSub && counter == 5'd15)? 1'b1:1'b0;
+assign EXP_done     = (Cur_state == EXP     && counter == 5'd16)? 1'b1:1'b0;
+assign FindSExp_done= (Cur_state == FindSExp&& counter == 5'd16)? 1'b1:1'b0;
+assign Finish_done  = (row_counter == 5'd16)? 1'b1:1'b0;
+
+always @(posedge clk or posedge reset) begin
+    if(reset) Cur_state <= Init;
+    else      Cur_state <= Next_State;
+end
+
+always @(*) begin                               //FSM
+    case(Cur_state)
+    Init: begin
+        if (Init_done)  Next_State = CAMSUB;
+        else            Next_State = Init;
+    end
+    CAMSUB: begin
+        if (CAMSUB_done) Next_State = FindMax;
+        else             Next_State = CAMSUB;
+    end
+    FindMax: begin
+        if (FindMax_done) Next_State = FindSub;
+        else              Next_State = FindMax;
+    end
+    FindSub: begin
+        if (FindSub_done) Next_State = EXP;
+        else              Next_State = FindSub;
+    end
+    EXP: begin
+        if (EXP_done)     Next_State = FindSExp;
+        else              Next_State = EXP;
+    end
+    FindSExp: begin
+        if (FindSExp_done)     Next_State = Fin;
+        else              Next_State = FindSExp;
+    end
+    default: begin
+        if (Finish_done) Next_State = Fin;
+        else             Next_State = Init;
+    end
+    endcase
+end
+
+always @(posedge clk or posedge reset) begin    //Assign "counter", "row_counter"
+    if(reset)begin
+        counter <= 5'b0;
+        row_counter <= 5'b0;
+    end
+    else begin
+        case(Cur_state)
+            Init, FindMax, FindSub: begin
+                if(counter == 5'd15) counter <= 1'b0;
+                else                 counter <= counter + 1'b1;
+            end
+            CAMSUB, EXP, FindSExp: begin
+                if(counter == 5'd16) counter <= 1'b0;
+                else                 counter <= counter + 1'b1;
+            end
+            default: begin
+                counter <= 1'b0;
+                row_counter <= row_counter + 1'b1;
+            end
+        endcase
+        
+    end
+end
+
+always @(posedge clk or posedge reset) begin    //Build Input_buffer
+    if (reset) begin
+        for(i=0; i<=15; i=i+1) Input_buffer[i] <= 8'b0;
+        data_addr <= 9'b0;
+    end
+    else begin
+        if(data_req) begin
+            data_addr <= data_addr + 1'b1;
+            Input_buffer[counter] <= data;
+        end
+    end
+end
+
+always @(posedge clk or posedge reset) begin    //Assign "posi" for Match Vector
+    if(reset)begin
+        posi <= 5'd0;
+    end
+    else begin
+        case(Cur_state)
+            CAMSUB, EXP: begin
+                posi <= counter;
+            end
+            default: begin
+                posi <= 5'd0;
+            end
+        endcase
+    end
+end
+
+always @(posedge clk or posedge reset) begin    //Assign "x_i" to get Match Vector
+    if (reset) begin
+        xi        <= 8'b0;
+    end
+    else begin
+        if(Cur_state == CAMSUB) xi <= Input_buffer[counter];
+        else                    xi <= 8'b0;
+    end
+end
+
+always @(posedge clk or posedge reset) begin    //Find Max_Match_Vector
+    if (reset) begin
+        Max_Match_Vector <= 64'b0;
+    end
+    else begin
+        if(Cur_state == FindMax || Cur_state == FindSub) Max_Match_Vector <= (Match_Vector_Array[counter] > Max_Match_Vector)?Match_Vector_Array[counter]:Max_Match_Vector;
+        else Max_Match_Vector <= 64'b0;
+    end
+end
+
+
+always @(posedge clk or posedge reset) begin    //Find o_xmax_MV & o_xi_MV 
+    if (reset) begin
+        o_xmax_MV <= 64'b0;
+        o_xi_MV   <= 64'b0;
+    end
+    else begin
+        if(Cur_state == FindSub)begin
+            o_xmax_MV <= Max_Match_Vector;
+            o_xi_MV   <= Match_Vector_Array[counter];
+        end
+        else begin
+            o_xmax_MV <= 64'b0;
+            o_xi_MV   <= 64'b0;
+        end
+    end
+end
+
+always @(posedge clk or posedge reset) begin    //Build Match_Vector_Array & Sum_Match_Vector
+    if (reset) begin
+        for(i=0; i<=15; i=i+1) Match_Vector_Array[i] <= 64'b0;
+        for(i=0; i<=63; i=i+1) Sum_Match_Vector[i] <= 3'b0;
+    end
+    else begin
+        if(Cur_state == CAMSUB)begin
+            Match_Vector_Array[posi] <= i_xi_MV;
+            for(i=0; i<=63; i=i+1) Sum_Match_Vector[i] <= 3'b0;
+        end
+        else if(Cur_state == EXP)begin
+            Match_Vector_Array[posi] <= i_sub_MV;
+            for(i=0;i<=63;i=i+1) begin
+                Sum_Match_Vector[i] <= (i_sub_MV[i] == 1 && counter >0)? Sum_Match_Vector[i] +1'b1 : Sum_Match_Vector[i];
+            end
+        end
+    end
+end
+
+always @(posedge clk or posedge reset) begin    //Output for o_sub_MV & substract Match Vector
+    if (reset) begin
+        for(i=0;i<=63;i=i+1) o_sum_MV[i] <= 3'b0;
+        o_sub_MV   <= 64'b0;
+    end
+    else begin
+        if(Cur_state == FindSExp) begin
+            for(i=0;i<=63;i=i+1) o_sum_MV[i] <= Sum_Match_Vector[i];
+            o_sub_MV <= Match_Vector_Array[counter];
+        end
+        else begin
+            for(i=0;i<=63;i=i+1) o_sum_MV[i] <= 3'b0;
+            o_sub_MV   <= 64'b0;
+        end
+    end
+end
+
+
+
+always @(posedge clk or posedge reset) begin    // Finish
+    if(reset) finish <= 1'b0;
+    else begin
+        if(Finish_done) finish <= 1'b1;
+        else            finish <= 1'b0;
+    end
+end
+endmodule

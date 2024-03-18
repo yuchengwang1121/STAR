@@ -1,6 +1,6 @@
 #@ # 
 #@ # Running dc_shell Version T-2022.03 for linux64 -- Feb 22, 2022
-#@ # Date:   Mon Mar 18 19:44:23 2024
+#@ # Date:   Mon Mar 18 22:34:32 2024
 #@ # Run by: YuChengWang@caidcpuserver1
 #@ 
 
@@ -8697,4 +8697,3 @@ source -echo -verbose /home/YuChengWang/STAR/script/synthesize.tcl
 #@ # exit
 #@ # -- End source /home/YuChengWang/STAR/script/synthesize.tcl
 
-exit

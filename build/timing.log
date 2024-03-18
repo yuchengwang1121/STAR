@@ -6,13 +6,13 @@ Report : timing
         -max_paths 1
 Design : STAR
 Version: T-2022.03
-Date   : Mon Mar 18 19:44:50 2024
+Date   : Mon Mar 18 22:34:51 2024
 ****************************************
 
 Operating Conditions: slow   Library: slow
 Wire Load Model Mode: top
 
-  Startpoint: counter_reg_1_
+  Startpoint: counter_reg_0_
               (rising edge-triggered flip-flop clocked by clk)
   Endpoint: Max_Match_Vector_reg_4_
             (rising edge-triggered flip-flop clocked by clk)
@@ -27,32 +27,35 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock clk (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  counter_reg_1_/CK (DFFRX1)                              0.00       0.50 r
-  counter_reg_1_/Q (DFFRX1)                               0.98       1.48 r
-  U6174/Y (NOR2X1)                                        0.51       1.99 f
-  U2744/Y (AND2X2)                                        0.67       2.66 f
-  U3573/Y (CLKBUFX3)                                      0.91       3.57 f
-  U3484/Y (CLKBUFX3)                                      0.99       4.56 f
-  U6380/Y (AO22X1)                                        0.62       5.18 f
-  U6381/Y (AOI221XL)                                      0.52       5.70 r
-  U6386/Y (NAND4X1)                                       0.52       6.22 f
-  gt_168_S2/A[41] (STAR_DW_cmp_0)                         0.00       6.22 f
-  gt_168_S2/U495/Y (NOR2BX1)                              0.45       6.67 f
-  gt_168_S2/U485/Y (OAI32X1)                              0.36       7.03 r
-  gt_168_S2/U484/Y (OAI22XL)                              0.27       7.31 f
-  gt_168_S2/U480/Y (OAI21XL)                              0.79       8.10 r
-  gt_168_S2/U320/Y (CLKINVX1)                             0.29       8.39 f
-  gt_168_S2/U466/Y (OAI211X1)                             0.26       8.65 r
-  gt_168_S2/U463/Y (OAI211X1)                             0.23       8.88 f
-  gt_168_S2/U462/Y (NAND2X1)                              0.35       9.22 r
-  gt_168_S2/U397/Y (OAI32X1)                              0.31       9.53 f
-  gt_168_S2/GE_LT_GT_LE (STAR_DW_cmp_0)                   0.00       9.53 f
-  U3797/Y (NAND2BX1)                                      0.70      10.23 f
-  U3571/Y (CLKBUFX3)                                      1.01      11.24 f
-  U3466/Y (CLKBUFX3)                                      1.02      12.26 f
-  U4125/Y (OAI22XL)                                       0.67      12.93 r
-  Max_Match_Vector_reg_4_/D (DFFRX1)                      0.00      12.93 r
-  data arrival time                                                 12.93
+  counter_reg_0_/CK (DFFRX1)                              0.00       0.50 r
+  counter_reg_0_/Q (DFFRX1)                               0.76       1.26 f
+  U2902/Y (CLKINVX1)                                      0.28       1.54 r
+  U2903/Y (NAND2BX1)                                      0.24       1.78 r
+  U2904/Y (CLKINVX1)                                      0.54       2.32 f
+  U2551/Y (CLKBUFX3)                                      1.01       3.33 f
+  U2378/Y (CLKBUFX3)                                      0.98       4.30 f
+  U4030/Y (AO22X1)                                        0.61       4.91 f
+  U4031/Y (AOI221XL)                                      0.50       5.42 r
+  U4032/Y (CLKINVX1)                                      0.44       5.86 f
+  gt_168_S2/A[63] (STAR_DW_cmp_0)                         0.00       5.86 f
+  gt_168_S2/U525/Y (NOR2BX1)                              0.40       6.26 f
+  gt_168_S2/U524/Y (AOI21X1)                              0.40       6.66 r
+  gt_168_S2/U523/Y (OAI211X1)                             0.34       7.01 f
+  gt_168_S2/U498/Y (NOR2X1)                               0.28       7.29 r
+  gt_168_S2/U497/Y (OAI211X1)                             0.21       7.50 f
+  gt_168_S2/U361/Y (CLKINVX1)                             0.21       7.71 r
+  gt_168_S2/U464/Y (NAND3X1)                              0.27       7.99 f
+  gt_168_S2/U321/Y (CLKINVX1)                             0.19       8.18 r
+  gt_168_S2/U463/Y (OAI211X1)                             0.19       8.37 f
+  gt_168_S2/U462/Y (NAND2X1)                              0.35       8.72 r
+  gt_168_S2/U397/Y (OAI32X1)                              0.31       9.03 f
+  gt_168_S2/GE_LT_GT_LE (STAR_DW_cmp_0)                   0.00       9.03 f
+  U2548/Y (NAND2BX1)                                      0.70       9.72 f
+  U2374/Y (CLKBUFX3)                                      1.01      10.73 f
+  U2320/Y (CLKBUFX3)                                      1.02      11.75 f
+  U2842/Y (OAI22XL)                                       0.67      12.42 r
+  Max_Match_Vector_reg_4_/D (DFFRX1)                      0.00      12.42 r
+  data arrival time                                                 12.42
 
   clock clk (rise edge)                                  13.00      13.00
   clock network delay (ideal)                             0.50      13.50
@@ -62,9 +65,9 @@ Wire Load Model Mode: top
   data required time                                                13.10
   --------------------------------------------------------------------------
   data required time                                                13.10
-  data arrival time                                                -12.93
+  data arrival time                                                -12.42
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.17
+  slack (MET)                                                        0.67
 
 
 1

@@ -307,3 +307,105 @@ wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvUnknownSaveResult -win $_nWave1 -clear
+wvUnknownSaveResult -win $_nWave1 -clear
+wvUnknownSaveResult -win $_nWave1 -clear
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 6205460.909661 -snap {("G3" 0)}
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 0)}
+wvSetPosition -win $_nWave1 {("G3" 0)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_tb/u_STAR/i_sub_MV\[63:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/softmax_tb/u_STAR/o_sub_MV\[63:0\]} \
+{/softmax_tb/u_STAR/row_counter\[4:0\]} \
+{/softmax_tb/u_STAR/Input_buffer\[3:0\]} \
+{/softmax_tb/u_STAR/data_addr\[8:0\]} \
+{/softmax_tb/input_mem\[0:63\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSetPosition -win $_nWave1 {("G3" 0)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 509959.391468 -snap {("G3" 0)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/softmax_tb"
+wvGetSignalSetScope -win $_nWave1 "/softmax_tb/u_CAMSUB_mem"
+wvGetSignalSetScope -win $_nWave1 "/softmax_tb/u_LUT_mem"
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_tb/u_STAR/i_sub_MV\[63:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/softmax_tb/u_STAR/o_sub_MV\[63:0\]} \
+{/softmax_tb/u_STAR/row_counter\[4:0\]} \
+{/softmax_tb/u_STAR/Input_buffer\[3:0\]} \
+{/softmax_tb/u_STAR/data_addr\[8:0\]} \
+{/softmax_tb/input_mem\[0:63\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/softmax_tb/u_LUT_mem/exp\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 1 )} 
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_tb/u_STAR/i_sub_MV\[63:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/softmax_tb/u_STAR/o_sub_MV\[63:0\]} \
+{/softmax_tb/u_STAR/row_counter\[4:0\]} \
+{/softmax_tb/u_STAR/Input_buffer\[3:0\]} \
+{/softmax_tb/u_STAR/data_addr\[8:0\]} \
+{/softmax_tb/input_mem\[0:63\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/softmax_tb/u_LUT_mem/exp\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 1 )} 
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvGetSignalClose -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSetCursor -win $_nWave1 5661803.011292 -snap {("G4" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvSetCursor -win $_nWave1 5079557.854454 -snap {("G4" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSetCursor -win $_nWave1 2321087.829360 -snap {("G4" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvSetCursor -win $_nWave1 2499141.938519 -snap {("G4" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1

@@ -56,7 +56,7 @@ icc_init:
 gen_def:
 	#sh $(SRC_DIR)/gen_def.sh > $(SRC_DIR)/def.v; \
 
-cp_tb_src: gen_hex
+cp_tb_src: 
 	cd $(BUILD_DIR); \
 	cp $(TB_SRC) .;
 

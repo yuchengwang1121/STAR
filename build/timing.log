@@ -6,29 +6,65 @@ Report : timing
         -max_paths 1
 Design : STAR
 Version: T-2022.03
-Date   : Sun Mar 17 22:43:28 2024
+Date   : Mon Mar 18 19:44:50 2024
 ****************************************
 
 Operating Conditions: slow   Library: slow
 Wire Load Model Mode: top
 
-  Startpoint: Cur_state_reg_0_
-              (rising edge-triggered flip-flop)
-  Endpoint: EXP_req (output port)
-  Path Group: (none)
+  Startpoint: counter_reg_1_
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: Max_Match_Vector_reg_4_
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
   Path Type: max
 
-  Point                                    Incr       Path
-  -----------------------------------------------------------
-  Cur_state_reg_0_/CK (DFFRX1)             0.00       0.00 r
-  Cur_state_reg_0_/Q (DFFRX1)              0.55       0.55 f
-  U3661/Y (NOR3XL)                         0.85       1.39 r
-  U3626/Y (INVXL)                          0.60       2.00 f
-  U5113/Y (INVX1)                          0.84       2.84 r
-  EXP_req (out)                            0.00       2.84 r
-  data arrival time                                   2.84
-  -----------------------------------------------------------
-  (Path is unconstrained)
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  STAR               tsmc13_wl10           slow
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  counter_reg_1_/CK (DFFRX1)                              0.00       0.50 r
+  counter_reg_1_/Q (DFFRX1)                               0.98       1.48 r
+  U6174/Y (NOR2X1)                                        0.51       1.99 f
+  U2744/Y (AND2X2)                                        0.67       2.66 f
+  U3573/Y (CLKBUFX3)                                      0.91       3.57 f
+  U3484/Y (CLKBUFX3)                                      0.99       4.56 f
+  U6380/Y (AO22X1)                                        0.62       5.18 f
+  U6381/Y (AOI221XL)                                      0.52       5.70 r
+  U6386/Y (NAND4X1)                                       0.52       6.22 f
+  gt_168_S2/A[41] (STAR_DW_cmp_0)                         0.00       6.22 f
+  gt_168_S2/U495/Y (NOR2BX1)                              0.45       6.67 f
+  gt_168_S2/U485/Y (OAI32X1)                              0.36       7.03 r
+  gt_168_S2/U484/Y (OAI22XL)                              0.27       7.31 f
+  gt_168_S2/U480/Y (OAI21XL)                              0.79       8.10 r
+  gt_168_S2/U320/Y (CLKINVX1)                             0.29       8.39 f
+  gt_168_S2/U466/Y (OAI211X1)                             0.26       8.65 r
+  gt_168_S2/U463/Y (OAI211X1)                             0.23       8.88 f
+  gt_168_S2/U462/Y (NAND2X1)                              0.35       9.22 r
+  gt_168_S2/U397/Y (OAI32X1)                              0.31       9.53 f
+  gt_168_S2/GE_LT_GT_LE (STAR_DW_cmp_0)                   0.00       9.53 f
+  U3797/Y (NAND2BX1)                                      0.70      10.23 f
+  U3571/Y (CLKBUFX3)                                      1.01      11.24 f
+  U3466/Y (CLKBUFX3)                                      1.02      12.26 f
+  U4125/Y (OAI22XL)                                       0.67      12.93 r
+  Max_Match_Vector_reg_4_/D (DFFRX1)                      0.00      12.93 r
+  data arrival time                                                 12.93
+
+  clock clk (rise edge)                                  13.00      13.00
+  clock network delay (ideal)                             0.50      13.50
+  clock uncertainty                                      -0.10      13.40
+  Max_Match_Vector_reg_4_/CK (DFFRX1)                     0.00      13.40 r
+  library setup time                                     -0.30      13.10
+  data required time                                                13.10
+  --------------------------------------------------------------------------
+  data required time                                                13.10
+  data arrival time                                                -12.93
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.17
 
 
 1

@@ -3,4 +3,5 @@
 // Do not modify this file
 //
 /home/YuChengWang/STAR/sim/softmax_tb.sv
+/home/YuChengWang/STAR/src/def.sv
 /home/YuChengWang/STAR/src/STAR.sv

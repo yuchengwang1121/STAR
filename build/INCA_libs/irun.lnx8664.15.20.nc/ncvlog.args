@@ -6,6 +6,7 @@
 ./INCA_libs/irun.lnx8664.15.20.nc
 -RUNMODE
 /home/YuChengWang/STAR/sim/softmax_tb.sv
+/home/YuChengWang/STAR/src/def.sv
 /home/YuChengWang/STAR/src/STAR.sv
 -INCDIR
 /home/YuChengWang/STAR/src

@@ -1,41 +1,43 @@
 ncverilog(64): 15.20-s084: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
-TOOL:	ncverilog	15.20-s084: Started on Mar 17, 2024 at 22:39:17 CST
+TOOL:	ncverilog	15.20-s084: Started on Mar 18, 2024 at 22:33:26 CST
 ncverilog
 	/home/YuChengWang/STAR/sim/softmax_tb.sv
+	/home/YuChengWang/STAR/src/def.sv
 	/home/YuChengWang/STAR/src/STAR.sv
 	+incdir+/home/YuChengWang/STAR/src
 	+nc64bit
 	+access+r
 	+define+FSDB_FILE="STAR.fsdb"
-Recompiling... reason: file '../src/STAR.sv' is newer than expected.
-	expected: Sun Mar 17 22:36:20 2024
-	actual:   Sun Mar 17 22:39:13 2024
-file: /home/YuChengWang/STAR/src/STAR.sv
-	module worklib.STAR:sv
+Recompiling... reason: file '../sim/softmax_tb.sv' is newer than expected.
+	expected: Mon Mar 18 22:28:52 2024
+	actual:   Mon Mar 18 22:33:23 2024
+file: /home/YuChengWang/STAR/sim/softmax_tb.sv
+	module worklib.softmax_tb:sv
 		errors: 0, warnings: 0
-ncvlog: *W,SPDUSD: Include directory /home/YuChengWang/STAR/src given but not used.
-	Total errors/warnings found outside modules and primitives:
-		errors: 0, warnings: 1
 		Caching library 'worklib' ....... Done
 	Elaborating the design hierarchy:
+   STAR u_STAR(   .clk(clk),
+             |
+ncelab: *W,CUVWSP (../sim/softmax_tb.sv,43|13): 1 output port was not connected:
+ncelab: (../src/STAR.sv,23): o_sum_MV
+
 ncelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
-		worklib.STAR:sv <0x71387db0>
-			streams:  31, words: 103487
+		worklib.softmax_tb:sv <0x61b12cc8>
+			streams:  33, words: 20087
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
 		                  Instances  Unique
-		Modules:                  4       4
-		Registers:               46      46
-		Scalar wires:            18       -
-		Expanded wires:           3       1
-		Vectored wires:          15       -
-		Always blocks:           18      18
-		Initial blocks:          15      15
-		Cont. assignments:        5      13
-		Pseudo assignments:       1       1
+		Modules:                  5       5
+		Registers:               72      72
+		Scalar wires:            24       -
+		Vectored wires:          31       -
+		Always blocks:           21      21
+		Initial blocks:          16      16
+		Cont. assignments:        8      16
+		Pseudo assignments:      18      18
 		Simulation timescale:  10ps
 	Writing initial simulation snapshot: worklib.softmax_tb:sv
 Loading snapshot worklib.softmax_tb:sv .................... Done
@@ -50,13 +52,20 @@ FSDB Dumper for IUS, Release Verdi_Q-2020.03, Linux x86_64/64bit, 02/09/2020
 *Verdi* : Begin traversing the scopes, layer (0).
 *Verdi* : Enable +all dumping.
 *Verdi* : End of traversing.
+==> The input size is :          64
 -----------------------------------------------------
 
 START!!! Simulation Start .....
 
 -----------------------------------------------------
 
-Simulation complete via $finish(1) at time 16040 NS + 0
-../sim/softmax_tb.sv:176       #(`CYCLE/2); $finish;
+-----------------------------------------------------
+
+Congratulations! All data have been generated successfully!
+
+-------------------------PASS------------------------
+
+Simulation complete via $finish(1) at time 9040 NS + 0
+../sim/softmax_tb.sv:197       #(`CYCLE/2); $finish;
 ncsim> exit
-TOOL:	ncverilog	15.20-s084: Exiting on Mar 17, 2024 at 22:39:18 CST  (total: 00:00:01)
+TOOL:	ncverilog	15.20-s084: Exiting on Mar 18, 2024 at 22:33:28 CST  (total: 00:00:02)

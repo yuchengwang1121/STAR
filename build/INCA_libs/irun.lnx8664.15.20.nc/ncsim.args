@@ -2,16 +2,15 @@
 // File created by:  ncverilog
 // Do not modify this file
 //
++incdir+/home/YuChengWang/STAR/src
 +nc64bit
 +access+r
 +define+FSDB_FILE=\"STAR.fsdb\"
-+define+SDF
-+define+SDFFILE=\"/home/YuChengWang/STAR/syn/STAR_syn.sdf\"
 -MESSAGES
 +EMGRLOG
 ncverilog.log
 -XLSTIME
-1710772627
+1710948884
 -XLKEEP
 -XLMODE
 ./INCA_libs/irun.lnx8664.15.20.nc

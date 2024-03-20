@@ -1,6 +1,6 @@
 `timescale 1ns/10ps
-`define CYCLE      15          	  // Modify your clock period here
-`define SDFFILE    "./syn/STAR_syn.sdf"	  // Modify your sdf file name
+`define CYCLE      15          	         // <===== need modify if change input 16=>20, 4=>15 =====>
+`define SDFFILE    "./syn/STAR_syn.sdf"	// Modify your sdf file name
 `define End_CYCLE  100000000              // Modify cycle times once your design need more cycle times!
 
 `define Input      "../sim/input.dat" 
@@ -265,7 +265,7 @@ output logic [`LUT_len-1:0] sub_MV;
 logic [`LUT_len-1:0] SUB_table [0:`LUT_len-1];
 logic [7:0] posi;
 integer i;
-logic [1:0] counter;                                  //need modify if change input
+logic [1:0] counter;                                  //<===== need modify if change input 16=>3, 4=>1 =====>
 logic [7:0] xsub_buffer [0:`Input_len-1];
 
 assign posi = xsub_buffer[counter] + 8'd50;

@@ -57,7 +57,7 @@ assign FindMax_done = (Cur_state == FindMax && counter == `Input_len-1)? 1'b1:1'
 assign FindSub_done = (Cur_state == FindSub && counter == `Input_len-1)? 1'b1:1'b0;
 assign EXP_done     = (Cur_state == EXP     && counter == `Input_len)? 1'b1:1'b0;
 assign FindSExp_done= (Cur_state == FindSExp&& counter == `Input_len)? 1'b1:1'b0;
-assign Finish_done  = (row_counter == `Input_len<<2)? 1'b1:1'b0;
+assign Finish_done  = (row_counter == `Input_len>>2)? 1'b1:1'b0;
 
 always @(posedge clk or posedge reset) begin
     if(reset) Cur_state <= Init;

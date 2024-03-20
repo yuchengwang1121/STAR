@@ -2,11 +2,7 @@
 // File created by:  ncverilog
 // Do not modify this file
 //
--VFILE
-/usr/cad/lib/CBDK_IC_Contest_v2.1/Verilog/tsmc13_neg.v
+-INCDIR
+/home/YuChengWang/STAR/src
 -DEFINE
 FSDB_FILE=\"STAR.fsdb\"
--DEFINE
-SDF
--DEFINE
-SDFFILE=\"/home/YuChengWang/STAR/syn/STAR_syn.sdf\"

@@ -7,7 +7,7 @@
   * Change the parameter `inputlen` to simulate different numbers of segment
   * $inputlen = Inputlen/segnum$
 * Counter =>
- * $2^{Counter}=inputlen$
+  * $2^{Counter}=inputlen$
 ### sim/softmax_tb.sv
 * CYCLE =>
   * Please make sure the result of `make syn` is correct. Or it will occur "Time violation"

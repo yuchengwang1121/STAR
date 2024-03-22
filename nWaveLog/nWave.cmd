@@ -65,3 +65,4 @@ wvZoomIn -win $_nWave1
 wvZoomIn -win $_nWave1
 wvZoomIn -win $_nWave1
 wvZoomIn -win $_nWave1
+wvExit

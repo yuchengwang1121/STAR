@@ -12,6 +12,7 @@ module softmax_tb;
 
 parameter N_INPUT   = (`Input_len == 16)? `Input_len**2: `Input_len**3;   // 16 x 16 or 4*4*4
 
+
 logic   [7:0]   input_mem   [0:N_INPUT-1];
 
 logic   clk = 0;
@@ -265,7 +266,7 @@ output logic [`LUT_len-1:0] sub_MV;
 logic [`LUT_len-1:0] SUB_table [0:`LUT_len-1];
 logic [7:0] posi;
 integer i;
-logic [1:0] counter;                                  //<===== need modify if change input 16=>3, 4=>1 =====>
+logic [`Counter-1:0] counter;                                  //<===== need modify if change input 16=>3, 4=>1 =====>
 logic [7:0] xsub_buffer [0:`Input_len-1];
 
 assign posi = xsub_buffer[counter] + 8'd50;

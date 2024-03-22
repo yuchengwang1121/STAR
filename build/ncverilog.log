@@ -1,5 +1,5 @@
 ncverilog(64): 15.20-s084: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
-TOOL:	ncverilog	15.20-s084: Started on Mar 20, 2024 at 23:34:44 CST
+TOOL:	ncverilog	15.20-s084: Started on Mar 22, 2024 at 13:50:18 CST
 ncverilog
 	/home/YuChengWang/STAR/sim/softmax_tb.sv
 	/home/YuChengWang/STAR/src/def.sv
@@ -9,8 +9,8 @@ ncverilog
 	+access+r
 	+define+FSDB_FILE="STAR.fsdb"
 Recompiling... reason: file '../sim/softmax_tb.sv' is newer than expected.
-	expected: Wed Mar 20 23:34:00 2024
-	actual:   Wed Mar 20 23:34:39 2024
+	expected: Wed Mar 20 23:34:39 2024
+	actual:   Fri Mar 22 13:49:28 2024
 file: /home/YuChengWang/STAR/sim/softmax_tb.sv
 	module worklib.softmax_tb:sv
 		errors: 0, warnings: 0
@@ -28,7 +28,7 @@ file: /home/YuChengWang/STAR/src/STAR.sv
 	Elaborating the design hierarchy:
    STAR u_STAR(   .clk(clk),
              |
-ncelab: *W,CUVWSP (../sim/softmax_tb.sv,43|13): 1 output port was not connected:
+ncelab: *W,CUVWSP (../sim/softmax_tb.sv,44|13): 1 output port was not connected:
 ncelab: (../src/STAR.sv,23): o_sum_MV
 
 ncelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
@@ -36,7 +36,7 @@ ncelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-
 	Generating native compiled code:
 		worklib.CAMSUB_mem:sv <0x10f730c8>
 			streams:  10, words:  4514
-		worklib.CAM_mem:sv <0x4db37274>
+		worklib.CAM_mem:sv <0x7b04ed05>
 			streams:   8, words:  4583
 		worklib.LUT_mem:sv <0x5f6f6dad>
 			streams:   7, words:  3553
@@ -84,6 +84,6 @@ Congratulations! All data have been generated successfully!
 -------------------------PASS------------------------
 
 Simulation complete via $finish(1) at time 448 NS + 0
-../sim/softmax_tb.sv:197       #(`CYCLE/2); $finish;
+../sim/softmax_tb.sv:198       #(`CYCLE/2); $finish;
 ncsim> exit
-TOOL:	ncverilog	15.20-s084: Exiting on Mar 20, 2024 at 23:34:45 CST  (total: 00:00:01)
+TOOL:	ncverilog	15.20-s084: Exiting on Mar 22, 2024 at 13:50:20 CST  (total: 00:00:02)

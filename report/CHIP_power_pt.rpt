@@ -1,11 +1,38 @@
-Information: Running time_based power analysis... (PWR-601)
-Information: Enabling native fsdb reader. 
-Information: Reading fsdb file '/home/YuChengWang/STAR/build/STAR.fsdb'
-** FSDB version : 5.8
-** FSDB Reader version : Verdi_P-2019.06-SP2-5
-** FSDB version supported upto: 5.8
-Warning: Unable to add any signals from FSDB..
-Warning: There are invalid value changes in the activity (VCD/VPD/FSDB) file. (PWR-505)
-Error: Can not find any event in the event file.  (PWR-248)
-Error: Power is not calculated. Please run update_power before report_power.  (PRPT-115)
-0
+****************************************
+Report : Time Based Power (Cycle Accurate)
+Design : STAR
+Version: R-2020.09
+Date   : Wed Apr  3 17:04:15 2024
+****************************************
+
+
+
+  Attributes
+  ----------
+      i  -  Including register clock pin internal power
+      u  -  User defined power group
+
+                        Internal  Switching  Leakage    Total
+Power Group             Power     Power      Power      Power   (     %)  Attrs
+--------------------------------------------------------------------------------
+clock_network           8.361e-04    0.0000    0.0000 8.361e-04 (74.91%)  i
+register                7.641e-06 1.516e-05 1.722e-05 4.002e-05 ( 3.59%)  
+combinational           1.953e-05 2.138e-04 6.763e-06 2.401e-04 (21.51%)  
+sequential                 0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+memory                     0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+io_pad                     0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+black_box                  0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+
+  Net Switching Power          = 2.290e-04   (20.51%)
+  Cell Internal Power          = 8.633e-04   (77.34%)
+  Cell Leakage Power           = 2.398e-05   ( 2.15%)
+                                 ---------
+Total Power                    = 1.116e-03  (100.00%)
+
+X Transition Power             = 9.598e-05
+CAPP Estimated Glitching Power = 9.857e-06
+
+Peak Power                     = 2.774e-03
+Peak Time                      =     12390
+
+1

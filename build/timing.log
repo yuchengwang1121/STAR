@@ -6,15 +6,15 @@ Report : timing
         -max_paths 1
 Design : STAR
 Version: T-2022.03
-Date   : Wed Apr  3 15:41:43 2024
+Date   : Wed Apr  3 17:01:58 2024
 ****************************************
 
 Operating Conditions: slow   Library: slow
 Wire Load Model Mode: top
 
-  Startpoint: i_sub_MV[0]
-              (input port clocked by clk)
-  Endpoint: Sum_Match_Vector_reg_0__2_
+  Startpoint: counter_reg_2_
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: Max_Match_Vector_reg_0_
             (rising edge-triggered flip-flop clocked by clk)
   Path Group: clk
   Path Type: max
@@ -23,31 +23,41 @@ Wire Load Model Mode: top
   ------------------------------------------------
   STAR               tsmc13_wl10           slow
 
-  Point                                                   Incr       Path
-  --------------------------------------------------------------------------
-  clock clk (rise edge)                                   0.00       0.00
-  clock network delay (ideal)                             0.50       0.50
-  input external delay                                    5.00       5.50 r
-  i_sub_MV[0] (in)                                        0.03       5.53 r
-  U962/Y (CLKINVX1)                                       0.30       5.83 f
-  U795/Y (OAI21XL)                                        0.81       6.64 r
-  U796/Y (OA21XL)                                         0.54       7.18 r
-  U964/Y (OA21XL)                                         0.38       7.56 r
-  U963/Y (OAI32X1)                                        0.23       7.79 f
-  Sum_Match_Vector_reg_0__2_/D (DFFRX1)                   0.00       7.79 f
-  data arrival time                                                  7.79
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  counter_reg_2_/CK (DFFRX1)               0.00       0.50 r
+  counter_reg_2_/QN (DFFRX1)               0.93       1.43 r
+  U2080/Y (NOR2X1)                         0.51       1.94 f
+  U917/Y (AND2X2)                          0.50       2.44 f
+  U1160/Y (CLKBUFX3)                       0.77       3.21 f
+  U2121/Y (AO22X1)                         0.59       3.81 f
+  U2122/Y (AOI221XL)                       0.52       4.33 r
+  U2129/Y (NAND4X1)                        0.54       4.86 f
+  U2330/Y (NAND2X1)                        0.41       5.27 r
+  U2331/Y (OAI222XL)                       0.50       5.77 f
+  U2332/Y (OAI222XL)                       0.94       6.71 r
+  U2333/Y (OAI222XL)                       0.65       7.35 f
+  U2334/Y (OAI222XL)                       0.67       8.02 r
+  U2335/Y (OAI21XL)                        0.46       8.49 f
+  U1272/Y (NAND2BX1)                       0.36       8.84 f
+  U1271/Y (CLKBUFX3)                       0.72       9.57 f
+  U1436/Y (OAI22XL)                        0.63      10.19 r
+  Max_Match_Vector_reg_0_/D (DFFRX1)       0.00      10.19 r
+  data arrival time                                  10.19
 
-  clock clk (rise edge)                                  20.00      20.00
-  clock network delay (ideal)                             0.50      20.50
-  clock uncertainty                                      -0.10      20.40
-  Sum_Match_Vector_reg_0__2_/CK (DFFRX1)                  0.00      20.40 r
-  library setup time                                     -0.24      20.16
-  data required time                                                20.16
-  --------------------------------------------------------------------------
-  data required time                                                20.16
-  data arrival time                                                 -7.79
-  --------------------------------------------------------------------------
-  slack (MET)                                                       12.37
+  clock clk (rise edge)                   15.00      15.00
+  clock network delay (ideal)              0.50      15.50
+  clock uncertainty                       -0.10      15.40
+  Max_Match_Vector_reg_0_/CK (DFFRX1)      0.00      15.40 r
+  library setup time                      -0.30      15.10
+  data required time                                 15.10
+  -----------------------------------------------------------
+  data required time                                 15.10
+  data arrival time                                 -10.19
+  -----------------------------------------------------------
+  slack (MET)                                         4.91
 
 
 1

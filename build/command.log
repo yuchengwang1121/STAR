@@ -1,6 +1,6 @@
 #@ # 
 #@ # Running dc_shell Version T-2022.03 for linux64 -- Feb 22, 2022
-#@ # Date:   Wed Apr  3 15:41:34 2024
+#@ # Date:   Wed Apr  3 17:01:46 2024
 #@ # Run by: YuChengWang@caidcpuserver1
 #@ 
 
@@ -8634,7 +8634,7 @@ source -echo -verbose /home/YuChengWang/STAR/script/synthesize.tcl
 
 #@ # operating conditions and boundary conditions #
 #@ 
-#@ set cycle  20         ;#clock period defined by designer
+#@ set cycle  15         ;#clock period defined by designer
 #@ 
 #@ create_clock -period $cycle [get_ports  clk]
 #@ set_dont_touch_network      [get_clocks clk]
@@ -8697,5 +8697,4 @@ source -echo -verbose /home/YuChengWang/STAR/script/synthesize.tcl
 #@ # exit
 #@ # -- End source /home/YuChengWang/STAR/script/synthesize.tcl
 
-report_area
 exit

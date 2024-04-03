@@ -19,7 +19,7 @@ source ./build/.synopsys_dc.setup
 #=====================================================================
 set CHIP STAR
 set NETLIST [list ./syn/${CHIP}_syn.v]
-set STRIP_PATH "./sim/softmax_tb.sv"
+set STRIP_PATH "softmax_tb/u_STAR"
 set DRIVE0_PORT [list clk reset]
 set SDF_FILE "./syn/${CHIP}_syn.sdf"
 #set SPEF_FILE "STAR.spef.max"
@@ -75,7 +75,7 @@ report_timing -nworst 10 -path_type summary >> $TIME_RPT
 #==================================================================== 
 #    Power Switching Activity Annotation Section                 #  
 #====================================================================
-read_fsdb $FSDB_FILE -strip_path $STRIP_PATH 
+read_fsdb -rtl $FSDB_FILE -format systemverilog -strip_path $STRIP_PATH 
 report_switching_activity    
 #====================================================================
 # Report Power Information

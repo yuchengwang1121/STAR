@@ -1,6 +1,6 @@
 ###################################################################
 
-# Created by write_sdc on Wed Apr  3 15:41:43 2024
+# Created by write_sdc on Wed Apr  3 17:01:58 2024
 
 ###################################################################
 set sdc_version 2.0
@@ -232,7 +232,7 @@ set_max_fanout 20 [get_ports {Sum_exp[3]}]
 set_max_fanout 20 [get_ports {Sum_exp[2]}]
 set_max_fanout 20 [get_ports {Sum_exp[1]}]
 set_max_fanout 20 [get_ports {Sum_exp[0]}]
-create_clock [get_ports clk]  -period 20  -waveform {0 10}
+create_clock [get_ports clk]  -period 15  -waveform {0 7.5}
 set_clock_latency 0.5  [get_clocks clk]
 set_clock_uncertainty 0.1  [get_clocks clk]
 set_input_delay -clock clk  5  [get_ports reset]

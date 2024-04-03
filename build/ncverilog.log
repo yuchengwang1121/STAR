@@ -1,5 +1,5 @@
 ncverilog(64): 15.20-s084: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
-TOOL:	ncverilog	15.20-s084: Started on Apr 03, 2024 at 16:46:50 CST
+TOOL:	ncverilog	15.20-s084: Started on Apr 03, 2024 at 17:01:31 CST
 ncverilog
 	/home/YuChengWang/STAR/sim/softmax_tb.sv
 	/home/YuChengWang/STAR/src/def.sv
@@ -9,8 +9,8 @@ ncverilog
 	+access+r
 	+define+FSDB_FILE="STAR.fsdb"
 Recompiling... reason: file '../src/def.sv' is newer than expected.
-	expected: Wed Apr  3 16:46:37 2024
-	actual:   Wed Apr  3 16:46:48 2024
+	expected: Wed Apr  3 16:46:48 2024
+	actual:   Wed Apr  3 17:01:26 2024
 file: /home/YuChengWang/STAR/sim/softmax_tb.sv
 	module worklib.softmax_tb:sv
 		errors: 0, warnings: 0
@@ -34,16 +34,16 @@ ncelab: (../src/STAR.sv,23): o_sum_MV
 ncelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
-		worklib.CAMSUB_mem:sv <0x43566ce7>
-			streams:  10, words:  4198
-		worklib.CAM_mem:sv <0x255480c3>
-			streams:   8, words:  4255
-		worklib.LUT_mem:sv <0x7c9caa19>
-			streams:   7, words:  3289
-		worklib.STAR:sv <0x60dcbf34>
+		worklib.CAMSUB_mem:sv <0x0665c2de>
+			streams:  10, words:  3910
+		worklib.CAM_mem:sv <0x5288110a>
+			streams:   8, words:  7097
+		worklib.LUT_mem:sv <0x1d7cd86d>
+			streams:   7, words:  3298
+		worklib.STAR:sv <0x34bc8c16>
 			streams:  33, words: 30721
-		worklib.softmax_tb:sv <0x0f8f39e9>
-			streams:  36, words: 21506
+		worklib.softmax_tb:sv <0x58651865>
+			streams:  36, words: 21513
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
@@ -70,21 +70,21 @@ FSDB Dumper for IUS, Release Verdi_Q-2020.03, Linux x86_64/64bit, 02/09/2020
 *Verdi* : Begin traversing the scopes, layer (0).
 *Verdi* : Enable +all dumping.
 *Verdi* : End of traversing.
-==> The input size is :          64
+==> The input size is :         256
 -----------------------------------------------------
 
 START!!! Simulation Start .....
 
 -----------------------------------------------------
 
-The total cycle take is   450
+The total cycle take is  1602
 -----------------------------------------------------
 
 Congratulations! All data have been generated successfully!
 
 -------------------------PASS------------------------
 
-Simulation complete via $finish(1) at time 6328 NS + 0
+Simulation complete via $finish(1) at time 22456 NS + 0
 ../sim/softmax_tb.sv:204       #(`CYCLE/2); $finish;
 ncsim> exit
-TOOL:	ncverilog	15.20-s084: Exiting on Apr 03, 2024 at 16:46:51 CST  (total: 00:00:01)
+TOOL:	ncverilog	15.20-s084: Exiting on Apr 03, 2024 at 17:01:33 CST  (total: 00:00:02)

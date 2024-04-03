@@ -2,7 +2,7 @@
 Report : clock
 Design : STAR
 Version: R-2020.09
-Date   : Wed Apr  3 14:54:04 2024
+Date   : Wed Apr  3 17:04:14 2024
 ****************************************
 
 Attributes:
@@ -21,7 +21,7 @@ Report : port
 	-input_delay
 Design : STAR
 Version: R-2020.09
-Date   : Wed Apr  3 14:54:04 2024
+Date   : Wed Apr  3 17:04:14 2024
 ****************************************
 
 Attributes:
@@ -151,7 +151,7 @@ Report : port
 	-output_delay
 Design : STAR
 Version: R-2020.09
-Date   : Wed Apr  3 14:54:04 2024
+Date   : Wed Apr  3 17:04:14 2024
 ****************************************
 
 Attributes:

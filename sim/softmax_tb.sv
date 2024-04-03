@@ -10,7 +10,7 @@
 `include "../src/def.sv"
 module softmax_tb;
 
-parameter N_INPUT   = (`Input_len == 16)? `Input_len**2: `Input_len**3;   // 16 x 16 or 4*4*4
+parameter N_INPUT   = (`Input_len == 16)? `Input_len**2: `Input_len*16;   // 16 x 16 or 4*4*4
 
 
 logic   [7:0]   input_mem   [0:N_INPUT-1];
@@ -266,7 +266,7 @@ output logic [`LUT_len-1:0] sub_MV;
 logic [`LUT_len-1:0] SUB_table [0:`LUT_len-1];
 logic [7:0] posi;
 integer i;
-logic [`Counter-1:0] counter;                                  //<===== need modify if change input 16=>3, 4=>1 =====>
+logic [`Counter:0] counter;                                  //<===== need modify if change input 16=>3, 4=>1 =====>
 logic [7:0] xsub_buffer [0:`Input_len-1];
 
 assign posi = xsub_buffer[counter] + 8'd50;
@@ -276,7 +276,7 @@ initial begin     //From -50 ~ 0 ~ 12 => [0 ~ 64]
 end
 
 always@(posedge clk or posedge rst) begin
-   if(rst)  counter <= 2'b11;
+   if(rst)  counter <= `Counter'b0 - 1'b1;
    else begin
       if(FindSub || EXP) counter <= counter + 1'b1;
       else        counter <= 1'b0;

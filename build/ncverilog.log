@@ -1,5 +1,5 @@
 ncverilog(64): 15.20-s084: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
-TOOL:	ncverilog	15.20-s084: Started on Mar 22, 2024 at 13:50:18 CST
+TOOL:	ncverilog	15.20-s084: Started on Apr 03, 2024 at 16:08:29 CST
 ncverilog
 	/home/YuChengWang/STAR/sim/softmax_tb.sv
 	/home/YuChengWang/STAR/src/def.sv
@@ -8,16 +8,19 @@ ncverilog
 	+nc64bit
 	+access+r
 	+define+FSDB_FILE="STAR.fsdb"
-Recompiling... reason: file '../sim/softmax_tb.sv' is newer than expected.
-	expected: Wed Mar 20 23:34:39 2024
-	actual:   Fri Mar 22 13:49:28 2024
+Recompiling... reason: file '../src/def.sv' is newer than expected.
+	expected: Wed Apr  3 16:07:46 2024
+	actual:   Wed Apr  3 16:08:27 2024
 file: /home/YuChengWang/STAR/sim/softmax_tb.sv
 	module worklib.softmax_tb:sv
 		errors: 0, warnings: 0
 	module worklib.CAMSUB_mem:sv
 		errors: 0, warnings: 0
+   if(rst)  counter <= `Counter'b0 - 1'b1;
+                              |
+ncvlog: *W,MAXBSZ (/home/YuChengWang/STAR/sim/softmax_tb.sv,279|30): zero width prefix to based number ignored [2.5(IEEE)].
 	module worklib.CAM_mem:sv
-		errors: 0, warnings: 0
+		errors: 0, warnings: 1
 	module worklib.LUT_mem:sv
 		errors: 0, warnings: 0
 file: /home/YuChengWang/STAR/src/def.sv
@@ -32,18 +35,25 @@ ncelab: *W,CUVWSP (../sim/softmax_tb.sv,44|13): 1 output port was not connected:
 ncelab: (../src/STAR.sv,23): o_sum_MV
 
 ncelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
-	Building instance overlay tables: .................... Done
+	Building instance overlay tables: ....................
+      if(sub_MV[50:35] !=0) begin  //-15 ~ 0 => [1<<35 & 1<<50]
+              |
+ncelab: *W,BNDWRN (../sim/softmax_tb.sv,329|14): Bit-select or part-select index out of declared bounds.
+         value <= sub_MV[50:35];
+                       |
+ncelab: *W,BNDWRN (../sim/softmax_tb.sv,331|23): Bit-select or part-select index out of declared bounds.
+ Done
 	Generating native compiled code:
-		worklib.CAMSUB_mem:sv <0x10f730c8>
-			streams:  10, words:  4514
-		worklib.CAM_mem:sv <0x7b04ed05>
-			streams:   8, words:  4583
-		worklib.LUT_mem:sv <0x5f6f6dad>
-			streams:   7, words:  3553
-		worklib.STAR:sv <0x2e3cb4f3>
-			streams:  33, words: 61094
-		worklib.softmax_tb:sv <0x61b12cc8>
-			streams:  33, words: 20087
+		worklib.CAMSUB_mem:sv <0x38c8950b>
+			streams:  10, words:  3916
+		worklib.CAM_mem:sv <0x6faf74d2>
+			streams:   8, words:  3779
+		worklib.LUT_mem:sv <0x0e58a7a7>
+			streams:   7, words:  2847
+		worklib.STAR:sv <0x772a0729>
+			streams:  33, words: 30721
+		worklib.softmax_tb:sv <0x37a07f8f>
+			streams:  33, words: 19869
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
@@ -70,7 +80,7 @@ FSDB Dumper for IUS, Release Verdi_Q-2020.03, Linux x86_64/64bit, 02/09/2020
 *Verdi* : Begin traversing the scopes, layer (0).
 *Verdi* : Enable +all dumping.
 *Verdi* : End of traversing.
-==> The input size is :          64
+==> The input size is :          32
 -----------------------------------------------------
 
 START!!! Simulation Start .....
@@ -83,7 +93,7 @@ Congratulations! All data have been generated successfully!
 
 -------------------------PASS------------------------
 
-Simulation complete via $finish(1) at time 448 NS + 0
+Simulation complete via $finish(1) at time 3640 NS + 0
 ../sim/softmax_tb.sv:198       #(`CYCLE/2); $finish;
 ncsim> exit
-TOOL:	ncverilog	15.20-s084: Exiting on Mar 22, 2024 at 13:50:20 CST  (total: 00:00:02)
+TOOL:	ncverilog	15.20-s084: Exiting on Apr 03, 2024 at 16:08:30 CST  (total: 00:00:01)

@@ -1,0 +1,372 @@
+****************************************
+Report : clock
+Design : STAR
+Version: R-2020.09
+Date   : Wed Apr  3 14:54:04 2024
+****************************************
+
+Attributes:
+    p - Propagated clock
+    G - Generated  clock
+    I - Inactive   clock
+
+Clock             Period          Waveform            Attrs     Sources
+-----------------------------------------------------------------------
+clk                15.00          {0 7.5}                       {clk}
+
+1
+Information: Building multi voltage information for entire design. (MV-022)
+****************************************
+Report : port
+	-input_delay
+Design : STAR
+Version: R-2020.09
+Date   : Wed Apr  3 14:54:04 2024
+****************************************
+
+Attributes:
+    H - HyperScale context override
+
+
+                    Input Delay
+                  Min             Max       Related Related
+ Input Port    Rise   Fall    Rise    Fall   Clock   Pin       Attrs
+----------------------------------------------------------------------
+Sum_exp[0]    --      --      --      --      --      --        -- 
+Sum_exp[1]    --      --      --      --      --      --        -- 
+Sum_exp[2]    --      --      --      --      --      --        -- 
+Sum_exp[3]    --      --      --      --      --      --        -- 
+Sum_exp[4]    --      --      --      --      --      --        -- 
+Sum_exp[5]    --      --      --      --      --      --        -- 
+Sum_exp[6]    --      --      --      --      --      --        -- 
+Sum_exp[7]    --      --      --      --      --      --        -- 
+Sum_exp[8]    --      --      --      --      --      --        -- 
+Sum_exp[9]    --      --      --      --      --      --        -- 
+Sum_exp[10]   --      --      --      --      --      --        -- 
+Sum_exp[11]   --      --      --      --      --      --        -- 
+Sum_exp[12]   --      --      --      --      --      --        -- 
+Sum_exp[13]   --      --      --      --      --      --        -- 
+Sum_exp[14]   --      --      --      --      --      --        -- 
+Sum_exp[15]   --      --      --      --      --      --        -- 
+Sum_exp[16]   --      --      --      --      --      --        -- 
+Sum_exp[17]   --      --      --      --      --      --        -- 
+Sum_exp[18]   --      --      --      --      --      --        -- 
+Sum_exp[19]   --      --      --      --      --      --        -- 
+Sum_exp[20]   --      --      --      --      --      --        -- 
+Sum_exp[21]   --      --      --      --      --      --        -- 
+Sum_exp[22]   --      --      --      --      --      --        -- 
+Sum_exp[23]   --      --      --      --      --      --        -- 
+Sum_exp[24]   --      --      --      --      --      --        -- 
+Sum_exp[25]   --      --      --      --      --      --        -- 
+Sum_exp[26]   --      --      --      --      --      --        -- 
+Sum_exp[27]   --      --      --      --      --      --        -- 
+Sum_exp[28]   --      --      --      --      --      --        -- 
+Sum_exp[29]   --      --      --      --      --      --        -- 
+Sum_exp[30]   --      --      --      --      --      --        -- 
+Sum_exp[31]   --      --      --      --      --      --        -- 
+clk           --      --      --      --      --      --        -- 
+data[0]       --      --      --      --      --      --        -- 
+data[1]       --      --      --      --      --      --        -- 
+data[2]       --      --      --      --      --      --        -- 
+data[3]       --      --      --      --      --      --        -- 
+data[4]       --      --      --      --      --      --        -- 
+data[5]       --      --      --      --      --      --        -- 
+data[6]       --      --      --      --      --      --        -- 
+data[7]       --      --      --      --      --      --        -- 
+exp[0]        --      --      --      --      --      --        -- 
+exp[1]        --      --      --      --      --      --        -- 
+exp[2]        --      --      --      --      --      --        -- 
+exp[3]        --      --      --      --      --      --        -- 
+exp[4]        --      --      --      --      --      --        -- 
+exp[5]        --      --      --      --      --      --        -- 
+exp[6]        --      --      --      --      --      --        -- 
+exp[7]        --      --      --      --      --      --        -- 
+exp[8]        --      --      --      --      --      --        -- 
+exp[9]        --      --      --      --      --      --        -- 
+exp[10]       --      --      --      --      --      --        -- 
+exp[11]       --      --      --      --      --      --        -- 
+exp[12]       --      --      --      --      --      --        -- 
+exp[13]       --      --      --      --      --      --        -- 
+exp[14]       --      --      --      --      --      --        -- 
+exp[15]       --      --      --      --      --      --        -- 
+exp[16]       --      --      --      --      --      --        -- 
+exp[17]       --      --      --      --      --      --        -- 
+exp[18]       --      --      --      --      --      --        -- 
+exp[19]       --      --      --      --      --      --        -- 
+exp[20]       --      --      --      --      --      --        -- 
+exp[21]       --      --      --      --      --      --        -- 
+exp[22]       --      --      --      --      --      --        -- 
+exp[23]       --      --      --      --      --      --        -- 
+exp[24]       --      --      --      --      --      --        -- 
+exp[25]       --      --      --      --      --      --        -- 
+exp[26]       --      --      --      --      --      --        -- 
+exp[27]       --      --      --      --      --      --        -- 
+exp[28]       --      --      --      --      --      --        -- 
+exp[29]       --      --      --      --      --      --        -- 
+exp[30]       --      --      --      --      --      --        -- 
+exp[31]       --      --      --      --      --      --        -- 
+i_sub_MV[0]   --      --      --      --      --      --        -- 
+i_sub_MV[1]   --      --      --      --      --      --        -- 
+i_sub_MV[2]   --      --      --      --      --      --        -- 
+i_sub_MV[3]   --      --      --      --      --      --        -- 
+i_sub_MV[4]   --      --      --      --      --      --        -- 
+i_sub_MV[5]   --      --      --      --      --      --        -- 
+i_sub_MV[6]   --      --      --      --      --      --        -- 
+i_sub_MV[7]   --      --      --      --      --      --        -- 
+i_sub_MV[8]   --      --      --      --      --      --        -- 
+i_sub_MV[9]   --      --      --      --      --      --        -- 
+i_sub_MV[10]
+              --      --      --      --      --      --        -- 
+i_sub_MV[11]
+              --      --      --      --      --      --        -- 
+i_sub_MV[12]
+              --      --      --      --      --      --        -- 
+i_sub_MV[13]
+              --      --      --      --      --      --        -- 
+i_sub_MV[14]
+              --      --      --      --      --      --        -- 
+i_sub_MV[15]
+              --      --      --      --      --      --        -- 
+i_xi_MV[0]    --      --      --      --      --      --        -- 
+i_xi_MV[1]    --      --      --      --      --      --        -- 
+i_xi_MV[2]    --      --      --      --      --      --        -- 
+i_xi_MV[3]    --      --      --      --      --      --        -- 
+i_xi_MV[4]    --      --      --      --      --      --        -- 
+i_xi_MV[5]    --      --      --      --      --      --        -- 
+i_xi_MV[6]    --      --      --      --      --      --        -- 
+i_xi_MV[7]    --      --      --      --      --      --        -- 
+i_xi_MV[8]    --      --      --      --      --      --        -- 
+i_xi_MV[9]    --      --      --      --      --      --        -- 
+i_xi_MV[10]   --      --      --      --      --      --        -- 
+i_xi_MV[11]   --      --      --      --      --      --        -- 
+i_xi_MV[12]   --      --      --      --      --      --        -- 
+i_xi_MV[13]   --      --      --      --      --      --        -- 
+i_xi_MV[14]   --      --      --      --      --      --        -- 
+i_xi_MV[15]   --      --      --      --      --      --        -- 
+reset         --      --      --      --      --      --        -- 
+
+1
+****************************************
+Report : port
+	-output_delay
+Design : STAR
+Version: R-2020.09
+Date   : Wed Apr  3 14:54:04 2024
+****************************************
+
+Attributes:
+    H - HyperScale context override
+
+
+                   Output Delay
+                  Min             Max       Related Related
+ Output Port    Rise   Fall   Rise    Fall   Clock   Pin      Attrs
+----------------------------------------------------------------------
+CAMSUB_req    0.50    0.50    0.50    0.50  clk       --      
+EXP_req       0.50    0.50    0.50    0.50  clk       --      
+FindSub_req   0.50    0.50    0.50    0.50  clk       --      
+data_addr[0]
+              0.50    0.50    0.50    0.50  clk       --      
+data_addr[1]
+              0.50    0.50    0.50    0.50  clk       --      
+data_addr[2]
+              0.50    0.50    0.50    0.50  clk       --      
+data_addr[3]
+              0.50    0.50    0.50    0.50  clk       --      
+data_addr[4]
+              0.50    0.50    0.50    0.50  clk       --      
+data_addr[5]
+              0.50    0.50    0.50    0.50  clk       --      
+data_addr[6]
+              0.50    0.50    0.50    0.50  clk       --      
+data_addr[7]
+              0.50    0.50    0.50    0.50  clk       --      
+data_addr[8]
+              0.50    0.50    0.50    0.50  clk       --      
+data_req      0.50    0.50    0.50    0.50  clk       --      
+finish        0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[0]   0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[1]   0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[2]   0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[3]   0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[4]   0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[5]   0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[6]   0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[7]   0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[8]   0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[9]   0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[10]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[11]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[12]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[13]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[14]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sub_MV[15]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[0]   0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[1]   0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[2]   0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[3]   0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[4]   0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[5]   0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[6]   0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[7]   0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[8]   0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[9]   0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[10]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[11]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[12]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[13]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[14]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[15]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[16]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[17]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[18]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[19]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[20]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[21]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[22]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[23]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[24]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[25]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[26]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[27]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[28]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[29]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[30]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[31]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[32]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[33]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[34]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[35]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[36]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[37]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[38]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[39]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[40]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[41]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[42]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[43]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[44]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[45]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[46]
+              0.50    0.50    0.50    0.50  clk       --      
+o_sum_MV[47]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[0]    0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[1]    0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[2]    0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[3]    0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[4]    0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[5]    0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[6]    0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[7]    0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[8]    0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[9]    0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[10]   0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[11]   0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[12]   0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[13]   0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[14]   0.50    0.50    0.50    0.50  clk       --      
+o_xi_MV[15]   0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[0]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[1]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[2]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[3]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[4]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[5]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[6]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[7]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[8]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[9]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[10]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[11]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[12]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[13]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[14]
+              0.50    0.50    0.50    0.50  clk       --      
+o_xmax_MV[15]
+              0.50    0.50    0.50    0.50  clk       --      
+xi[0]         0.50    0.50    0.50    0.50  clk       --      
+xi[1]         0.50    0.50    0.50    0.50  clk       --      
+xi[2]         0.50    0.50    0.50    0.50  clk       --      
+xi[3]         0.50    0.50    0.50    0.50  clk       --      
+xi[4]         0.50    0.50    0.50    0.50  clk       --      
+xi[5]         0.50    0.50    0.50    0.50  clk       --      
+xi[6]         0.50    0.50    0.50    0.50  clk       --      
+xi[7]         0.50    0.50    0.50    0.50  clk       --      
+
+1
+Information: Advanced waveform propagation is enabled. (PT-040)
+Warning: Zero transition time will be used at to pins of annotated arcs. Delays on not annotated delay arcs will be estimated using best available slew.  (PTE-066)
+Information: Building multi voltage information for entire design. (MV-022)
+Information: Zero transition time used at to pin of annotated arcs. Delays on not annotated delay arcs will be estimated using best available slew.  (PTE-054)
+Information: Zero transition time used at to pin of annotated arcs. Delays on not annotated delay arcs will be estimated using best available slew.  (PTE-054)
+Information: Checking 'no_input_delay'.
+Information: Checking 'no_driving_cell'.
+Information: Checking 'unconstrained_endpoints'.
+Information: Checking 'unexpandable_clocks'.
+Information: Checking 'latch_fanout'.
+Information: Checking 'no_clock'.
+Information: Checking 'partial_input_delay'.
+Information: Checking 'generic'.
+Information: Checking 'loops'.
+Information: Checking 'generated_clocks'.
+Information: Checking 'pulse_clock_non_pulse_clock_merge'.
+Information: Checking 'pll_configuration'.
+check_timing succeeded.
+1

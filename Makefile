@@ -68,6 +68,9 @@ gen_hex:
 check:
 	jg -superlint $(SCRIPT_DIR)/superlint.tcl &
 
+prime:
+	primetime -file $(SCRIPT_DIR)/prime.tcl
+
 # Run RTL simulation
 rtl: 
 	cd $(BUILD_DIR); \

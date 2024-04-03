@@ -33,7 +33,7 @@ logic [`LUT_len-1:0] i_sub_MV;
 logic [`LUT_len-1:0] o_xmax_MV;
 logic [`LUT_len-1:0] o_xi_MV;
 logic [`LUT_len-1:0] o_sub_MV;
-
+logic [`LUT_len-1:0] C;
 logic [7:0] data;
 
 
@@ -112,6 +112,11 @@ end
 
 always begin #(`CYCLE/2) clk = ~clk; end
 
+always @ (posedge clk or reset)begin
+   if(reset) C <= 1'b0;
+   else C <= C + 1'b1;
+end
+
 always@ (negedge clk)begin
    if(finish == 0) begin             
       if( data_req ) begin
@@ -184,6 +189,7 @@ end
 initial begin
       @(posedge over)      
       if((over)) begin
+         $display("The total cycle take is %d", C);
          $display("-----------------------------------------------------\n");
          if (err == 0)  begin
             $display("Congratulations! All data have been generated successfully!\n");
@@ -326,13 +332,8 @@ always@(posedge clk or posedge rst) begin
       value <= 16'd0;
    end
    else begin
-      if(sub_MV[50:35] !=0) begin  //-15 ~ 0 => [1<<35 & 1<<50]
-         for (i=50; i>=35; i=i-1) if(sub_MV[i]==1) index <= i-50;
-         value <= sub_MV[50:35];
-      end
-      else begin
-         value <= 16'd0;
-      end
+      for (i=12; i>=0; i=i-1) if(sub_MV[i]==1) index <= i;
+      value <= sub_MV;
    end
 end
 

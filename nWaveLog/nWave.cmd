@@ -495,3 +495,4 @@ wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
 wvUnknownSaveResult -win $_nWave1 -clear
 wvSetCursor -win $_nWave1 6398.879900 -snap {("G1" 5)}
+wvExit

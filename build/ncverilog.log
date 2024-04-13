@@ -1,5 +1,5 @@
 ncverilog(64): 15.20-s084: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
-TOOL:	ncverilog	15.20-s084: Started on Apr 03, 2024 at 17:01:31 CST
+TOOL:	ncverilog	15.20-s084: Started on Apr 14, 2024 at 00:09:15 CST
 ncverilog
 	/home/YuChengWang/STAR/sim/softmax_tb.sv
 	/home/YuChengWang/STAR/src/def.sv
@@ -8,21 +8,11 @@ ncverilog
 	+nc64bit
 	+access+r
 	+define+FSDB_FILE="STAR.fsdb"
-Recompiling... reason: file '../src/def.sv' is newer than expected.
-	expected: Wed Apr  3 16:46:48 2024
-	actual:   Wed Apr  3 17:01:26 2024
+Recompiling... reason: file '../sim/softmax_tb.sv' is newer than expected.
+	expected: Sat Apr 13 23:24:33 2024
+	actual:   Sun Apr 14 00:09:14 2024
 file: /home/YuChengWang/STAR/sim/softmax_tb.sv
 	module worklib.softmax_tb:sv
-		errors: 0, warnings: 0
-	module worklib.CAMSUB_mem:sv
-		errors: 0, warnings: 0
-	module worklib.CAM_mem:sv
-		errors: 0, warnings: 0
-	module worklib.LUT_mem:sv
-		errors: 0, warnings: 0
-file: /home/YuChengWang/STAR/src/def.sv
-file: /home/YuChengWang/STAR/src/STAR.sv
-	module worklib.STAR:sv
 		errors: 0, warnings: 0
 		Caching library 'worklib' ....... Done
 	Elaborating the design hierarchy:
@@ -32,18 +22,22 @@ ncelab: *W,CUVWSP (../sim/softmax_tb.sv,44|13): 1 output port was not connected:
 ncelab: (../src/STAR.sv,23): o_sum_MV
 
 ncelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+                  .i_sub_MV(i_sub_MV),
+                                   |
+ncelab: *W,CUVMPW (../sim/softmax_tb.sv,55|35): port sizes differ in port connection (64/16).
+                  .o_sub_MV(o_sub_MV),
+                                   |
+ncelab: *W,CUVMPW (../sim/softmax_tb.sv,59|35): port sizes differ in port connection (64/16).
+                     .sub_MV(i_sub_MV),
+                                    |
+ncelab: *W,CUVMPW (../sim/softmax_tb.sv,73|36): port sizes differ in port connection (64/16).
+                     .sub_MV(o_sub_MV),
+                                    |
+ncelab: *W,CUVMPW (../sim/softmax_tb.sv,79|36): port sizes differ in port connection (64/16).
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
-		worklib.CAMSUB_mem:sv <0x0665c2de>
-			streams:  10, words:  3910
-		worklib.CAM_mem:sv <0x5288110a>
-			streams:   8, words:  7097
-		worklib.LUT_mem:sv <0x1d7cd86d>
-			streams:   7, words:  3298
-		worklib.STAR:sv <0x34bc8c16>
-			streams:  33, words: 30721
-		worklib.softmax_tb:sv <0x58651865>
-			streams:  36, words: 21513
+		worklib.softmax_tb:sv <0x7a0b804c>
+			streams:  36, words: 21964
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
@@ -52,7 +46,7 @@ ncelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-
 		Registers:               73      73
 		Scalar wires:            24       -
 		Vectored wires:          31       -
-		Always blocks:           22      22
+		Always blocks:           23      23
 		Initial blocks:          16      16
 		Cont. assignments:        8      16
 		Pseudo assignments:      19      19
@@ -77,14 +71,14 @@ START!!! Simulation Start .....
 
 -----------------------------------------------------
 
-The total cycle take is  1602
+The total cycle take is                 1602
 -----------------------------------------------------
 
 Congratulations! All data have been generated successfully!
 
 -------------------------PASS------------------------
 
-Simulation complete via $finish(1) at time 22456 NS + 0
+Simulation complete via $finish(1) at time 19248 NS + 0
 ../sim/softmax_tb.sv:204       #(`CYCLE/2); $finish;
 ncsim> exit
-TOOL:	ncverilog	15.20-s084: Exiting on Apr 03, 2024 at 17:01:33 CST  (total: 00:00:02)
+TOOL:	ncverilog	15.20-s084: Exiting on Apr 14, 2024 at 00:09:16 CST  (total: 00:00:01)

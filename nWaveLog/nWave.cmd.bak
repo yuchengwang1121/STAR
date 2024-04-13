@@ -1,0 +1,265 @@
+wvSetPosition -win $_nWave1 {("G1" 0)}
+wvOpenFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
+wvSetCursor -win $_nWave1 18576.457996
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/Retransformer"
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/Retransformer/A\[31:0\]} \
+{/Retransformer/B\[31:0\]} \
+{/Retransformer/result\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 1 2 3 )} 
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvGetSignalSetScope -win $_nWave1 "/softmax_tb"
+wvGetSignalSetScope -win $_nWave1 "/Retransformer"
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/Retransformer/A\[31:0\]} \
+{/Retransformer/B\[31:0\]} \
+{/Retransformer/result\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 1 2 3 )} 
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 17020.794026 -snap {("G2" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoom -win $_nWave1 102490.802738 104320.995644
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/Retransformer/A\[31:0\]} \
+{/Retransformer/B\[31:0\]} \
+{/Retransformer/result\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 103678.662851 -snap {("G2" 0)}
+wvOpenFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
+wvSetCursor -win $_nWave1 7056.099075 -snap {("G2" 0)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb"
+wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb/uut"
+wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb"
+wvSetPosition -win $_nWave1 {("G1" 5)}
+wvSetPosition -win $_nWave1 {("G1" 5)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
+{/Retransformer/B\[31:0\]} \
+{/Retransformer/result\[31:0\]} \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
+{/ReTransformer_tb/B\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 4 5 )} 
+wvSetPosition -win $_nWave1 {("G1" 5)}
+wvSetPosition -win $_nWave1 {("G1" 7)}
+wvSetPosition -win $_nWave1 {("G1" 7)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
+{/Retransformer/B\[31:0\]} \
+{/Retransformer/result\[31:0\]} \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
+{/ReTransformer_tb/B\[31:0\]} \
+{/ReTransformer_tb/Sum\[31:0\]} \
+{/ReTransformer_tb/done} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 6 7 )} 
+wvSetPosition -win $_nWave1 {("G1" 7)}
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
+{/Retransformer/B\[31:0\]} \
+{/Retransformer/result\[31:0\]} \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
+{/ReTransformer_tb/B\[31:0\]} \
+{/ReTransformer_tb/Sum\[31:0\]} \
+{/ReTransformer_tb/done} \
+{/ReTransformer_tb/result\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb/uut"
+wvSetPosition -win $_nWave1 {("G1" 9)}
+wvSetPosition -win $_nWave1 {("G1" 9)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
+{/Retransformer/B\[31:0\]} \
+{/Retransformer/result\[31:0\]} \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
+{/ReTransformer_tb/B\[31:0\]} \
+{/ReTransformer_tb/Sum\[31:0\]} \
+{/ReTransformer_tb/done} \
+{/ReTransformer_tb/result\[31:0\]} \
+{/ReTransformer_tb/uut/Counter\[3:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
+wvSetPosition -win $_nWave1 {("G1" 9)}
+wvSetPosition -win $_nWave1 {("G1" 9)}
+wvSetPosition -win $_nWave1 {("G1" 9)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
+{/Retransformer/B\[31:0\]} \
+{/Retransformer/result\[31:0\]} \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
+{/ReTransformer_tb/B\[31:0\]} \
+{/ReTransformer_tb/Sum\[31:0\]} \
+{/ReTransformer_tb/done} \
+{/ReTransformer_tb/result\[31:0\]} \
+{/ReTransformer_tb/uut/Counter\[3:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
+wvSetPosition -win $_nWave1 {("G1" 9)}
+wvGetSignalClose -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 4 5 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 4 5 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvSetCursor -win $_nWave1 8076.228998 -snap {("G2" 0)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb"
+wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb/uut"
+wvSetPosition -win $_nWave1 {("G1" 10)}
+wvSetPosition -win $_nWave1 {("G1" 10)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
+{/Retransformer/B\[31:0\]} \
+{/Retransformer/result\[31:0\]} \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
+{/ReTransformer_tb/B\[31:0\]} \
+{/ReTransformer_tb/Sum\[31:0\]} \
+{/ReTransformer_tb/done} \
+{/ReTransformer_tb/result\[31:0\]} \
+{/ReTransformer_tb/uut/Counter\[3:0\]} \
+{/ReTransformer_tb/uut/clk} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 10 )} 
+wvSetPosition -win $_nWave1 {("G1" 10)}
+wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb"
+wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb/uut"
+wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb"
+wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb/uut"
+wvSetPosition -win $_nWave1 {("G1" 11)}
+wvSetPosition -win $_nWave1 {("G1" 11)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
+{/Retransformer/B\[31:0\]} \
+{/Retransformer/result\[31:0\]} \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
+{/ReTransformer_tb/B\[31:0\]} \
+{/ReTransformer_tb/Sum\[31:0\]} \
+{/ReTransformer_tb/done} \
+{/ReTransformer_tb/result\[31:0\]} \
+{/ReTransformer_tb/uut/Counter\[3:0\]} \
+{/ReTransformer_tb/uut/clk} \
+{/ReTransformer_tb/uut/reset} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
+wvSetPosition -win $_nWave1 {("G1" 11)}
+wvSetPosition -win $_nWave1 {("G1" 11)}
+wvSetPosition -win $_nWave1 {("G1" 11)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
+{/Retransformer/B\[31:0\]} \
+{/Retransformer/result\[31:0\]} \
+}
+wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
+wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
+{/ReTransformer_tb/B\[31:0\]} \
+{/ReTransformer_tb/Sum\[31:0\]} \
+{/ReTransformer_tb/done} \
+{/ReTransformer_tb/result\[31:0\]} \
+{/ReTransformer_tb/uut/Counter\[3:0\]} \
+{/ReTransformer_tb/uut/clk} \
+{/ReTransformer_tb/uut/reset} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
+wvSetPosition -win $_nWave1 {("G1" 11)}
+wvGetSignalClose -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1

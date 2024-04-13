@@ -9,8 +9,9 @@ SCRIPT_DIR         =$(ROOT_DIR)/script
 REPORT_DIR         =$(ROOT_DIR)/report
 NC_DIR             =$(ROOT_DIR)/conf
 
-TB_TOP             =softmax_tb.sv
-TOP                =STAR
+TB_TOP             :=softmax_tb.sv
+TOP                :=STAR
+
 
 SRC=$(filter-out $(SRC_DIR)/$(TOP), $(shell ls $(SRC_DIR)/*.v $(SRC_DIR)/*.sv))
 

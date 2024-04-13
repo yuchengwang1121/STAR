@@ -2,7 +2,7 @@
 Report : Time Based Power (Cycle Accurate)
 Design : STAR
 Version: R-2020.09
-Date   : Wed Apr  3 17:04:15 2024
+Date   : Sat Apr 13 23:28:56 2024
 ****************************************
 
 
@@ -15,24 +15,24 @@ Date   : Wed Apr  3 17:04:15 2024
                         Internal  Switching  Leakage    Total
 Power Group             Power     Power      Power      Power   (     %)  Attrs
 --------------------------------------------------------------------------------
-clock_network           8.361e-04    0.0000    0.0000 8.361e-04 (74.91%)  i
-register                7.641e-06 1.516e-05 1.722e-05 4.002e-05 ( 3.59%)  
-combinational           1.953e-05 2.138e-04 6.763e-06 2.401e-04 (21.51%)  
+clock_network           8.370e-04    0.0000    0.0000 8.370e-04 (63.25%)  i
+register                1.404e-05 1.386e-05 1.223e-05 4.012e-05 ( 3.03%)  
+combinational           2.754e-05 4.120e-04 6.630e-06 4.462e-04 (33.72%)  
 sequential                 0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
 memory                     0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
 io_pad                     0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
 black_box                  0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
 
-  Net Switching Power          = 2.290e-04   (20.51%)
-  Cell Internal Power          = 8.633e-04   (77.34%)
-  Cell Leakage Power           = 2.398e-05   ( 2.15%)
+  Net Switching Power          = 4.259e-04   (32.18%)
+  Cell Internal Power          = 8.786e-04   (66.39%)
+  Cell Leakage Power           = 1.886e-05   ( 1.43%)
                                  ---------
-Total Power                    = 1.116e-03  (100.00%)
+Total Power                    = 1.323e-03  (100.00%)
 
-X Transition Power             = 9.598e-05
-CAPP Estimated Glitching Power = 9.857e-06
+X Transition Power             = 1.781e-04
+CAPP Estimated Glitching Power = 4.401e-06
 
-Peak Power                     = 2.774e-03
-Peak Time                      =     12390
+Peak Power                     = 1.613e-03
+Peak Time                      =      1215
 
 1

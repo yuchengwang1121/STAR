@@ -6,13 +6,13 @@ Report : timing
 	-sort_by slack
 Design : STAR
 Version: R-2020.09
-Date   : Wed Apr  3 17:04:14 2024
+Date   : Sat Apr 13 23:28:56 2024
 ****************************************
 
 
-  Startpoint: counter_reg_2_
+  Startpoint: Cur_state_reg_1_
                (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: Max_Match_Vector_reg_0_
+  Endpoint: Match_Vector_Array_reg_0__22_
                (rising edge-triggered flip-flop clocked by clk)
   Path Group: clk
   Path Type: max
@@ -21,38 +21,33 @@ Date   : Wed Apr  3 17:04:14 2024
   ------------------------------------------------------------------------------
   clock clk (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  counter_reg_2_/CK (DFFRX1)                              0.00       0.50 r
-  counter_reg_2_/QN (DFFRX1)                              0.93 *     1.43 r
-  U2080/Y (NOR2X1)                                        0.51 *     1.94 f
-  U917/Y (AND2X2)                                         0.50 *     2.44 f
-  U1160/Y (CLKBUFX3)                                      0.78 *     3.21 f
-  U2121/Y (AO22X1)                                        0.59 *     3.81 f
-  U2122/Y (AOI221XL)                                      0.52 *     4.33 r
-  U2129/Y (NAND4X1)                                       0.54 *     4.86 f
-  U2330/Y (NAND2X1)                                       0.41 *     5.27 r
-  U2331/Y (OAI222XL)                                      0.50 *     5.77 f
-  U2332/Y (OAI222XL)                                      0.94 *     6.71 r
-  U2333/Y (OAI222XL)                                      0.65 *     7.36 f
-  U2334/Y (OAI222XL)                                      0.67 *     8.03 r
-  U2335/Y (OAI21XL)                                       0.46 *     8.49 f
-  U1272/Y (NAND2BX1)                                      0.36 *     8.84 f
-  U1271/Y (CLKBUFX3)                                      0.72 *     9.57 f
-  U1436/Y (OAI22XL)                                       0.62 *    10.19 r
-  Max_Match_Vector_reg_0_/D (DFFRX1)                      0.00 *    10.19 r
-  data arrival time                                                 10.19
+  Cur_state_reg_1_/CK (DFFRX1)                            0.00       0.50 r
+  Cur_state_reg_1_/QN (DFFRX1)                            0.91 *     1.41 r
+  U839/Y (NAND3X1)                                        0.78 *     2.19 f
+  U989/Y (CLKBUFX3)                                       0.74 *     2.93 f
+  U974/Y (NAND2X1)                                        0.52 *     3.45 r
+  U1264/Y (AND4X1)                                        0.92 *     4.37 r
+  U975/Y (CLKBUFX3)                                       0.70 *     5.07 r
+  U918/Y (CLKBUFX3)                                       0.37 *     5.44 r
+  U834/Y (NOR2BX1)                                        0.85 *     6.29 r
+  U919/Y (CLKBUFX3)                                       0.85 *     7.14 r
+  U893/Y (CLKBUFX3)                                       0.80 *     7.94 r
+  U1139/Y (OAI2BB2XL)                                     0.36 *     8.30 r
+  Match_Vector_Array_reg_0__22_/D (DFFRX1)                0.00 *     8.30 r
+  data arrival time                                                  8.30
 
   clock clk (rise edge)                                  15.00      15.00
   clock network delay (ideal)                             0.50      15.50
   clock reconvergence pessimism                           0.00      15.50
   clock uncertainty                                      -0.10      15.40
-  Max_Match_Vector_reg_0_/CK (DFFRX1)                               15.40 r
-  library setup time                                     -0.30 *    15.10
-  data required time                                                15.10
+  Match_Vector_Array_reg_0__22_/CK (DFFRX1)                         15.40 r
+  library setup time                                     -0.29 *    15.11
+  data required time                                                15.11
   ------------------------------------------------------------------------------
-  data required time                                                15.10
-  data arrival time                                                -10.19
+  data required time                                                15.11
+  data arrival time                                                 -8.30
   ------------------------------------------------------------------------------
-  slack (MET)                                                        4.91
+  slack (MET)                                                        6.81
 
 
 1
@@ -67,13 +62,13 @@ Report : timing
 	-sort_by slack
 Design : STAR
 Version: R-2020.09
-Date   : Wed Apr  3 17:04:14 2024
+Date   : Sat Apr 13 23:28:56 2024
 ****************************************
 
 
-  Startpoint: counter_reg_2_
+  Startpoint: Cur_state_reg_1_
                (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: Max_Match_Vector_reg_0_
+  Endpoint: Match_Vector_Array_reg_0__22_
                (rising edge-triggered flip-flop clocked by clk)
   Path Group: clk
   Path Type: max
@@ -82,54 +77,44 @@ Date   : Wed Apr  3 17:04:14 2024
   -----------------------------------------------------------------------------
   clock clk (rise edge)                           0.00       0.00       0.00
   clock network delay (ideal)                                0.50       0.50
-  counter_reg_2_/CK (DFFRX1)                      0.00       0.00       0.50 r
-  counter_reg_2_/QN (DFFRX1)                      0.00       0.93 *     1.43 r
-  n773 (net)                     6     0.08 
-  U2080/Y (NOR2X1)                                0.00       0.51 *     1.94 f
-  n1553 (net)                    4     0.05 
-  U917/Y (AND2X2)                                 0.00       0.50 *     2.44 f
-  n1278 (net)                    7     0.08 
-  U1160/Y (CLKBUFX3)                              0.00       0.78 *     3.21 f
-  n1755 (net)                   18     0.21 
-  U2121/Y (AO22X1)                                0.00       0.59 *     3.81 f
-  n1593 (net)                    1     0.01 
-  U2122/Y (AOI221XL)                              0.00       0.52 *     4.33 r
-  n1600 (net)                    1     0.01 
-  U2129/Y (NAND4X1)                               0.00       0.54 *     4.86 f
-  N560 (net)                     3     0.04 
-  U2330/Y (NAND2X1)                               0.00       0.41 *     5.27 r
-  n1948 (net)                    2     0.02 
-  U2331/Y (OAI222XL)                              0.00       0.50 *     5.77 f
-  n1949 (net)                    2     0.02 
-  U2332/Y (OAI222XL)                              0.00       0.94 *     6.71 r
-  n1950 (net)                    2     0.02 
-  U2333/Y (OAI222XL)                              0.00       0.65 *     7.36 f
-  n1951 (net)                    2     0.02 
-  U2334/Y (OAI222XL)                              0.00       0.67 *     8.03 r
-  n1952 (net)                    1     0.01 
-  U2335/Y (OAI21XL)                               0.00       0.46 *     8.49 f
-  N229 (net)                     2     0.02 
-  U1272/Y (NAND2BX1)                              0.00       0.36 *     8.84 f
-  n357 (net)                     1     0.01 
-  U1271/Y (CLKBUFX3)                              0.00       0.72 *     9.57 f
-  n1773 (net)                   16     0.19 
-  U1436/Y (OAI22XL)                               0.00       0.62 *    10.19 r
-  N248 (net)                     1     0.01 
-  Max_Match_Vector_reg_0_/D (DFFRX1)              0.00       0.00 *    10.19 r
-  data arrival time                                                    10.19
+  Cur_state_reg_1_/CK (DFFRX1)                    0.00       0.00       0.50 r
+  Cur_state_reg_1_/QN (DFFRX1)                    0.00       0.91 *     1.41 r
+  n2680 (net)                    6     0.08 
+  U839/Y (NAND3X1)                                0.00       0.78 *     2.19 f
+  n43 (net)                      7     0.08 
+  U989/Y (CLKBUFX3)                               0.00       0.74 *     2.93 f
+  n1123 (net)                   12     0.14 
+  U974/Y (NAND2X1)                                0.00       0.52 *     3.45 r
+  n173 (net)                     3     0.04 
+  U1264/Y (AND4X1)                                0.00       0.92 *     4.37 r
+  n175 (net)                     7     0.08 
+  U975/Y (CLKBUFX3)                               0.00       0.70 *     5.07 r
+  n1117 (net)                   16     0.19 
+  U918/Y (CLKBUFX3)                               0.00       0.37 *     5.44 r
+  n1120 (net)                    5     0.06 
+  U834/Y (NOR2BX1)                                0.00       0.85 *     6.29 r
+  n177 (net)                     5     0.06 
+  U919/Y (CLKBUFX3)                               0.00       0.85 *     7.14 r
+  n1114 (net)                   21     0.25 
+  U893/Y (CLKBUFX3)                               0.00       0.80 *     7.94 r
+  n1115 (net)                   21     0.24 
+  U1139/Y (OAI2BB2XL)                             0.00       0.36 *     8.30 r
+  n517 (net)                     1     0.01 
+  Match_Vector_Array_reg_0__22_/D (DFFRX1)        0.00       0.00 *     8.30 r
+  data arrival time                                                     8.30
 
   clock clk (rise edge)                           0.00      15.00      15.00
   clock network delay (ideal)                                0.50      15.50
   clock reconvergence pessimism                              0.00      15.50
   clock uncertainty                                         -0.10      15.40
-  Max_Match_Vector_reg_0_/CK (DFFRX1)                                  15.40 r
-  library setup time                                        -0.30 *    15.10
-  data required time                                                   15.10
+  Match_Vector_Array_reg_0__22_/CK (DFFRX1)                            15.40 r
+  library setup time                                        -0.29 *    15.11
+  data required time                                                   15.11
   -----------------------------------------------------------------------------
-  data required time                                                   15.10
-  data arrival time                                                   -10.19
+  data required time                                                   15.11
+  data arrival time                                                    -8.30
   -----------------------------------------------------------------------------
-  slack (MET)                                                           4.91
+  slack (MET)                                                           6.81
 
 
 1
@@ -143,7 +128,7 @@ Report : timing
 	-sort_by slack
 Design : STAR
 Version: R-2020.09
-Date   : Wed Apr  3 17:04:14 2024
+Date   : Sat Apr 13 23:28:56 2024
 ****************************************
 
 No paths with slack less than 0.00.

@@ -1,5 +1,5 @@
 `timescale 1ns/10ps
-`define CYCLE      15          	         // <===== need modify if change input 16=>20, 4=>15 =====>
+`define CYCLE      11
 `define SDFFILE    "./syn/STAR_syn.sdf"	// Modify your sdf file name
 `define End_CYCLE  100000000              // Modify cycle times once your design need more cycle times!
 
@@ -211,11 +211,11 @@ module CAMSUB_mem (xi, xi_MV, CAMSUB, FindSub, sub_xi, clk, rst);
 input clk, rst;
 input signed [7:0] xi;
 input CAMSUB,FindSub;
-output logic [`LUT_len-1:0] xi_MV;
+output logic [63:0] xi_MV;
 output logic signed [7:0] sub_xi;
 
 
-logic [`LUT_len-1:0] MV_table [0:`LUT_len-1];
+logic [63:0] MV_table [0:63];
 logic [7:0] xi_buffer [0:`Input_len-1];
 logic signed [7:0] max_xi;
 logic [4:0] counter;
@@ -225,12 +225,14 @@ integer i;
 
 assign posi = xi + 8'd20;
 
-initial begin     //From -20 ~ 0 ~ 43
-	for (i=0; i<=`LUT_len-1; i=i+1) MV_table[i] = 1<<i;
+initial begin     //From -20 ~ 0 ~ 43 (min=-17, max=43)not x_i-x_max
+	for (i=0; i<=63; i=i+1) MV_table[i] = 1<<i;
 end
 
 always@(negedge clk) begin
-   if(CAMSUB)   xi_MV <= MV_table[posi];
+   if(CAMSUB)begin
+      xi_MV <= MV_table[posi];
+   end
    else   xi_MV <= 'hz;
 end
 
@@ -267,7 +269,7 @@ endmodule
 module CAM_mem (clk, rst, sub_xi, sub_MV, EXP, FindSub);
 input clk, rst, EXP, FindSub;
 input signed [7:0] sub_xi;
-output logic [`LUT_len-1:0] sub_MV;
+output logic [`EXP_len-1:0] sub_MV;
 
 logic [`LUT_len-1:0] SUB_table [0:`LUT_len-1];
 logic [7:0] posi;
@@ -275,17 +277,17 @@ integer i;
 logic [`Counter:0] counter;                                  //<===== need modify if change input 16=>3, 4=>1 =====>
 logic [7:0] xsub_buffer [0:`Input_len-1];
 
-assign posi = xsub_buffer[counter] + 8'd50;
+assign posi = xsub_buffer[counter] + 8'd15;
 
-initial begin     //From -50 ~ 0 ~ 12 => [0 ~ 64]
+initial begin     //From -15 ~ 0 => [0 ~ 15]
 	for (i=0; i<=`LUT_len-1; i=i+1) SUB_table[i] = 1<<i;
 end
 
 always@(posedge clk or posedge rst) begin
-   if(rst)  counter <= `Counter'b0 - 1'b1;
+   if(rst)  counter <= 1'b0;
    else begin
       if(FindSub || EXP) counter <= counter + 1'b1;
-      else        counter <= 1'b0;
+      else        counter <= -1'b1;
    end
 end
 
@@ -295,7 +297,10 @@ always@(posedge clk or posedge rst) begin
 end
 
 always@(negedge clk) begin
-   if(EXP)     sub_MV <= SUB_table[posi];
+   if(EXP)begin
+      if(posi>=1'b0 && posi <=4'd15)   sub_MV <= SUB_table[posi];
+      else                             sub_MV <= 1'b0;
+   end
    else        sub_MV <= 'hz;
 end
 
@@ -303,18 +308,18 @@ endmodule
 
 module LUT_mem (clk, rst, sub_MV, exp, Sum_exp);
 input clk, rst;
-input [`LUT_len-1:0] sub_MV;
+input [`EXP_len-1:0] sub_MV;
 output [31:0]exp;
 output [31:0]Sum_exp;
 
 parameter N_EXP = 16;
 logic [4:0] posi;
 logic signed [4:0] index;
-logic signed [`Input_len-1:0] value;
+logic signed [`EXP_len-1:0] value;
 logic   [31:0]  lut_mem    [0:N_EXP-1];
 integer i,fid1,s;
 
-assign posi = index+4'd15;
+assign posi = index;
 assign exp  = (value !=0)? lut_mem[posi]:'hz;
 assign Sum_exp = 32'd1;
 
@@ -329,10 +334,17 @@ end
 always@(posedge clk or posedge rst) begin
    if(rst)begin
       index <= 5'd0;
+   end
+   else begin
+      for (i=16; i>=0; i=i-1) if(sub_MV[i]==1) index <= i;
+   end
+end
+
+always@(posedge clk or posedge rst) begin
+   if(rst)begin
       value <= 16'd0;
    end
    else begin
-      for (i=12; i>=0; i=i-1) if(sub_MV[i]==1) index <= i;
       value <= sub_MV;
    end
 end

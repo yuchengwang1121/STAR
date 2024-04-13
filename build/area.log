@@ -3,28 +3,28 @@
 Report : area
 Design : STAR
 Version: T-2022.03
-Date   : Wed Apr  3 17:01:58 2024
+Date   : Sun Apr 14 00:16:02 2024
 ****************************************
 
 Library(s) Used:
 
     slow (File: /home/nfs_cad/lib/CBDK_IC_Contest_v2.1/SynopsysDC/db/slow.db)
 
-Number of ports:                          242
-Number of nets:                          2648
-Number of cells:                         2115
-Number of combinational cells:           1534
-Number of sequential cells:               580
+Number of ports:                          515
+Number of nets:                          4339
+Number of cells:                         3385
+Number of combinational cells:           2465
+Number of sequential cells:               916
 Number of macros/black boxes:               0
-Number of buf/inv:                        488
-Number of references:                      39
+Number of buf/inv:                        836
+Number of references:                      44
 
-Combinational area:              12486.074457
-Buf/Inv area:                     3498.341356
-Noncombinational area:           18705.347366
+Combinational area:              19618.549307
+Buf/Inv area:                     5769.462519
+Noncombinational area:           29546.640800
 Macro/Black Box area:                0.000000
-Net Interconnect area:          284528.131012
+Net Interconnect area:          445108.960327
 
-Total cell area:                 31191.421824
-Total area:                     315719.552835
+Total cell area:                 49165.190108
+Total area:                     494274.150435
 1

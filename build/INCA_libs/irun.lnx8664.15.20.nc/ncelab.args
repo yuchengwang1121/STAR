@@ -5,7 +5,7 @@
 +incdir+/home/YuChengWang/STAR/src
 +nc64bit
 +access+r
-+define+FSDB_FILE=\"STAR.fsdb\"
++define+FSDB_FILE=\"SASA.fsdb\"
 -noshowtop
 -ACCESS
 +r

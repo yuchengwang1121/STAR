@@ -1,36 +1,50 @@
 wvSetPosition -win $_nWave1 {("G1" 0)}
-wvOpenFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
-wvSetCursor -win $_nWave1 18576.457996
+wvOpenFile -win $_nWave1 {/home/YuChengWang/STAR/build/SASA.fsdb}
+wvResizeWindow -win $_nWave1 0 23 1920 1137
 wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/Retransformer"
-wvSetPosition -win $_nWave1 {("G1" 3)}
-wvSetPosition -win $_nWave1 {("G1" 3)}
+wvGetSignalSetScope -win $_nWave1 "/MVU"
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA"
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvSetPosition -win $_nWave1 {("G1" 1)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-{/Retransformer/A\[31:0\]} \
-{/Retransformer/B\[31:0\]} \
-{/Retransformer/result\[31:0\]} \
+{/softmax_SASA/clk} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
-wvSelectSignal -win $_nWave1 {( "G1" 1 2 3 )} 
-wvSetPosition -win $_nWave1 {("G1" 3)}
-wvGetSignalSetScope -win $_nWave1 "/softmax_tb"
-wvGetSignalSetScope -win $_nWave1 "/Retransformer"
-wvSetPosition -win $_nWave1 {("G1" 3)}
-wvSetPosition -win $_nWave1 {("G1" 3)}
+wvSelectSignal -win $_nWave1 {( "G1" 1 )} 
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA/u_SASA"
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSetPosition -win $_nWave1 {("G1" 2)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-{/Retransformer/A\[31:0\]} \
-{/Retransformer/B\[31:0\]} \
-{/Retransformer/result\[31:0\]} \
+{/softmax_SASA/clk} \
+{/softmax_SASA/u_SASA/clk} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
-wvSelectSignal -win $_nWave1 {( "G1" 1 2 3 )} 
-wvSetPosition -win $_nWave1 {("G1" 3)}
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/clk} \
+{/softmax_SASA/u_SASA/clk} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSetPosition -win $_nWave1 {("G1" 2)}
 wvGetSignalClose -win $_nWave1
-wvSetCursor -win $_nWave1 17020.794026 -snap {("G2" 0)}
 wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
@@ -41,126 +55,181 @@ wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
-wvZoom -win $_nWave1 102490.802738 104320.995644
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 0)}
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvResizeWindow -win $_nWave1 0 23 1920 1137
+wvSelectSignal -win $_nWave1 {( "G1" 1 )} 
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 0)}
+wvSetPosition -win $_nWave1 {("G1" 0)}
+wvSetCursor -win $_nWave1 240.976314
 wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/MVU"
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA"
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/finish} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 1 )} 
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA/u_SASA"
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/finish} \
+{/softmax_SASA/u_SASA/finish} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSetPosition -win $_nWave1 {("G1" 2)}
 wvSetPosition -win $_nWave1 {("G1" 3)}
 wvSetPosition -win $_nWave1 {("G1" 3)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-{/Retransformer/A\[31:0\]} \
-{/Retransformer/B\[31:0\]} \
-{/Retransformer/result\[31:0\]} \
+{/softmax_SASA/finish} \
+{/softmax_SASA/u_SASA/finish} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
 wvSetPosition -win $_nWave1 {("G1" 3)}
-wvGetSignalClose -win $_nWave1
-wvSetCursor -win $_nWave1 103678.662851 -snap {("G2" 0)}
-wvOpenFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
-wvSetCursor -win $_nWave1 7056.099075 -snap {("G2" 0)}
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb"
-wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb/uut"
-wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb"
+wvSetPosition -win $_nWave1 {("G1" 4)}
+wvSetPosition -win $_nWave1 {("G1" 4)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/finish} \
+{/softmax_SASA/u_SASA/finish} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/Init_done} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
+wvSetPosition -win $_nWave1 {("G1" 4)}
 wvSetPosition -win $_nWave1 {("G1" 5)}
 wvSetPosition -win $_nWave1 {("G1" 5)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
-{/Retransformer/B\[31:0\]} \
-{/Retransformer/result\[31:0\]} \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
-{/ReTransformer_tb/B\[31:0\]} \
+{/softmax_SASA/finish} \
+{/softmax_SASA/u_SASA/finish} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/Init_done} \
+{/softmax_SASA/u_SASA/reset} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
-wvSelectSignal -win $_nWave1 {( "G1" 4 5 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
 wvSetPosition -win $_nWave1 {("G1" 5)}
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA"
+wvSetPosition -win $_nWave1 {("G1" 6)}
+wvSetPosition -win $_nWave1 {("G1" 6)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/finish} \
+{/softmax_SASA/u_SASA/finish} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/Init_done} \
+{/softmax_SASA/u_SASA/reset} \
+{/softmax_SASA/clk} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
+wvSetPosition -win $_nWave1 {("G1" 6)}
 wvSetPosition -win $_nWave1 {("G1" 7)}
 wvSetPosition -win $_nWave1 {("G1" 7)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
-{/Retransformer/B\[31:0\]} \
-{/Retransformer/result\[31:0\]} \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
-{/ReTransformer_tb/B\[31:0\]} \
-{/ReTransformer_tb/Sum\[31:0\]} \
-{/ReTransformer_tb/done} \
+{/softmax_SASA/finish} \
+{/softmax_SASA/u_SASA/finish} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/Init_done} \
+{/softmax_SASA/u_SASA/reset} \
+{/softmax_SASA/clk} \
+{/softmax_SASA/reset} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
-wvSelectSignal -win $_nWave1 {( "G1" 6 7 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 7 )} 
 wvSetPosition -win $_nWave1 {("G1" 7)}
+wvGetSignalSetScope -win $_nWave1 "/MVU"
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA"
 wvSetPosition -win $_nWave1 {("G1" 8)}
 wvSetPosition -win $_nWave1 {("G1" 8)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
-{/Retransformer/B\[31:0\]} \
-{/Retransformer/result\[31:0\]} \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
-{/ReTransformer_tb/B\[31:0\]} \
-{/ReTransformer_tb/Sum\[31:0\]} \
-{/ReTransformer_tb/done} \
-{/ReTransformer_tb/result\[31:0\]} \
+{/softmax_SASA/finish} \
+{/softmax_SASA/u_SASA/finish} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/Init_done} \
+{/softmax_SASA/u_SASA/reset} \
+{/softmax_SASA/clk} \
+{/softmax_SASA/reset} \
+{/softmax_SASA/finish} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
 wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
 wvSetPosition -win $_nWave1 {("G1" 8)}
-wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb/uut"
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA/u_SASA"
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA"
 wvSetPosition -win $_nWave1 {("G1" 9)}
 wvSetPosition -win $_nWave1 {("G1" 9)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
-{/Retransformer/B\[31:0\]} \
-{/Retransformer/result\[31:0\]} \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
-{/ReTransformer_tb/B\[31:0\]} \
-{/ReTransformer_tb/Sum\[31:0\]} \
-{/ReTransformer_tb/done} \
-{/ReTransformer_tb/result\[31:0\]} \
-{/ReTransformer_tb/uut/Counter\[3:0\]} \
+{/softmax_SASA/finish} \
+{/softmax_SASA/u_SASA/finish} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/Init_done} \
+{/softmax_SASA/u_SASA/reset} \
+{/softmax_SASA/clk} \
+{/softmax_SASA/reset} \
+{/softmax_SASA/finish} \
+{/softmax_SASA/over} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
 wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
 wvSetPosition -win $_nWave1 {("G1" 9)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 841.958406 -snap {("G2" 0)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
 wvSetPosition -win $_nWave1 {("G1" 9)}
 wvSetPosition -win $_nWave1 {("G1" 9)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
-{/Retransformer/B\[31:0\]} \
-{/Retransformer/result\[31:0\]} \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
-{/ReTransformer_tb/B\[31:0\]} \
-{/ReTransformer_tb/Sum\[31:0\]} \
-{/ReTransformer_tb/done} \
-{/ReTransformer_tb/result\[31:0\]} \
-{/ReTransformer_tb/uut/Counter\[3:0\]} \
+{/softmax_SASA/finish} \
+{/softmax_SASA/u_SASA/finish} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/Init_done} \
+{/softmax_SASA/u_SASA/reset} \
+{/softmax_SASA/clk} \
+{/softmax_SASA/reset} \
+{/softmax_SASA/finish} \
+{/softmax_SASA/over} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
@@ -170,96 +239,636 @@ wvGetSignalClose -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
+wvResizeWindow -win $_nWave1 0 23 1920 1137
+wvSetCursor -win $_nWave1 516.105583 -snap {("G1" 6)}
+wvSetCursor -win $_nWave1 816.194123 -snap {("G2" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 4 5 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 4 5 )} 
-wvSetRadix -win $_nWave1 -format UDec
-wvSetCursor -win $_nWave1 8076.228998 -snap {("G2" 0)}
+wvSetCursor -win $_nWave1 6688.354702 -snap {("G2" 0)}
 wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb"
-wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb/uut"
 wvSetPosition -win $_nWave1 {("G1" 10)}
 wvSetPosition -win $_nWave1 {("G1" 10)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
-{/Retransformer/B\[31:0\]} \
-{/Retransformer/result\[31:0\]} \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
-{/ReTransformer_tb/B\[31:0\]} \
-{/ReTransformer_tb/Sum\[31:0\]} \
-{/ReTransformer_tb/done} \
-{/ReTransformer_tb/result\[31:0\]} \
-{/ReTransformer_tb/uut/Counter\[3:0\]} \
-{/ReTransformer_tb/uut/clk} \
+{/softmax_SASA/finish} \
+{/softmax_SASA/u_SASA/finish} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/Init_done} \
+{/softmax_SASA/u_SASA/reset} \
+{/softmax_SASA/clk} \
+{/softmax_SASA/reset} \
+{/softmax_SASA/finish} \
+{/softmax_SASA/over} \
+{/softmax_SASA/u_SASA/clk} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
 wvSelectSignal -win $_nWave1 {( "G1" 10 )} 
 wvSetPosition -win $_nWave1 {("G1" 10)}
-wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb"
-wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb/uut"
-wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb"
-wvGetSignalSetScope -win $_nWave1 "/ReTransformer_tb/uut"
-wvSetPosition -win $_nWave1 {("G1" 11)}
-wvSetPosition -win $_nWave1 {("G1" 11)}
+wvSetCursor -win $_nWave1 20158.476882 -snap {("G2" 0)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSetCursor -win $_nWave1 4203.574883 -snap {("G2" 0)}
+wvSetCursor -win $_nWave1 13003.058304 -snap {("G2" 0)}
+wvSelectSignal -win $_nWave1 {( "G1" 1 2 3 4 5 6 7 8 9 10 )} 
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 0)}
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvSetPosition -win $_nWave1 {("G1" 1)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
-{/Retransformer/B\[31:0\]} \
-{/Retransformer/result\[31:0\]} \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
-{/ReTransformer_tb/B\[31:0\]} \
-{/ReTransformer_tb/Sum\[31:0\]} \
-{/ReTransformer_tb/done} \
-{/ReTransformer_tb/result\[31:0\]} \
-{/ReTransformer_tb/uut/Counter\[3:0\]} \
-{/ReTransformer_tb/uut/clk} \
-{/ReTransformer_tb/uut/reset} \
+{/softmax_SASA/u_SASA/clk} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
-wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
-wvSetPosition -win $_nWave1 {("G1" 11)}
-wvSetPosition -win $_nWave1 {("G1" 11)}
-wvSetPosition -win $_nWave1 {("G1" 11)}
+wvSelectSignal -win $_nWave1 {( "G1" 1 )} 
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSetPosition -win $_nWave1 {("G1" 2)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/STAR.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/Retransformer/A\[31:0\]} \
-{/Retransformer/B\[31:0\]} \
-{/Retransformer/result\[31:0\]} \
-}
-wvSetActiveFile -win $_nWave1 {/home/YuChengWang/STAR/build/ReTransformer.fsdb}
-wvAddSignal -win $_nWave1 -group {"G1" {/ReTransformer_tb/A\[31:0\]} \
-{/ReTransformer_tb/B\[31:0\]} \
-{/ReTransformer_tb/Sum\[31:0\]} \
-{/ReTransformer_tb/done} \
-{/ReTransformer_tb/result\[31:0\]} \
-{/ReTransformer_tb/uut/Counter\[3:0\]} \
-{/ReTransformer_tb/uut/clk} \
-{/ReTransformer_tb/uut/reset} \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
-wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
-wvSetPosition -win $_nWave1 {("G1" 11)}
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvSetPosition -win $_nWave1 {("G1" 3)}
 wvGetSignalClose -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSetCursor -win $_nWave1 50442.898592 -snap {("G2" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 0)}
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSetCursor -win $_nWave1 53263.964402 -snap {("G2" 0)}
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA"
+wvSetPosition -win $_nWave1 {("G1" 4)}
+wvSetPosition -win $_nWave1 {("G1" 4)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
+wvSetPosition -win $_nWave1 {("G1" 4)}
+wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
+wvExpandBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 20)}
+wvSetPosition -win $_nWave1 {("G1" 20)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+{/softmax_SASA/input_mem\[0\]\[0:15\]} \
+{/softmax_SASA/input_mem\[1\]\[0:15\]} \
+{/softmax_SASA/input_mem\[2\]\[0:15\]} \
+{/softmax_SASA/input_mem\[3\]\[0:15\]} \
+{/softmax_SASA/input_mem\[4\]\[0:15\]} \
+{/softmax_SASA/input_mem\[5\]\[0:15\]} \
+{/softmax_SASA/input_mem\[6\]\[0:15\]} \
+{/softmax_SASA/input_mem\[7\]\[0:15\]} \
+{/softmax_SASA/input_mem\[8\]\[0:15\]} \
+{/softmax_SASA/input_mem\[9\]\[0:15\]} \
+{/softmax_SASA/input_mem\[10\]\[0:15\]} \
+{/softmax_SASA/input_mem\[11\]\[0:15\]} \
+{/softmax_SASA/input_mem\[12\]\[0:15\]} \
+{/softmax_SASA/input_mem\[13\]\[0:15\]} \
+{/softmax_SASA/input_mem\[14\]\[0:15\]} \
+{/softmax_SASA/input_mem\[15\]\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSetPosition -win $_nWave1 {("G1" 20)}
+wvGetSignalClose -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
+wvSetPosition -win $_nWave1 {("G1" 5)}
+wvExpandBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 36)}
+wvScrollDown -win $_nWave1 3
+wvScrollUp -win $_nWave1 15
+wvSetCursor -win $_nWave1 53179.892905 -snap {("G1" 6)}
+wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
+wvSetPosition -win $_nWave1 {("G1" 5)}
+wvCollapseBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 5)}
+wvSetPosition -win $_nWave1 {("G1" 20)}
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSetCursor -win $_nWave1 6700.031299 -snap {("G1" 7)}
+wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
+wvSetPosition -win $_nWave1 {("G1" 5)}
+wvExpandBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 36)}
+wvScrollUp -win $_nWave1 13
+wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
+wvSetPosition -win $_nWave1 {("G1" 5)}
+wvCollapseBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 5)}
+wvSetPosition -win $_nWave1 {("G1" 20)}
+wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
+wvSetPosition -win $_nWave1 {("G1" 4)}
+wvCollapseBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 4)}
+wvSetCursor -win $_nWave1 1732.806979 -snap {("G2" 0)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 55898.204662 -snap {("G2" 0)}
+wvSetCursor -win $_nWave1 82203.242150 -snap {("G2" 0)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/MVU"
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA"
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA"
+wvSetPosition -win $_nWave1 {("G1" 6)}
+wvSetPosition -win $_nWave1 {("G1" 6)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+{/softmax_SASA/data_addr_x\[3:0\]} \
+{/softmax_SASA/data_addr_y\[3:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 5 6 )} 
+wvSetPosition -win $_nWave1 {("G1" 6)}
+wvSetPosition -win $_nWave1 {("G1" 7)}
+wvSetPosition -win $_nWave1 {("G1" 7)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+{/softmax_SASA/data_addr_x\[3:0\]} \
+{/softmax_SASA/data_addr_y\[3:0\]} \
+{/softmax_SASA/data_req} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 7 )} 
+wvSetPosition -win $_nWave1 {("G1" 7)}
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA/u_SASA"
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+{/softmax_SASA/data_addr_x\[3:0\]} \
+{/softmax_SASA/data_addr_y\[3:0\]} \
+{/softmax_SASA/data_req} \
+{/softmax_SASA/u_SASA/data\[7:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+{/softmax_SASA/data_addr_x\[3:0\]} \
+{/softmax_SASA/data_addr_y\[3:0\]} \
+{/softmax_SASA/data_req} \
+{/softmax_SASA/u_SASA/data\[7:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 204611.342734 -snap {("G2" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSetCursor -win $_nWave1 3325.494796 -snap {("G2" 0)}
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 9)}
+wvSetPosition -win $_nWave1 {("G1" 9)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+{/softmax_SASA/data_addr_x\[3:0\]} \
+{/softmax_SASA/data_addr_y\[3:0\]} \
+{/softmax_SASA/data_req} \
+{/softmax_SASA/u_SASA/data\[7:0\]} \
+{/softmax_SASA/u_SASA/finish} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
+wvSetPosition -win $_nWave1 {("G1" 9)}
+wvSetPosition -win $_nWave1 {("G1" 10)}
+wvSetPosition -win $_nWave1 {("G1" 10)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+{/softmax_SASA/data_addr_x\[3:0\]} \
+{/softmax_SASA/data_addr_y\[3:0\]} \
+{/softmax_SASA/data_req} \
+{/softmax_SASA/u_SASA/data\[7:0\]} \
+{/softmax_SASA/u_SASA/finish} \
+{/softmax_SASA/u_SASA/total_counter\[6:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 10 )} 
+wvSetPosition -win $_nWave1 {("G1" 10)}
+wvSetPosition -win $_nWave1 {("G2" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 1)}
+wvSetPosition -win $_nWave1 {("G2" 1)}
+wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvGetSignalSetScope -win $_nWave1 "/softmax_SASA"
+wvSetPosition -win $_nWave1 {("G2" 2)}
+wvSetPosition -win $_nWave1 {("G2" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+{/softmax_SASA/data_addr_x\[3:0\]} \
+{/softmax_SASA/data_addr_y\[3:0\]} \
+{/softmax_SASA/data_req} \
+{/softmax_SASA/u_SASA/data\[7:0\]} \
+{/softmax_SASA/u_SASA/finish} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/softmax_SASA/u_SASA/total_counter\[6:0\]} \
+{/softmax_SASA/ori_data} -color ID_RED5 \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 2 )} 
+wvSetPosition -win $_nWave1 {("G2" 2)}
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+{/softmax_SASA/data_addr_x\[3:0\]} \
+{/softmax_SASA/data_addr_y\[3:0\]} \
+{/softmax_SASA/data_req} \
+{/softmax_SASA/u_SASA/data\[7:0\]} \
+{/softmax_SASA/u_SASA/finish} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/softmax_SASA/u_SASA/total_counter\[6:0\]} \
+{/softmax_SASA/ori_data} -color ID_RED5 \
+{/softmax_SASA/qua_data\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 3 )} 
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvSelectSignal -win $_nWave1 {( "G2" 3 )} 
+wvSelectSignal -win $_nWave1 {( "G2" 3 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvSetCursor -win $_nWave1 2017.715944 -snap {("G1" 8)}
+wvSetCursor -win $_nWave1 3138.669246 -snap {("G1" 8)}
+wvSetCursor -win $_nWave1 2092.446164 -snap {("G1" 8)}
+wvSetCursor -win $_nWave1 3998.066777 -snap {("G1" 8)}
+wvSetCursor -win $_nWave1 4969.559639 -snap {("G1" 8)}
+wvSetCursor -win $_nWave1 2017.715944 -snap {("G1" 8)}
+wvSetCursor -win $_nWave1 2503.462375 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 3474.955236 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 2503.462375 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 1494.604403 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 1980.350834 -snap {("G1" 1)}
+wvSetPosition -win $_nWave1 {("G2" 4)}
+wvSetPosition -win $_nWave1 {("G2" 4)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+{/softmax_SASA/data_addr_x\[3:0\]} \
+{/softmax_SASA/data_addr_y\[3:0\]} \
+{/softmax_SASA/data_req} \
+{/softmax_SASA/u_SASA/data\[7:0\]} \
+{/softmax_SASA/u_SASA/finish} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/softmax_SASA/u_SASA/total_counter\[6:0\]} \
+{/softmax_SASA/ori_data} -color ID_RED5 \
+{/softmax_SASA/qua_data\[31:0\]} \
+{/softmax_SASA/data\[7:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 4 )} 
+wvSetPosition -win $_nWave1 {("G2" 4)}
+wvSetCursor -win $_nWave1 2466.097265 -snap {("G1" 0)}
+wvSetCursor -win $_nWave1 2466.097265 -snap {("G1" 1)}
+wvSetPosition -win $_nWave1 {("G2" 4)}
+wvSetPosition -win $_nWave1 {("G2" 4)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+{/softmax_SASA/input_mem\[0:15\]} \
+{/softmax_SASA/data_addr_x\[3:0\]} \
+{/softmax_SASA/data_addr_y\[3:0\]} \
+{/softmax_SASA/data_req} \
+{/softmax_SASA/u_SASA/data\[7:0\]} \
+{/softmax_SASA/u_SASA/finish} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/softmax_SASA/u_SASA/total_counter\[6:0\]} \
+{/softmax_SASA/ori_data} -color ID_RED5 \
+{/softmax_SASA/qua_data\[31:0\]} \
+{/softmax_SASA/data\[7:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 4 )} 
+wvSetPosition -win $_nWave1 {("G2" 4)}
+wvGetSignalClose -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G2" 2 )} 
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 0)}
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvSelectSignal -win $_nWave1 {( "G2" 1 )} 
+wvSetCursor -win $_nWave1 2081685.012128 -snap {("G3" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
 wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
 wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 1449.076355 -snap {("G3" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 1483.282020 -snap {("G3" 0)}
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 2315.101601 -snap {("G3" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G2" 2 )} 
+wvSetRadix -win $_nWave1 -2Com
+wvSelectSignal -win $_nWave1 {( "G2" 3 )} 
+wvSelectSignal -win $_nWave1 {( "G2" 3 )} 
+wvExpandBus -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G2" 3 )} 
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvCollapseBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 5187568.965517 -snap {("G1" 3)}
+wvSelectSignal -win $_nWave1 {( "G1" 4 5 6 7 8 9 )} {( "G2" 1 2 3 )} 
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 0)}
+wvSetCursor -win $_nWave1 5186573.891626 -snap {("G3" 0)}
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 1)}
+wvSetPosition -win $_nWave1 {("G2" 1)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/softmax_SASA/u_SASA/Init_done} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 1 )} 
+wvSetPosition -win $_nWave1 {("G2" 1)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/softmax_SASA/u_SASA/clk} \
+{/softmax_SASA/u_SASA/Cur_state\[2:0\]} \
+{/softmax_SASA/u_SASA/counter\[6:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/softmax_SASA/u_SASA/Init_done} \
+{/softmax_SASA/u_SASA/data_addr_x\[3:0\]} \
+{/softmax_SASA/u_SASA/data_addr_y\[3:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}

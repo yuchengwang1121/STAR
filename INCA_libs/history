@@ -1,0 +1,16 @@
+//
+// File created by:  irun
+// Do not modify this file
+
+s1::(28Jun2024:18:49:22):( ncverilog /home/YuChengWang/STAR/sim/softmax_STAR.sv /home/YuChengWang/STAR/src/MVU.sv /home/YuChengWang/STAR/src/SASA.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="STAR.fsdb" )
+s2::(28Jun2024:18:52:20):( ncverilog /home/YuChengWang/STAR/sim/softmax_SASA.sv /home/YuChengWang/STAR/src/STAR.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="SASA.fsdb" )
+s3::(28Jun2024:18:52:45):( ncverilog /home/YuChengWang/STAR/sim/softmax_SASA.sv /home/YuChengWang/STAR/src/STAR.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="SASA.fsdb" )
+s4::(28Jun2024:18:52:51):( ncverilog /home/YuChengWang/STAR/sim/softmax_STAR.sv /home/YuChengWang/STAR/src/MVU.sv /home/YuChengWang/STAR/src/SASA.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="STAR.fsdb" )
+s5::(28Jun2024:18:53:19):( ncverilog /home/YuChengWang/STAR/sim/softmax_STAR.sv /home/YuChengWang/STAR/src/MVU.sv /home/YuChengWang/STAR/src/SASA.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="STAR.fsdb" )
+s6::(28Jun2024:18:53:24):( ncverilog /home/YuChengWang/STAR/sim/softmax_SASA.sv /home/YuChengWang/STAR/src/STAR.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="SASA.fsdb" )
+s7::(28Jun2024:18:53:33):( ncverilog /home/YuChengWang/STAR/sim/softmax_STAR.sv /home/YuChengWang/STAR/src/MVU.sv /home/YuChengWang/STAR/src/SASA.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="STAR.fsdb" )
+s8::(28Jun2024:19:09:22):( ncverilog /home/YuChengWang/STAR/sim/softmax_STAR.sv /home/YuChengWang/STAR/src/def.sv /home/YuChengWang/STAR/src/MVU.sv /home/YuChengWang/STAR/src/SASA.sv /home/YuChengWang/STAR/src/STAR.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="STAR.fsdb" )
+s9::(28Jun2024:19:09:51):( ncverilog /home/YuChengWang/STAR/sim/softmax_STAR.sv /home/YuChengWang/STAR/src/def.sv /home/YuChengWang/STAR/src/MVU.sv /home/YuChengWang/STAR/src/SASA.sv /home/YuChengWang/STAR/src/STAR.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="STAR.fsdb" )
+s10::(28Jun2024:19:12:02):( ncverilog /home/YuChengWang/STAR/sim/softmax_STAR.sv /home/YuChengWang/STAR/src/def.sv /home/YuChengWang/STAR/src/MVU.sv /home/YuChengWang/STAR/src/SASA.sv /home/YuChengWang/STAR/src/STAR.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="STAR.fsdb" )
+s11::(28Jun2024:19:12:51):( ncverilog /home/YuChengWang/STAR/sim/softmax_STAR.sv /home/YuChengWang/STAR/src/def.sv /home/YuChengWang/STAR/src/MVU.sv /home/YuChengWang/STAR/src/SASA.sv /home/YuChengWang/STAR/src/STAR.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="STAR.sv.fsdb" )
+s12::(28Jun2024:19:14:01):( ncverilog /home/YuChengWang/STAR/sim/softmax_STAR.sv /home/YuChengWang/STAR/src/def.sv /home/YuChengWang/STAR/src/MVU.sv /home/YuChengWang/STAR/src/SASA.sv /home/YuChengWang/STAR/src/STAR.sv +incdir+/home/YuChengWang/STAR/src +nc64bit +access+r +define+FSDB_FILE="STAR.sv.fsdb" )

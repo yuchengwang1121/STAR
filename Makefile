@@ -9,13 +9,24 @@ SCRIPT_DIR         =$(ROOT_DIR)/script
 REPORT_DIR         =$(ROOT_DIR)/report
 NC_DIR             =$(ROOT_DIR)/conf
 
-TB_TOP             :=softmax_tb.sv
-TOP                :=STAR
+ifeq ($(mode),1)
+TB_TOP      := softmax_STAR.sv
+TOP         := STAR
+FILTER1		:= MVU
+FILTER2		:= SASA
+else
+TB_TOP      := softmax_SASA.sv
+TOP         := SASA
+FILTER1		:= MVU
+FILTER2		:= STAR
+endif
 
+# Get the list of all .sv files in the SRC_DIR
+SRC := $(wildcard $(SRC_DIR)/*.sv)
 
-SRC=$(filter-out $(SRC_DIR)/$(TOP), $(shell ls $(SRC_DIR)/*.v $(SRC_DIR)/*.sv))
+SRC := $(filter-out $(SRC_DIR)/$(FILTER1).sv $(SRC_DIR)/$(FILTER2).sv, $(SRC))
 
-TB_SRC=$(SIM_DIR)/*.dat
+TB_SRC := $(SIM_DIR)/*.dat
 
 # For IC contest
 CBDK_DIR         =/usr/cad/lib/CBDK_IC_Contest_v2.1/Verilog

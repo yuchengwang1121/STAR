@@ -84,4 +84,4 @@ define VIEW_MAP ( $VIEW_MAP \
 , .SVMS => SVMS \
 )
 define ELAB_SNAPSHOT
-define SNAPSHOT worklib.ReTransformer_tb:sv
+define SNAPSHOT worklib.softmax_SASA:sv

@@ -5,12 +5,12 @@
 +incdir+/home/YuChengWang/STAR/src
 +nc64bit
 +access+r
-+define+FSDB_FILE=\"STAR.fsdb\"
++define+FSDB_FILE=\"SASA.fsdb\"
 -MESSAGES
 +EMGRLOG
 ncverilog.log
 -XLSTIME
-1713024555
+1719927568
 -XLKEEP
 -XLMODE
 ./INCA_libs/irun.lnx8664.15.20.nc
@@ -24,4 +24,4 @@ ncverilog
 -XLVERSION
 "TOOL:	ncverilog	15.20-s084"
 -XLNAME
-./INCA_libs/irun.lnx8664.15.20.nc/caidcpuserver1_2348369
+./INCA_libs/irun.lnx8664.15.20.nc/caidcpuserver1_171024

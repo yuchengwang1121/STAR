@@ -5,4 +5,4 @@
 -INCDIR
 /home/YuChengWang/STAR/src
 -DEFINE
-FSDB_FILE=\"STAR.fsdb\"
+FSDB_FILE=\"SASA.fsdb\"

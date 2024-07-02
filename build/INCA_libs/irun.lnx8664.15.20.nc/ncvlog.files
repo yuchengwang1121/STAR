@@ -2,6 +2,6 @@
 // File created by:  ncverilog
 // Do not modify this file
 //
-/home/YuChengWang/STAR/sim/softmax_tb.sv
+/home/YuChengWang/STAR/sim/softmax_SASA.sv
+/home/YuChengWang/STAR/src/SASA.sv
 /home/YuChengWang/STAR/src/def.sv
-/home/YuChengWang/STAR/src/STAR.sv

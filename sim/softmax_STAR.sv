@@ -1,20 +1,16 @@
 `timescale 1ns/10ps
+`include "../src/def.sv"
 `define CYCLE      11
 `define SDFFILE    "./syn/STAR_syn.sdf"	// Modify your sdf file name
 `define End_CYCLE  100000000              // Modify cycle times once your design need more cycle times!
 
 `define Input      "../sim/input.dat" 
-`define Seg        "../sim/segment.dat" 
 `define LUT        "../sim/LUT.dat"  
+module softmax_STAR;
 
-`include "../src/def.sv"
-module softmax_tb;
-
-parameter N_INPUT   = (`Input_len == 16)? `Input_len**2: `Input_len*16;   // 16 x 16 or 4*4*4
-
+parameter N_INPUT   = `STAR_Input_len**2;
 
 logic   [7:0]   input_mem   [0:N_INPUT-1];
-
 logic   clk = 0;
 logic   reset = 0;
 logic   result_compare = 0;
@@ -28,12 +24,12 @@ logic [7:0] sub_xi;
 logic [8:0] data_addr;
 logic [31:0] exp;
 logic [31:0] Sum_exp;
-logic [`LUT_len-1:0] i_xi_MV;
-logic [`LUT_len-1:0] i_sub_MV;
-logic [`LUT_len-1:0] o_xmax_MV;
-logic [`LUT_len-1:0] o_xi_MV;
-logic [`LUT_len-1:0] o_sub_MV;
-logic [`LUT_len-1:0] C;
+logic [`STAR_CAM_len-1:0] i_xi_MV;
+logic [`STAR_CAM_len-1:0] i_sub_MV;
+logic [`STAR_CAM_len-1:0] o_xmax_MV;
+logic [`STAR_CAM_len-1:0] o_xi_MV;
+logic [`STAR_CAM_len-1:0] o_sub_MV;
+logic [`STAR_CAM_len-1:0] C;
 logic [7:0] data;
 
 
@@ -87,7 +83,7 @@ integer fid;
 `endif
 
 initial begin                             // read input from input.txt
-   fid = (`Input_len == 16)? $fopen(`Input,"r") :  $fopen(`Seg,"r");
+   fid = $fopen(`Input,"r");
    if(fid != 0)begin
       for(i=0; i<=N_INPUT; i=i+1)begin
          s=$fscanf(fid, "%d", input_mem[i]);
@@ -146,33 +142,7 @@ initial begin // result compare
 	$display("-----------------------------------------------------\n");
  	$display("START!!! Simulation Start .....\n");
  	$display("-----------------------------------------------------\n");
-   // for (i=0; i <N_PAT ; i=i+1) begin
-   //    $display("=> The LUT value at %d is %b ", i, lut_mem[i]);
-   // end
-// 	#(`CYCLE*3); 
 	wait( finish ) ;
-// 	@(posedge clk); @(posedge clk);
-// 	for (i=0; i <N_PAT ; i=i+1) begin
-// 			//@(posedge clk);  // TRY IT ! no comment this line for debugging !!
-// 				exp_dbg = exp_mem[i]; LBP_dbg = u_lbp_mem.LBP_M[i];
-// 				if (exp_mem[i] == u_lbp_mem.LBP_M[i]) begin
-// 					err = err;
-// 				end
-// 				else begin
-// 					//$display("pixel %d is FAIL !!", i); 
-// 					err = err+1;
-// 					if (err <= 10) $display("Output pixel %d are wrong!", i);
-// 					if (err == 11) begin $display("Find the wrong pixel reached a total of more than 10 !, Please check the code .....\n");  end
-// 				end
-// 				if( ((i%1000) === 0) || (i == 16383))begin  
-// 					if ( err === 0)
-//       					$display("Output pixel: 0 ~ %d are correct!\n", i);
-// 					else
-// 					$display("Output Pixel: 0 ~ %d are wrong ! The wrong pixel reached a total of %d or more ! \n", i, err);
-					
-//   				end					
-// 				exp_num = exp_num + 1;
-// 	end
 	over = 1;
 end
 
@@ -211,12 +181,12 @@ module CAMSUB_mem (xi, xi_MV, CAMSUB, FindSub, sub_xi, clk, rst);
 input clk, rst;
 input signed [7:0] xi;
 input CAMSUB,FindSub;
-output logic [63:0] xi_MV;
+output logic [`STAR_CAM_len-1:0] xi_MV;
 output logic signed [7:0] sub_xi;
 
 
-logic [63:0] MV_table [0:63];
-logic [7:0] xi_buffer [0:`Input_len-1];
+logic [`STAR_CAM_len-1:0] MV_table [0:`STAR_CAM_len-1];
+logic [7:0] xi_buffer [0:`STAR_Input_len-1];
 logic signed [7:0] max_xi;
 logic [4:0] counter;
 
@@ -226,7 +196,7 @@ integer i;
 assign posi = xi + 8'd20;
 
 initial begin     //From -20 ~ 0 ~ 43 (min=-17, max=43)not x_i-x_max
-	for (i=0; i<=63; i=i+1) MV_table[i] = 1<<i;
+	for (i=0; i<=`STAR_CAM_len-1; i=i+1) MV_table[i] = 1<<i;
 end
 
 always@(negedge clk) begin
@@ -247,7 +217,7 @@ end
 
 always@(negedge clk or negedge rst) begin
    if(rst) begin
-      for (i=0; i<=`Input_len-1; i=i+1) xi_buffer[i] = 8'b0;
+      for (i=0; i<=`STAR_Input_len-1; i=i+1) xi_buffer[i] = 8'b0;
       max_xi <= 8'b0;
    end
    else begin
@@ -255,7 +225,7 @@ always@(negedge clk or negedge rst) begin
          xi_buffer[counter] <= xi;
          if(xi > max_xi) max_xi <= xi;
       end
-      else if(counter < 16)begin
+      else if(counter < `STAR_Input_len)begin
          sub_xi <= xi_buffer[counter] - max_xi;
       end
       else begin
@@ -269,18 +239,18 @@ endmodule
 module CAM_mem (clk, rst, sub_xi, sub_MV, EXP, FindSub);
 input clk, rst, EXP, FindSub;
 input signed [7:0] sub_xi;
-output logic [`EXP_len-1:0] sub_MV;
+output logic [`STAR_CAM_len-1:0] sub_MV;
 
-logic [`LUT_len-1:0] SUB_table [0:`LUT_len-1];
+logic [`STAR_CAM_len-1:0] SUB_table [0:`STAR_CAM_len-1];
 logic [7:0] posi;
 integer i;
-logic [`Counter:0] counter;                                  //<===== need modify if change input 16=>3, 4=>1 =====>
-logic [7:0] xsub_buffer [0:`Input_len-1];
+logic [`STAR_Counter-1:0] counter;                                  //<===== need modify if change input 16=>3, 4=>1 =====>
+logic [7:0] xsub_buffer [0:`STAR_Input_len-1];
 
 assign posi = xsub_buffer[counter] + 8'd15;
 
 initial begin     //From -15 ~ 0 => [0 ~ 15]
-	for (i=0; i<=`LUT_len-1; i=i+1) SUB_table[i] = 1<<i;
+	for (i=0; i<=`STAR_CAM_len-1; i=i+1) SUB_table[i] = 1<<i;
 end
 
 always@(posedge clk or posedge rst) begin
@@ -292,7 +262,7 @@ always@(posedge clk or posedge rst) begin
 end
 
 always@(posedge clk or posedge rst) begin
-   if(rst)  for (i=0; i<=`Input_len-1; i=i+1) xsub_buffer[i] <= 'hz;
+   if(rst)  for (i=0; i<=16-1; i=i+1) xsub_buffer[i] <= 'hz;
    else     xsub_buffer[counter] <= sub_xi;
 end
 
@@ -308,14 +278,14 @@ endmodule
 
 module LUT_mem (clk, rst, sub_MV, exp, Sum_exp);
 input clk, rst;
-input [`EXP_len-1:0] sub_MV;
+input [15:0] sub_MV;
 output [31:0]exp;
 output [31:0]Sum_exp;
 
 parameter N_EXP = 16;
 logic [4:0] posi;
 logic signed [4:0] index;
-logic signed [`EXP_len-1:0] value;
+logic signed [15:0] value;
 logic   [31:0]  lut_mem    [0:N_EXP-1];
 integer i,fid1,s;
 
@@ -350,24 +320,6 @@ always@(posedge clk or posedge rst) begin
 end
 
 endmodule
-
-// module lbp_mem (lbp_valid, lbp_data, lbp_addr, clk);
-// input		lbp_valid;
-// input	[13:0] 	lbp_addr;
-// input	[7:0]	lbp_data;
-// input		clk;
-
-// logic [7:0] LBP_M [0:16383];
-// integer i;
-
-// initial begin
-// 	for (i=0; i<=16383; i=i+1) LBP_M[i] = 0;
-// end
-
-// always@(negedge clk) 
-// 	if (lbp_valid) LBP_M[ lbp_addr ] <= lbp_data;
-
-// endmodule
 
 
 

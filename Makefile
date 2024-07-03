@@ -2,6 +2,7 @@ ROOT_DIR           =$(PWD)
 BUILD              =build
 BUILD_DIR          =$(ROOT_DIR)/$(BUILD)
 SRC_DIR            =$(ROOT_DIR)/src
+SUBSRC_DIR         =$(ROOT_DIR)/src/submodule
 SIM_DIR            =$(ROOT_DIR)/sim
 SYN_DIR            =$(ROOT_DIR)/syn
 APR_DIR            =$(ROOT_DIR)/icc
@@ -12,19 +13,17 @@ NC_DIR             =$(ROOT_DIR)/conf
 ifeq ($(mode),1)
 TB_TOP      := softmax_STAR.sv
 TOP         := STAR
-FILTER1		:= MVU
-FILTER2		:= SASA
+FILTER		:= SASA
 else
 TB_TOP      := softmax_SASA.sv
 TOP         := SASA
-FILTER1		:= MVU
-FILTER2		:= STAR
+FILTER		:= STAR
 endif
 
 # Get the list of all .sv files in the SRC_DIR
 SRC := $(wildcard $(SRC_DIR)/*.sv)
 
-SRC := $(filter-out $(SRC_DIR)/$(FILTER1).sv $(SRC_DIR)/$(FILTER2).sv, $(SRC))
+SRC := $(filter-out $(SRC_DIR)/$(FILTER).sv $(SUBSRC_DIR)/*.sv, $(SRC))
 
 TB_SRC := $(SIM_DIR)/*.dat
 

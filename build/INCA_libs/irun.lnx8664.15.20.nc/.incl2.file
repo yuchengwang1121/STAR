@@ -1,8 +1,14 @@
 ../src/def.sv
 /home/YuChengWang/STAR/src/def.sv
+../sim/findmax_tb.sv
+/home/YuChengWang/STAR/sim/findmax_tb.sv
 /home/YuChengWang/STAR/src/def.sv
 /home/YuChengWang/STAR/src/def.sv
 /home/YuChengWang/STAR/src/./submodule/MVU.sv
 /home/YuChengWang/STAR/src/submodule/MVU.sv
+/home/YuChengWang/STAR/src/./submodule/Rounding.sv
+/home/YuChengWang/STAR/src/submodule/Rounding.sv
 /home/YuChengWang/STAR/src/./submodule/FindMax.sv
 /home/YuChengWang/STAR/src/submodule/FindMax.sv
+/home/YuChengWang/STAR/src/./submodule/MulShift.sv
+/home/YuChengWang/STAR/src/submodule/MulShift.sv

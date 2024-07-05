@@ -1,5 +1,4 @@
 module FindMax (
-    input  [7:0] LM_counter,
     input  [`SASA_CAM_len-1:0] OR_MatchVector,
     output [`SASA_CAM_len-1:0] LM_MatchVector
 );

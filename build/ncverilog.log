@@ -1,5 +1,5 @@
 ncverilog(64): 15.20-s084: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
-TOOL:	ncverilog	15.20-s084: Started on Jul 03, 2024 at 23:04:18 CST
+TOOL:	ncverilog	15.20-s084: Started on Jul 06, 2024 at 02:52:42 CST
 ncverilog
 	/home/YuChengWang/STAR/sim/softmax_SASA.sv
 	/home/YuChengWang/STAR/src/SASA.sv
@@ -8,41 +8,64 @@ ncverilog
 	+nc64bit
 	+access+r
 	+define+FSDB_FILE="SASA.fsdb"
-Recompiling... reason: file '../src/submodule/MVU.sv' is newer than expected.
-	expected: Wed Jul  3 22:51:34 2024
-	actual:   Wed Jul  3 23:04:15 2024
+Recompiling... reason: file '../src/SASA.sv' is newer than expected.
+	expected: Sat Jul  6 02:44:30 2024
+	actual:   Sat Jul  6 02:52:38 2024
 file: /home/YuChengWang/STAR/src/SASA.sv
-            if(MVA_counter[`SASA_Input_shift-1:0] == `SASA_Input_shift'hf && MVA_counter>0)begin      //every Segnum vector a 
-                                                                        |
-ncvlog: *W,INTOVF (/home/YuChengWang/STAR/src/./submodule/MVU.sv,44|72): bit overflow during conversion from text [2.5(IEEE)] (2 bits).
-(`include file: /home/YuChengWang/STAR/src/./submodule/MVU.sv line 44, file: /home/YuChengWang/STAR/src/SASA.sv line 2)
-	module worklib.MVU:sv
-		errors: 0, warnings: 1
+        if(MVA_counter[`SASA_Input_shift-1:0] == `SASA_Input_shift'hf) M_counter <= M_counter + 1'b1;
+                                                                    |
+ncvlog: *W,INTOVF (/home/YuChengWang/STAR/src/./submodule/MVU.sv,40|68): bit overflow during conversion from text [2.5(IEEE)] (2 bits).
+(`include file: /home/YuChengWang/STAR/src/./submodule/MVU.sv line 40, file: /home/YuChengWang/STAR/src/SASA.sv line 2)
+	module worklib.SASA:sv
+		errors: 0, warnings: 0
 		Caching library 'worklib' ....... Done
 	Elaborating the design hierarchy:
+   SASA u_SASA(   .clk(clk),
+             |
+ncelab: *W,CUVWSP (../sim/softmax_SASA.sv,33|13): 1 output port was not connected:
+ncelab: (../src/SASA.sv,20): Round_data
+
 ncelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
-                  .MatchVector(MatchVector),
-                                         |
-ncelab: *W,CUVMPW (../sim/softmax_SASA.sv,42|41): port sizes differ in port connection (257/256).
+    .MVU_counter(MVU_counter),
+                           |
+ncelab: *W,CUVMPW (../src/SASA.sv,131|27): port sizes differ in port connection (8/9).
+                  .MatchVector(w_MatchVector)
+                                           |
+ncelab: *W,CUVMPW (../sim/softmax_SASA.sv,50|43): port sizes differ in port connection (256/257).
+      .input1(Sub_buffer[pivot]),
+                       |
+ncelab: *W,CUVMPW (../sim/softmax_SASA.sv,212|23): port sizes differ in port connection (32/8).
+      .input2(Sub_buffer[pivot+1]),
+                       |
+ncelab: *W,CUVMPW (../sim/softmax_SASA.sv,213|23): port sizes differ in port connection (32/8).
+      .input3(Sub_buffer[pivot+2]),
+                       |
+ncelab: *W,CUVMPW (../sim/softmax_SASA.sv,214|23): port sizes differ in port connection (32/8).
+      .input4(Sub_buffer[pivot+3]),
+                       |
+ncelab: *W,CUVMPW (../sim/softmax_SASA.sv,215|23): port sizes differ in port connection (32/8).
+      .Out_Max(dataMax)
+                     |
+ncelab: *W,CUVMPW (../sim/softmax_SASA.sv,216|21): port sizes differ in port connection (32/8).
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
-		worklib.MVU:sv <0x14135059>
-			streams:  14, words: 138817
+		worklib.SASA:sv <0x554dc52f>
+			streams:  20, words: 21416
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
 		                  Instances  Unique
-		Modules:                  5       5
-		Registers:               51      51
-		Scalar wires:            16       -
-		Vectored wires:          20       -
-		Always blocks:           10      10
+		Modules:                 11      11
+		Registers:               79      79
+		Scalar wires:            19       -
+		Vectored wires:          60       -
+		Always blocks:           17      17
 		Initial blocks:           9       9
-		Cont. assignments:       14      20
-		Pseudo assignments:      12      12
+		Cont. assignments:       31      40
+		Pseudo assignments:      20      20
 		Simulation timescale:  10ps
-	Writing initial simulation snapshot: worklib.softmax_SASA:sv
-Loading snapshot worklib.softmax_SASA:sv .................... Done
+	Writing initial simulation snapshot: worklib.FindMax_Seg2:sv
+Loading snapshot worklib.FindMax_Seg2:sv .................... Done
 ncsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
 *Verdi* Loading libsscore_ius152.so
 ncsim> source /usr/cad/cadence/INCISIV/cur/tools/inca/files/ncsimrc
@@ -67,7 +90,7 @@ Congratulations! All data have been generated successfully!
 
 -------------------------PASS------------------------
 
-Simulation complete via $finish(1) at time 1360 NS + 0
-../sim/softmax_SASA.sv:136       #(`CYCLE/2); $finish;
+Simulation complete via $finish(1) at time 2040 NS + 0
+../sim/softmax_SASA.sv:147       #(`CYCLE/2); $finish;
 ncsim> exit
-TOOL:	ncverilog	15.20-s084: Exiting on Jul 03, 2024 at 23:06:50 CST  (total: 00:02:32)
+TOOL:	ncverilog	15.20-s084: Exiting on Jul 06, 2024 at 02:55:14 CST  (total: 00:02:32)

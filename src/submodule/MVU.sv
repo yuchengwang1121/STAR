@@ -1,63 +1,59 @@
 module MVU (
     input clk,
     input reset,
-    // For Find Max
+    input [8:0]MVU_counter,
+    // Find Max & Sub
     input [`SASA_CAM_len-1:0] MatchVector,
-    input FindMax,
-    output CAM1_FindMax_done,
-    // For Find SUB
-    input FindSub,
     output [`SASA_CAM_len-1:0] SUB_MatchVector,
-    output CAM1_SUB_done
+    // For comparator
+    input [31:0] CAM1_out,
+    output [31:0] Round_data
 );
 
-reg [`SASA_CAM_len-1:0] MatchVectorArray [0:`SASA_Input_len-1];
-reg [`SASA_CAM_len-1:0] OR_Buffer [0:`SASA_Seq_len-1];
-reg [`SASA_CAM_len-1:0] GlobalMax [0:`SASA_Seq_len-1];
-
-reg [7:0] MVA_counter,LM_counter;
+logic [`SASA_CAM_len-1:0] MatchVectorArray [0:`SASA_Input_len-1];
+logic [`SASA_CAM_len-1:0] OR_Buffer [0:`SASA_Seq_len-1];
+logic [8:0] MVA_counter, M_counter;
+logic FindMax, PerformRound;
 integer i;
 
-//Ctrl signal for the FSM
-assign CAM1_FindMax_done    = (FindMax & LM_counter == 5'd17) ? 1'b1:1'b0;
-assign CAM1_SUB_done        = (FindSub & LM_counter == 5'd17) ? 1'b1:1'b0;
+// Ctrl signal for the FSM
+assign FindMax      = (MVU_counter[6] != 1'b1) ? 1'b1:1'b0;
+assign PerformRound    = (MVU_counter >=4 && MVU_counter<68) ? 1'b1:1'b0;
+
+// For MVA_counter
+always @(posedge clk or posedge reset) begin
+    if(reset)begin
+        MVA_counter <= 8'd0;
+    end
+    else begin
+        if (FindMax) MVA_counter <= MVA_counter + 1'b1;
+        else MVA_counter <= 8'd0;
+    end 
+end
+
+// For Max_counter
+always @(posedge clk or posedge reset) begin
+    if(reset)begin
+        M_counter  <= 8'd0;
+    end
+    else begin
+        if(MVA_counter[`SASA_Input_shift-1:0] == `SASA_Input_shift'hf) M_counter <= M_counter + 1'b1;
+        else if (!FindMax) M_counter  <= 8'd0;
+    end 
+end
 
 // Send match vector to MatchVectorArray & OR buffer
 always @(posedge clk or posedge reset) begin
     if (reset) begin
-        for(i=0; i<=`SASA_Input_len-1; i=i+1) MatchVectorArray[i] <= 1'b0;
-        for(i=0; i<=`SASA_Input_len-1; i=i+1) OR_Buffer[i] <= 1'b0;
+        for(i=0; i<=`SASA_Input_len-1; i=i+1) MatchVectorArray[i] <= `SASA_CAM_len'b0;
+        for(i=0; i<=`SASA_Input_len-1; i=i+1) OR_Buffer[i] <= `SASA_CAM_len'b0;
     end
     else begin
         if (FindMax) begin
-            MatchVectorArray[MVA_counter]   <= MatchVector;
-            OR_Buffer[LM_counter]           <= OR_Buffer[LM_counter] | MatchVector;
-        end        
-    end
-end
-
-// For MVA counter & LM_counter
-always @(posedge clk or posedge reset) begin
-    if(reset)begin
-        MVA_counter <= 7'd0;
-        LM_counter  <= 7'd0;
-    end
-    else begin
-        if (FindMax || FindSub) begin
-            MVA_counter <= MVA_counter + 1'b1;
-            //every Segnum vector a 
-            if(MVA_counter[`SASA_Input_shift-1:0] == `SASA_Input_shift'hf && MVA_counter>0) LM_counter <= LM_counter + 1'b1;
-            else LM_counter  <= 7'd0;
-            if (CAM1_FindMax_done) begin
-                MVA_counter <= 7'd0;
-                LM_counter  <= 7'd0;
-            end
+            MatchVectorArray[MVA_counter]  <= MatchVector;
+            OR_Buffer[M_counter]           <= OR_Buffer[M_counter] | MatchVector;
         end
-        else begin
-            MVA_counter <= 7'd0;
-            LM_counter  <= 7'd0;
-        end
-    end 
+    end
 end
 
 // Finding Max Match Vector
@@ -65,33 +61,44 @@ logic [`SASA_CAM_len-1:0] OR_MatchVector;   //OR Match Vector
 logic [`SASA_CAM_len-1:0] LM_MatchVector;   //Local Max Match Vector
 logic [`SASA_CAM_len-1:0] LocalMax [0:`SASA_Seq_len-1];
 
-assign OR_MatchVector = (LM_counter <= `SASA_Seq_len && LM_counter != 0)?OR_Buffer[LM_counter-1] : 1'b0;
+assign SUB_MatchVector  = (M_counter > 0)? MatchVectorArray[MVA_counter-4] | LocalMax[M_counter-1] : 1'b0;
+assign OR_MatchVector   = (M_counter <= `SASA_Seq_len && M_counter != 0)? OR_Buffer[M_counter-1] : 1'b0;
 
 FindMax u_FindMax(
     //Find Local Max
-    .LM_counter(LM_counter),
     .OR_MatchVector(OR_MatchVector),
     .LM_MatchVector(LM_MatchVector)
 );
 
+// Finding Local Max Match Vector
 always @(posedge clk or posedge reset) begin
     if (reset) begin
         for(i=0; i<=`SASA_Input_len-1; i=i+1) LocalMax[i] <= 1'b0;
     end
     else begin
-        LocalMax[LM_counter-1] <= (LM_counter <= `SASA_Seq_len && LM_counter != 0)?LM_MatchVector : 1'b0;
+        LocalMax[M_counter-1] <= (M_counter <= `SASA_Seq_len && M_counter != 0)?LM_MatchVector : 1'b0;
     end
 end
 
-//Output the SUB_Match Vector
+// LM_MatchVector to GlobalMax
+logic [`SASA_CAM_len-1:0] GlobalMax [0:`SASA_Seq_len-1];
+
 always @(posedge clk or posedge reset) begin
-    if (reset) begin
-        SUB_MatchVector <= 1'b0;
+    if(reset)begin
+        for(i=0; i<=`SASA_Input_len-1; i=i+1) GlobalMax[i]  <= `SASA_CAM_len'd0;
     end
     else begin
-        if (FindSub)  SUB_MatchVector <= MatchVectorArray[MVA_counter] | LocalMax[LM_counter]; 
-        else          SUB_MatchVector <= 1'b0;
-        
+        GlobalMax[M_counter] = (M_counter[4] == 0)? GlobalMax[M_counter] | LocalMax[M_counter] : 1'b0;
     end
 end
+
+Rounding u_Rounding(
+    .clk(clk),
+    .reset(reset),
+    .CAM1_out(CAM1_out),
+    .PerformRound(PerformRound),
+    .Round_data(Round_data),
+    .Selector(Selector)
+);
+
 endmodule

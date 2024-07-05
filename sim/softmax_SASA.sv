@@ -1,5 +1,6 @@
 `timescale 1ns/10ps
 `include "../src/def.sv"
+`include "../sim/findmax_tb.sv"
 `define CYCLE      11
 `define SDFFILE    "./syn/SASA_syn.sdf"	// Modify your sdf file name
 `define End_CYCLE  100000              // Modify cycle times once your design need more cycle times!
@@ -16,35 +17,52 @@ integer err = 0;
 real ori_data;
 integer qua_data;
 
-// input length
-parameter S_matrix  = 16;                 // Size of the QK matrix
-
 // reg declare
 logic   clk     = 0;
 logic   reset   = 0;
 
-real input_mem [0:S_matrix-1][0:S_matrix-1];
-logic [7:0] data,data4CAM;
-logic [3:0] data_addr_x;
-logic [3:0] data_addr_y;
-logic data_req, finish;
-logic [`SASA_CAM_len:0] MatchVector;
+real  input_mem [0:`SASA_Seq_len-1][0:`SASA_Seq_len-1];
+logic [31:0] w_data, w_data4CAM, w_CAM1_out, w_Round_data, w_CAM2_out;
+logic [`SASA_Seq_shift-1:0] w_data_addr_x, w_data_addr_y;
+logic w_data_req, w_finish;
+logic [`SASA_CAM_len-1:0] w_MatchVector;
+logic [`SASA_CAM_len-1:0] w_SUB_MatchVector;
 logic over = 0;
 
 // SASA module
    SASA u_SASA(   .clk(clk),
                   .reset(reset),
-                  .data(data),
-                  .data_req(data_req),
-                  .data_addr_x(data_addr_x),
-                  .data_addr_y(data_addr_y),
-                  .data4CAM(data4CAM),
-                  .MatchVector(MatchVector),
-                  .finish(finish)
+                  //Initialize
+                  .data(w_data),
+                  .data_req(w_data_req),
+                  .data_addr_x(w_data_addr_x),
+                  .data_addr_y(w_data_addr_y),
+                  //CAM1 - FindMax & Sub
+                  .data4CAM(w_data4CAM),
+                  .MatchVector(w_MatchVector),
+                  .SUB_MatchVector(w_SUB_MatchVector),
+                  //MVU
+                  .CAM1_out(w_CAM1_out),
+                  .Round_data(w_Round_data),
+                  //CAM2
+                  .CAM2_out(w_CAM2_out),
+                  .finish(w_finish)
    );
-   CAM1 uCAM(
-                  .data4CAM(data4CAM),
-                  .MatchVector(MatchVector)
+   CAM1 u_CAM(
+                  .data4CAM(w_data4CAM),
+                  .MatchVector(w_MatchVector)
+   );
+   CAM1_SUB u_CAM1_SUB(
+                  .clk(clk),
+                  .reset(reset),
+                  .data_req(w_data_req),
+                  .data4CAM(w_data4CAM),
+                  .CAM1_out(w_CAM1_out)
+
+   );
+   CAM2 u_CAM2(
+                  .Round_data(w_Round_data),
+                  .CAM2_out(w_CAM2_out)
    );
 
 // CLK & Reset
@@ -64,8 +82,8 @@ end
 initial begin
    fid = $fopen(`Input, "r");
    if (fid != 0) begin
-      for (i = 0; i < S_matrix; i = i + 1) begin
-         for (j = 0; j < S_matrix; j = j + 1) begin
+      for (i = 0; i < `SASA_Seq_len; i = i + 1) begin
+         for (j = 0; j < `SASA_Seq_len; j = j + 1) begin
             s = $fscanf(fid, "%f", input_mem[i][j]);
             if (s != 1) begin
                   $display("Error: Failed to read input from file", `Input);
@@ -84,15 +102,15 @@ end
 //Quantize input and output result for SASA
 always@ (negedge clk)begin
    // if(finish == 0) begin             
-      if( data_req ) begin
-         ori_data = input_mem[data_addr_y][data_addr_x]*16.0;
+      if(w_data_req) begin
+         ori_data = input_mem[w_data_addr_y][w_data_addr_x]*16.0;
          //Rounding
          if(ori_data >= 0) qua_data = $rtoi(ori_data + 0.5);
          else              qua_data = $rtoi(ori_data - 0.5);
-         data = qua_data;
+         w_data = qua_data;
       end
       else begin
-         data = 'hz;  
+         w_data = 'hz;  
       end                
    // end     
 end
@@ -106,7 +124,7 @@ initial begin
    $display("-----------------------------------------------------\n");
 
    // // Wait for the finish signal
-   wait(finish);
+   wait(w_finish);
    over = 1;
 
    // Simulation timeout check
@@ -140,15 +158,100 @@ endmodule
 
 // <----------------------------------------------------- CAM 1 ----------------------------------------------------->
 module CAM1(data4CAM, MatchVector);
-   input  signed [7:0]        data4CAM;
+   input  signed [31:0]        data4CAM;
    output [`SASA_CAM_len:0]   MatchVector;
-   
-   // 128 ~ -127
-   assign MatchVector = 1 << data4CAM + 127;
 
-
-
+   //Give the Match vector in range 128 ~ -127
+   assign MatchVector      = 1 << data4CAM + 127;
 endmodule
 
+
+module CAM1_SUB(clk, reset, data_req, data4CAM, CAM1_out);
+
+   input clk, reset;
+   input data_req;
+   input signed [31:0] data4CAM;
+   output reg [31:0] CAM1_out;
+   integer i;
+   // real data_dequa;  //data dequantnize
+
+   logic signed [31:0] Sub_buffer [0:`SASA_Input_len-1];      //64
+   logic signed [31:0] Max_buffer [0:`SASA_Seq_len-1];        //16
+   logic [31:0] s_counter,m_counter, pivot;
+   logic signed [31:0] data_sub, dataMax;
+   
+
+   //Ctrl of counter for buffer
+   always @(posedge clk or posedge reset) begin
+      if (reset)begin
+         s_counter <= 1'b0;
+         m_counter <= 1'b0;
+         pivot     <= 1'b0;
+      end
+      else begin
+         if (s_counter == `SASA_Input_len + `SASA_Block_wid) begin
+            s_counter <= 1'b0;
+            m_counter <= 1'b0;
+            pivot     <= 1'b0;
+         end
+         else begin
+            s_counter <= (!data_req)? s_counter + 1'b1 : 1'b0;
+            m_counter <= (s_counter[`SASA_Input_shift-1:0] == 0 && s_counter>0)? m_counter + 1'b1 : m_counter;
+            pivot = m_counter << `SASA_Input_shift;
+         end
+      end  
+   end
+
+   //Assign the value into buffer
+   always @(posedge clk or posedge reset) begin
+      if (reset)begin
+         for (i = 0; i < `SASA_Input_len; i = i + 1) Sub_buffer[i] <= 1'b0;
+         for (i = 0; i < `SASA_Seq_len; i = i + 1)   Max_buffer[i] <= 1'b0;
+      end
+      else begin
+         Sub_buffer[s_counter] <= data4CAM;
+         if(s_counter[`SASA_Input_shift-1:0] == 0 && s_counter>0) Max_buffer[m_counter] <= dataMax;
+      end
+   end
+
+   //Find Max value < --- Need modify if change segment --- >
+   FindMax_Seg4 u_FMS4(
+      .input1(Sub_buffer[pivot]),
+      .input2(Sub_buffer[pivot+1]),
+      .input3(Sub_buffer[pivot+2]),
+      .input4(Sub_buffer[pivot+3]),
+      .Out_Max(dataMax)
+   );
+
+   //Output the result of sub
+   assign CAM1_out = (s_counter > `SASA_Block_wid)? Sub_buffer[s_counter-`SASA_Block_wid-1] - Max_buffer[m_counter-1] : 1'b0;
+
+endmodule
 // <----------------------------------------------------- CAM 2 ----------------------------------------------------->
+module CAM2(Round_data, CAM2_out);
+   input  signed [31:0] Round_data;
+   output [31:0] CAM2_out;
+
+   integer f, i;
+   real  LUT_mem   [0:`SASA_LUT_len-1];
+
+   initial begin
+   f = $fopen(`LUT, "r");
+   if (f != 0) begin
+      for (i = 0; i < `SASA_LUT_len; i = i + 1) begin
+         s = $fscanf(f, "%f", LUT_mem[i]);
+         if (s != 1) begin
+               $display("Error: Failed to read input from file", `LUT);
+               $fclose(f);
+               $finish;
+         end
+      end
+      $fclose(f);
+   end else begin
+      $display("Error: Could not open file");
+      $finish;
+   end
+   end
+endmodule
+
 // <----------------------------------------------------- LUT ----------------------------------------------------->

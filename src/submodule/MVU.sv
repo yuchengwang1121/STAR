@@ -1,7 +1,8 @@
+`include "../src/def.sv"
 module MVU (
     input clk,
     input reset,
-    input [8:0]MVU_counter,
+    input [7:0]MVU_counter,
     // Find Max & Sub
     input [`SASA_CAM_len-1:0] MatchVector,
     output [`SASA_CAM_len-1:0] SUB_MatchVector,
@@ -18,7 +19,7 @@ integer i;
 
 // Ctrl signal for the FSM
 assign FindMax      = (MVU_counter[6] != 1'b1) ? 1'b1:1'b0;
-assign PerformRound    = (MVU_counter >=4 && MVU_counter<68) ? 1'b1:1'b0;
+assign PerformRound = (MVU_counter >=4 && MVU_counter<68) ? 1'b1:1'b0;
 
 // For MVA_counter
 always @(posedge clk or posedge reset) begin
@@ -88,7 +89,7 @@ always @(posedge clk or posedge reset) begin
         for(i=0; i<=`SASA_Input_len-1; i=i+1) GlobalMax[i]  <= `SASA_CAM_len'd0;
     end
     else begin
-        GlobalMax[M_counter] = (M_counter[4] == 0)? GlobalMax[M_counter] | LocalMax[M_counter] : 1'b0;
+        GlobalMax[M_counter] <= (M_counter[4] == 0)? GlobalMax[M_counter] | LocalMax[M_counter] : 1'b0;
     end
 end
 
@@ -97,8 +98,7 @@ Rounding u_Rounding(
     .reset(reset),
     .CAM1_out(CAM1_out),
     .PerformRound(PerformRound),
-    .Round_data(Round_data),
-    .Selector(Selector)
+    .Round_data(Round_data)
 );
 
 endmodule

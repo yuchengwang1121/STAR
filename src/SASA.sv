@@ -1,8 +1,9 @@
-`include "./def.sv"
-`include "./submodule/MVU.sv"
-`include "./submodule/Rounding.sv"
-`include "./submodule/FindMax.sv"
-`include "./submodule/MulShift.sv"
+`include "def.sv"
+`include "submodule/MVU.sv"
+`include "submodule/Rounding.sv"
+`include "submodule/FindMax.sv"
+`include "submodule/MulShift.sv"
+`include "submodule/SRU.sv"
 module SASA (
     input clk,
     input reset,
@@ -18,49 +19,71 @@ module SASA (
     //MVU
     input  [31:0] CAM1_out,
     output [31:0] Round_data,
-    //CAM2 
-    input [31:0] CAM2_out,
+    //LUT 
+    input [31:0] LUT_out,
+    output soft_rec,
+    output [31:0] LocalSum,
+    //Find factor
+    output find_fac,
+    output [31:0] Factor_out,
+    //Final calaulation and store
+    input [31:0] Deno_out,
+    output soft_fac,
+    output [31:0] Result,
     output finish
 
 );
 
 parameter   Init            = 3'b000,
             CAM1            = 3'b001,
-            CAM2            = 3'b010,
-            Finish          = 3'b011;
+            Factor          = 3'b010,
+            Soft            = 3'b011,
+            Finish          = 3'b100;
 
 integer i;
-logic Init_done,Finish_done, CAM1_done, CAM2_done;
-reg [2:0] Cur_state, Next_State;
-reg [7:0] MVU_counter, init_counter,total_counter;
+logic Init_done,Finish_done, CAM1_done, Factor_done, MVU_done;
+logic [2:0] Cur_state, Next_state;
+logic [7:0] MVU_counter, init_counter,total_counter;
 
 // Init State Ctrl Signal
-assign data_req             = (Cur_state == Init)? 1'b1:1'b0;
 assign Init_done            = (Cur_state == Init && init_counter == `SASA_Input_len-1)? 1'b1:1'b0;
-assign CAM1_done            = (total_counter == 8'd200)? 1'b1:1'b0;
-// assign Finish_done          = (Cur_state == Finish && total_counter == 2'd3)? 1'b1:1'b0;
+assign MVU_done             = (MVU_counter == `SASA_MVU_count)? 1'b1:1'b0;
+assign CAM1_done            = (total_counter == `SASA_Segnum)? 1'b1:1'b0;
+assign Finish_done          = (total_counter == `SASA_Segnum+2)? 1'b1:1'b0;
 
 //Finished State Ctrl Signal
-assign finish  = (Cur_state == Finish)? 1'b1:1'b0;
-
+assign data_req = (Cur_state == Init)? 1'b1:1'b0;
+assign soft_rec = (Cur_state == CAM1 && MVU_counter>=`SASA_Segnum && MVU_counter<=`SASA_MVU_count)? 1'b1:1'b0;
+assign find_fac = (Cur_state == Factor)? 1'b1:1'b0;
+assign soft_fac = (Cur_state == Soft)? 1'b1:1'b0;
+assign finish   = (Cur_state == Finish)? 1'b1:1'b0;
 
 always @(posedge clk or posedge reset) begin
     if(reset) Cur_state <= Init;
-    else Cur_state <= Next_State;
+    else Cur_state <= Next_state;
 end
 
 always @(*) begin                               //FSM
     case(Cur_state)
     Init: begin
-        if (Init_done)  Next_State = CAM1;
-        else            Next_State = Init;
+        if (CAM1_done)      Next_state = Factor;
+        else if (Init_done) Next_state = CAM1;
+        else                Next_state = Init;
     end
     CAM1: begin
-        if (CAM1_done)  Next_State = Finish;
-        else            Next_State = CAM1;
+        if (MVU_done)  Next_state = Init;
+        else           Next_state = CAM1;
+    end
+    Factor: begin
+        if (MVU_done)    Next_state = Soft;
+        else             Next_state = Factor;
+    end
+    Soft: begin
+        if (Finish_done)    Next_state = Finish;
+        else                Next_state = Soft;
     end
     default:begin
-        Next_State = Init;
+        Next_state =  Finish;
     end
     endcase
 end
@@ -71,8 +94,8 @@ always @(posedge clk or posedge reset) begin
         init_counter <= 8'b0;
     end
     else begin
-        if(Cur_state == Next_State) init_counter <= init_counter + 1'b1;
-        else init_counter <= 1'b0;
+        if(Cur_state != Next_state) init_counter <= 1'b0;
+        else init_counter <= (init_counter == `SASA_Input_len-1)? init_counter : init_counter + 1'b1;
     end
 end
 
@@ -82,7 +105,7 @@ always @(posedge clk or posedge reset) begin
         total_counter <= 8'b0;
     end
     else begin
-        total_counter <= total_counter + 1'b1;
+        total_counter <= (MVU_done)? total_counter + 1'b1 : total_counter;
     end
 end
 
@@ -90,33 +113,46 @@ end
 always @(posedge clk or posedge reset) begin
     if(reset) MVU_counter <= 8'hff;
     else begin
-        MVU_counter <= (Cur_state == CAM1)? MVU_counter + 1'b1 : 8'hff;
+        if (Cur_state != Init) begin
+            MVU_counter <= MVU_counter + 1'b1;
+        end
+        else if (Cur_state == Factor && Next_state == Soft) begin
+            MVU_counter <= 1'b0;
+        end
+        else begin
+            MVU_counter <= 8'hff;
+        end
     end
 end
 
 // Building QK buffer in Initial state
 reg [31:0] QK_buffer [0:`SASA_Input_len-1];
-reg [`SASA_Input_shift-1:0] col_counter, row_counter;
-reg [3:0] pivot_x,pivot_y;
+reg [`SASA_Block_wid-1:0] col_counter, row_counter;
+reg [3:0] pivot_x,pivot_y,test;
 
 assign data_addr_x = pivot_x + col_counter;
 assign data_addr_y = pivot_y + row_counter;
 always @(posedge clk or posedge reset) begin
     if (reset) begin
+        pivot_x     <= `SASA_Block_wid'b0;
+        pivot_y     <= `SASA_Block_wid'b0;
+    end
+    else begin
+        pivot_x <= (Init_done)? pivot_x + (`SASA_Block_wid << 1) : (row_counter == `SASA_Block_wid-1 && col_counter == `SASA_Block_wid-1)? pivot_x + `SASA_Block_wid : pivot_x;
+        pivot_y <= (row_counter == `SASA_Block_wid-1 && col_counter == `SASA_Block_wid-1)? pivot_y + `SASA_Block_wid : pivot_y;
+    end
+end
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
         for(i=0; i<=`SASA_Input_len-1; i=i+1) QK_buffer[i] <= 31'b0;
-        col_counter <= 2'b0;
-        row_counter <= 2'b0;
-        pivot_x     <= 4'b0;
-        pivot_y     <= 4'b0;
+        col_counter <= `SASA_Block_wid'b0;
+        row_counter <= `SASA_Block_wid'b0;
     end
     else begin
         if(data_req) begin
-            col_counter <= col_counter + 1'b1;   
-            if(col_counter == 2'd3) row_counter <= row_counter + 1'b1;
-            if(row_counter == 2'd3 && col_counter == 2'd3)begin
-                pivot_x <= pivot_x + `SASA_Block_wid;
-                pivot_y <= pivot_y + `SASA_Block_wid;
-            end
+            col_counter <= (col_counter == `SASA_Block_wid-1)? `SASA_Block_wid'b0 : col_counter + 1'b1;   
+            if(col_counter == `SASA_Block_wid-1) row_counter <= row_counter + 1'b1;
             QK_buffer[init_counter] <= data;
         end
     end
@@ -139,6 +175,19 @@ MVU u_MVU(
     .Round_data(Round_data)
 );
 
+SRU u_SRU(
+    .clk(clk),
+    .reset(reset),
+    .soft_rec(soft_rec),
+    .LUT_out(LUT_out),
+    .total_counter(total_counter),
+    .find_fac(find_fac),
+    .LocalSum(LocalSum),
+    .Factor_out(Factor_out),
+    .soft_fac(soft_fac),
+    .Deno_out(Deno_out),
+    .Result(Result)
+);
 
 
 endmodule

@@ -1,7 +1,7 @@
 `timescale 1ns/10ps
 `include "../src/def.sv"
-`define CYCLE      11
-`define SDFFILE    "./syn/STAR_syn.sdf"	// Modify your sdf file name
+`define CYCLE      30
+`define SDFFILE    "../syn/STAR_syn.sdf"	// Modify your sdf file name
 `define End_CYCLE  100000000              // Modify cycle times once your design need more cycle times!
 
 `define Input      "../sim/input.dat" 
@@ -10,71 +10,75 @@ module softmax_STAR;
 
 parameter N_INPUT   = `STAR_Input_len**2;
 
-logic   [7:0]   input_mem   [0:N_INPUT-1];
-logic   clk = 0;
-logic   reset = 0;
-logic   result_compare = 0;
+real input_mem [0:`SASA_Seq_len-1][0:`SASA_Seq_len-1];
+logic clk = 0;
+logic reset = 0;
+logic result_compare = 0;
 
 integer err = 0;
 integer times = 0;
 logic over = 0;
 integer exp_num = 0;
-logic [7:0] xi;
-logic [7:0] sub_xi;
-logic [8:0] data_addr;
-logic [31:0] exp;
-logic [31:0] Sum_exp;
-logic [`STAR_CAM_len-1:0] i_xi_MV;
-logic [`STAR_CAM_len-1:0] i_sub_MV;
-logic [`STAR_CAM_len-1:0] o_xmax_MV;
-logic [`STAR_CAM_len-1:0] o_xi_MV;
-logic [`STAR_CAM_len-1:0] o_sub_MV;
+logic [7:0] w_xi;
+logic [7:0] w_sub_xi;
+logic [3:0] w_data_addr_x, w_data_addr_y;
+logic [31:0] w_exp, w_Sum_exp, w_result;
+logic [`STAR_CAM_len-1:0] w_i_xi_MV;
+logic [`STAR_CAM_len-1:0] w_CAM_sub_MV;
+logic [`STAR_CAM_len-1:0] w_xmax_MV;
+logic [`STAR_CAM_len-1:0] w_o_xi_MV;
+logic [`STAR_CAM_len-1:0] w_LUT_sub_MV;
 logic [`STAR_CAM_len-1:0] C;
-logic [7:0] data;
+logic [7:0] w_data;
+logic w_data_req;
 
 
-integer i;
-integer s;
-integer fid;
+integer i,j,qua_data;
+integer s,fid;
+real ori_data;
 
    STAR u_STAR(   .clk(clk),
                   .reset(reset), 
-           			.data(data),
-                  .data_req(data_req), 
-					   .data_addr(data_addr),
-                  .i_xi_MV(i_xi_MV),
+           			.data(w_data),
+                  .data_req(w_data_req), 
+                  .data_addr_x(w_data_addr_x),
+					   .data_addr_y(w_data_addr_y),
+                  .i_xi_MV(w_i_xi_MV),
                   .CAMSUB_req(CAMSUB_req),
-                  .xi(xi),
-                  .o_xmax_MV(o_xmax_MV),
-                  .o_xi_MV(o_xi_MV),
+                  .xi(w_xi),
+                  .o_xmax_MV(w_xmax_MV),
+                  .o_xi_MV(w_o_xi_MV),
                   .FindSub_req(FindSub_req),
-                  .i_sub_MV(i_sub_MV),
+                  .i_sub_MV(w_CAM_sub_MV),
                   .EXP_req(EXP_req),
-                  .exp(exp),
-                  .Sum_exp(Sum_exp),
-                  .o_sub_MV(o_sub_MV),
+                  .exp(w_exp),
+                  .Sum_exp(w_Sum_exp),
+                  .o_sub_MV(w_LUT_sub_MV),
+                  .result(w_result),
                   .finish(finish));
 			
    CAMSUB_mem u_CAMSUB_mem(.clk(clk), 
                            .rst(reset),
-                           .xi(xi), 
-                           .xi_MV(i_xi_MV), 
+                           .xi(w_xi), 
+                           .xi_MV(w_i_xi_MV), 
+                           .o_xmax_MV(w_xmax_MV),
+                           .o_xi_MV(w_o_xi_MV),
                            .CAMSUB(CAMSUB_req), 
                            .FindSub(FindSub_req),
-                           .sub_xi(sub_xi));
+                           .sub_xi(w_sub_xi));
 
    CAM_mem u_CAM_mem(.clk(clk), 
                      .rst(reset),
-                     .sub_xi(sub_xi),
-                     .sub_MV(i_sub_MV),
+                     .sub_xi(w_sub_xi),
+                     .sub_MV(w_CAM_sub_MV),
                      .EXP(EXP_req),
                      .FindSub(FindSub_req));
 
    LUT_mem u_LUT_mem(.clk(clk), 
                      .rst(reset),
-                     .sub_MV(o_sub_MV),
-                     .exp(exp),
-                     .Sum_exp(Sum_exp)
+                     .sub_MV(w_LUT_sub_MV),
+                     .exp(w_exp),
+                     .Sum_exp(w_Sum_exp)
                      );
    
 
@@ -82,16 +86,22 @@ integer fid;
 	initial $sdf_annotate(`SDFFILE);
 `endif
 
-initial begin                             // read input from input.txt
-   fid = $fopen(`Input,"r");
-   if(fid != 0)begin
-      for(i=0; i<=N_INPUT; i=i+1)begin
-         s=$fscanf(fid, "%d", input_mem[i]);
-         // $display("Herer ==> %d with data %d", i, input_mem[i]);
+// Read input from input.dat to matrix
+initial begin
+   fid = $fopen(`Input, "r");
+   if (fid != 0) begin
+      for (i = 0; i < `SASA_Seq_len; i = i + 1) begin
+         for (j = 0; j < `SASA_Seq_len; j = j + 1) begin
+            s = $fscanf(fid, "%f", input_mem[i][j]);
+            if (s != 1) begin
+                  $display("Error: Failed to read input from file", `Input);
+                  $fclose(fid);
+                  $finish;
+            end
+         end
       end
       $fclose(fid);
-   end
-   else begin
+   end else begin
       $display("Error: Could not open file");
       $finish;
    end
@@ -114,14 +124,16 @@ always @ (posedge clk or reset)begin
 end
 
 always@ (negedge clk)begin
-   if(finish == 0) begin             
-      if( data_req ) begin
-         data = input_mem[data_addr];  
-      end 
-      else begin
-         data = 'hz;  
-      end                
-   end     
+   if(w_data_req) begin
+      ori_data = input_mem[w_data_addr_y][w_data_addr_x]*16.0;
+      //Rounding
+      if(ori_data >= 0) qua_data = $rtoi(ori_data + 0.5);
+      else              qua_data = $rtoi(ori_data - 0.5);
+      w_data = qua_data;
+   end
+   else begin
+      w_data = 'hz;  
+   end  
 end
 
 initial begin
@@ -177,31 +189,22 @@ end
 endmodule
 
 
-module CAMSUB_mem (xi, xi_MV, CAMSUB, FindSub, sub_xi, clk, rst);
+module CAMSUB_mem (xi, xi_MV, o_xmax_MV, o_xi_MV, CAMSUB, FindSub, sub_xi, clk, rst);
 input clk, rst;
 input signed [7:0] xi;
 input CAMSUB,FindSub;
+input logic [`STAR_CAM_len-1:0] o_xmax_MV, o_xi_MV;
 output logic [`STAR_CAM_len-1:0] xi_MV;
 output logic signed [7:0] sub_xi;
 
-
-logic [`STAR_CAM_len-1:0] MV_table [0:`STAR_CAM_len-1];
 logic [7:0] xi_buffer [0:`STAR_Input_len-1];
 logic signed [7:0] max_xi;
 logic [4:0] counter;
-
-logic [7:0] posi;
 integer i;
-
-assign posi = xi + 8'd20;
-
-initial begin     //From -20 ~ 0 ~ 43 (min=-17, max=43)not x_i-x_max
-	for (i=0; i<=`STAR_CAM_len-1; i=i+1) MV_table[i] = 1<<i;
-end
 
 always@(negedge clk) begin
    if(CAMSUB)begin
-      xi_MV <= MV_table[posi];
+      xi_MV <= 1 << (xi + 9'd255);
    end
    else   xi_MV <= 'hz;
 end
@@ -244,7 +247,7 @@ output logic [`STAR_CAM_len-1:0] sub_MV;
 logic [`STAR_CAM_len-1:0] SUB_table [0:`STAR_CAM_len-1];
 logic [7:0] posi;
 integer i;
-logic [`STAR_Counter-1:0] counter;                                  //<===== need modify if change input 16=>3, 4=>1 =====>
+logic [`STAR_Counter-1:0] counter;
 logic [7:0] xsub_buffer [0:`STAR_Input_len-1];
 
 assign posi = xsub_buffer[counter] + 8'd15;
@@ -267,11 +270,8 @@ always@(posedge clk or posedge rst) begin
 end
 
 always@(negedge clk) begin
-   if(EXP)begin
-      if(posi>=1'b0 && posi <=4'd15)   sub_MV <= SUB_table[posi];
-      else                             sub_MV <= 1'b0;
-   end
-   else        sub_MV <= 'hz;
+   if(EXP)  sub_MV <= SUB_table[posi];
+   else     sub_MV <= 'hz;
 end
 
 endmodule
@@ -295,8 +295,8 @@ assign Sum_exp = 32'd1;
 
 initial begin                             // read input from lut.txt
    fid1 = $fopen(`LUT,"r");
-   for(i=0; i<=25; i=i+1)begin
-      s=$fscanf(fid1, "%b", lut_mem[i]);
+   for(i=0; i<=`STAR_EXP_len; i=i+1)begin
+      s=$fscanf(fid1, "%d", lut_mem[i]);
    end
    $fclose(fid1);
 end

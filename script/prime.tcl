@@ -19,22 +19,22 @@ source ./build/.synopsys_dc.setup
 #=====================================================================
 set CHIP STAR
 set NETLIST [list ./syn/${CHIP}_syn.v]
-set STRIP_PATH "softmax_tb/u_STAR"
+set STRIP_PATH "softmax_${CHIP}/u_${CHIP}"
 set DRIVE0_PORT [list clk reset]
 set SDF_FILE "./syn/${CHIP}_syn.sdf"
-#set SPEF_FILE "STAR.spef.max"
+#set SPEF_FILE "${CHIP}.spef.max"
 set CNST_SDC "./script/${CHIP}_prime.sdc"
 set RPT "./report"
-set CLK_INFO "${RPT}/CHIP_clock_pt.rpt"
-set TIME_RPT "${RPT}/CHIP_timing_pt.rpt"
-set POWER_RPT "${RPT}/CHIP_power_pt.rpt"
+set CLK_INFO "${RPT}/${CHIP}/clock_pt.rpt"
+set TIME_RPT "${RPT}/${CHIP}/timing_pt.rpt"
+set POWER_RPT "${RPT}/${CHIP}/power_pt.rpt"
 #set BEST_OP "fast"
 #set WRST_OP "slow"
 set RST "reset"
 set FSDB_FILE "./build/${CHIP}.fsdb"
 set delay_calc_waveform_analysis_mode  full_design
-# set power_enable_timing_analysis true 
-set power_enable_multi_rail_analysis true 
+set power_enable_analysis true 
+set power_enable_multi_rail_analysis true
 set power_analysis_mode time_based
 #set INST_NAME "CHIP_beh/u0"
 #====================================================================

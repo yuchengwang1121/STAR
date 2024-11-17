@@ -1,4 +1,3 @@
-# Edit your top module name here
 set top STAR
 
 # Don't change anything below this line
@@ -48,8 +47,8 @@ write -format ddc -hierarchy -output "${top}_syn.ddc"
 write_file -format verilog -hierarchy -output ../syn/${top}_syn.v
 write_sdf -version 2.0 -context verilog  ../syn/${top}_syn.sdf
 write_sdc -version 2.0 ${top}.sdc
-report_area > area.log
-report_timing > timing.log
+report_area > ${top}_area.log
+report_timing > ${top}_timing.log
 report_qor > ${top}_syn.qor
 
 # exit

@@ -19,7 +19,7 @@ set_load 1 [all_outputs]
 set_drive 1 [all_inputs]
 
 set_operating_conditions -max_library slow -max slow -min_library slow -min slow
-set_wire_load_model -name tsmc13_wl10 -library slow                     
+set_wire_load_model -name tsmc13_wl10 -library slow                        
 
 foreach input $inputs_without_clock {
     set_max_fanout 20 [get_ports $input]
